@@ -19,13 +19,18 @@
       },
       "undoStack": [],
       "redoStack": [],
-      "transcriptionStatus": "error",
-      "transcriptionJobId": "94e2a85c-c5ab-4ee0-86d1-fffe1cfb6c27",
+      "transcriptionStatus": "transcribing",
+      "transcriptionJobId": "b441d83b-a311-4e00-a0ab-54947d5d6702",
+      "transcriptionProvider": "openai",
       "gcsOperationName": null,
       "projectId": "7cf33e81-edb0-4488-9708-377513b95185",
-      "revision": 313
+      "revision": 321,
+      "zoom": 1,
+      "cuts": [],
+      "deletedRegions": [],
+      "selectedSegmentIndex": null
     },
     "createdAt": 1780140668313,
-    "lastModified": 1780141035110
+    "lastModified": 1780173172087
   }
 ]

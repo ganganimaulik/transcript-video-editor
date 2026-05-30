@@ -16,6 +16,7 @@ try {
     apiKey: process.env.OPENAI_API_KEY
   });
 } catch(e) {
+  console.error(e.message);
   console.warn("OpenAI initialized failed or missing API key");
 }
 

@@ -18,7 +18,11 @@ class StateStore {
       transcriptionProvider: 'google',
       gcsOperationName: null,
       projectId: null,
-      revision: 0
+      revision: 0,
+      zoom: 1,
+      cuts: [],
+      deletedRegions: [],
+      selectedSegmentIndex: null
     };
     
     this.listeners = new Set();
@@ -37,6 +41,15 @@ class StateStore {
     this.listeners.forEach(listener => listener(this.state));
   }
 
+  _pushUndo() {
+    this.state.undoStack.push(JSON.parse(JSON.stringify({
+      words: this.state.words,
+      cuts: this.state.cuts,
+      deletedRegions: this.state.deletedRegions
+    })));
+    this.state.redoStack = []; // Clear redo stack on new action
+  }
+
   dispatch(action, payload) {
     const prevState = { ...this.state };
     
@@ -46,7 +59,10 @@ class StateStore {
         this.state.videoUrl = payload.url;
         this.state.duration = payload.duration;
         this.state.words = [];
+        this.state.cuts = [];
+        this.state.deletedRegions = [];
         this.state.segments = [{ start: 0, end: payload.duration }];
+        this.state.selectedSegmentIndex = null;
         this.state.undoStack = [];
         this.state.redoStack = [];
         this.state.revision++;
@@ -70,7 +86,11 @@ class StateStore {
           redoStack: [],
           isPlaying: false,
           currentTime: 0,
-          revision: payload.revision || 0
+          revision: payload.revision || 0,
+          cuts: payload.cuts || [],
+          deletedRegions: payload.deletedRegions || [],
+          zoom: payload.zoom || 1,
+          selectedSegmentIndex: null
         };
         this._recalculateSegments();
         break;
@@ -111,9 +131,7 @@ class StateStore {
         
       case 'DELETE_SELECTION':
         if (this.state.selection.startId !== -1 && this.state.selection.endId !== -1) {
-          // Save for undo
-          this.state.undoStack.push(JSON.parse(JSON.stringify(this.state.words)));
-          this.state.redoStack = []; // Clear redo stack on new action
+          this._pushUndo();
           
           const start = Math.min(this.state.selection.startId, this.state.selection.endId);
           const end = Math.max(this.state.selection.startId, this.state.selection.endId);
@@ -134,9 +152,7 @@ class StateStore {
 
       case 'RESTORE_SELECTION':
         if (this.state.selection.startId !== -1 && this.state.selection.endId !== -1) {
-          // Save for undo
-          this.state.undoStack.push(JSON.parse(JSON.stringify(this.state.words)));
-          this.state.redoStack = []; // Clear redo stack on new action
+          this._pushUndo();
           
           const start = Math.min(this.state.selection.startId, this.state.selection.endId);
           const end = Math.max(this.state.selection.startId, this.state.selection.endId);
@@ -162,9 +178,17 @@ class StateStore {
         
       case 'UNDO':
         if (this.state.undoStack.length > 0) {
-          this.state.redoStack.push(JSON.parse(JSON.stringify(this.state.words)));
-          this.state.words = this.state.undoStack.pop();
+          this.state.redoStack.push(JSON.parse(JSON.stringify({
+            words: this.state.words,
+            cuts: this.state.cuts,
+            deletedRegions: this.state.deletedRegions
+          })));
+          const lastState = this.state.undoStack.pop();
+          this.state.words = lastState.words || [];
+          this.state.cuts = lastState.cuts || [];
+          this.state.deletedRegions = lastState.deletedRegions || [];
           this.state.selection = { startId: -1, endId: -1 };
+          this.state.selectedSegmentIndex = null;
           this._recalculateSegments();
           this.state.revision++;
           emit('segments-changed', this.state.segments);
@@ -173,9 +197,17 @@ class StateStore {
         
       case 'REDO':
         if (this.state.redoStack.length > 0) {
-          this.state.undoStack.push(JSON.parse(JSON.stringify(this.state.words)));
-          this.state.words = this.state.redoStack.pop();
+          this.state.undoStack.push(JSON.parse(JSON.stringify({
+            words: this.state.words,
+            cuts: this.state.cuts,
+            deletedRegions: this.state.deletedRegions
+          })));
+          const nextState = this.state.redoStack.pop();
+          this.state.words = nextState.words || [];
+          this.state.cuts = nextState.cuts || [];
+          this.state.deletedRegions = nextState.deletedRegions || [];
           this.state.selection = { startId: -1, endId: -1 };
+          this.state.selectedSegmentIndex = null;
           this._recalculateSegments();
           this.state.revision++;
           emit('segments-changed', this.state.segments);
@@ -195,9 +227,7 @@ class StateStore {
         
         if (!hasCleanable) break;
         
-        // Save for undo — entire operation is one undo step
-        this.state.undoStack.push(JSON.parse(JSON.stringify(this.state.words)));
-        this.state.redoStack = [];
+        this._pushUndo();
         
         this.state.words = this.state.words.map(w => {
           if (w.deleted) return w;
@@ -221,33 +251,107 @@ class StateStore {
         emit('segments-changed', this.state.segments);
         break;
       }
+
+      case 'SET_ZOOM':
+        this.state.zoom = payload;
+        break;
+
+      case 'SPLIT_SEGMENT':
+        if (this.state.currentTime > 0 && this.state.currentTime < this.state.duration) {
+          // Verify we're not splitting inside a deleted segment or exactly at an existing cut
+          const isInDeleted = this.state.segments.every(s => this.state.currentTime < s.start || this.state.currentTime > s.end);
+          if (!isInDeleted && !this.state.cuts.includes(this.state.currentTime)) {
+            this._pushUndo();
+            this.state.cuts.push(this.state.currentTime);
+            this.state.cuts.sort((a, b) => a - b);
+            this._recalculateSegments();
+            this.state.revision++;
+            emit('segments-changed', this.state.segments);
+          }
+        }
+        break;
+
+      case 'DELETE_SEGMENT':
+        if (this.state.selectedSegmentIndex !== null && this.state.segments[this.state.selectedSegmentIndex]) {
+          this._pushUndo();
+          const seg = this.state.segments[this.state.selectedSegmentIndex];
+          this.state.deletedRegions.push({ start: seg.start, end: seg.end });
+
+          // Also mark words in this segment as deleted
+          if (this.state.words) {
+            this.state.words = this.state.words.map(w => {
+              if (w.start >= seg.start && w.end <= seg.end) {
+                return { ...w, deleted: true };
+              }
+              return w;
+            });
+          }
+
+          this.state.selectedSegmentIndex = null;
+          this._recalculateSegments();
+          this.state.revision++;
+          emit('segments-changed', this.state.segments);
+        }
+        break;
+
+      case 'SELECT_SEGMENT':
+        this.state.selectedSegmentIndex = payload;
+        break;
     }
     
     this.notify();
   }
   
   _recalculateSegments() {
-    if (this.state.words.length === 0) {
-      if (this.state.duration > 0) {
-        this.state.segments = [{ start: 0, end: this.state.duration }];
-      } else {
-        this.state.segments = [];
-      }
+    if (this.state.duration <= 0) {
+      this.state.segments = [];
       return;
     }
     
     // Start with the full duration of the video
     let segments = [{ start: 0, end: this.state.duration || 0 }];
     
-    // Subtract times of deleted words
-    for (const word of this.state.words) {
-      if (word.deleted) {
-        segments = this._subtractRange(segments, word.start, word.end);
+    // Subtract times of deleted words if we have words
+    if (this.state.words && this.state.words.length > 0) {
+      for (const word of this.state.words) {
+        if (word.deleted) {
+          segments = this._subtractRange(segments, word.start, word.end);
+        }
+      }
+    }
+
+    // Subtract deleted timeline regions
+    if (this.state.deletedRegions && this.state.deletedRegions.length > 0) {
+      for (const region of this.state.deletedRegions) {
+        segments = this._subtractRange(segments, region.start, region.end);
       }
     }
     
+    // Split segments at cuts
+    if (this.state.cuts && this.state.cuts.length > 0) {
+      let cutSegments = [];
+      for (const seg of segments) {
+        let currentSegStart = seg.start;
+        for (const cut of this.state.cuts) {
+          if (cut > currentSegStart && cut < seg.end) {
+            cutSegments.push({ start: currentSegStart, end: cut });
+            currentSegStart = cut;
+          }
+        }
+        if (currentSegStart < seg.end) {
+          cutSegments.push({ start: currentSegStart, end: seg.end });
+        }
+      }
+      segments = cutSegments;
+    }
+
     // Filter out effectively zero-length segments
     this.state.segments = segments.filter(s => s.end - s.start > 0.05);
+
+    // Ensure selected index is still valid, else nullify
+    if (this.state.selectedSegmentIndex !== null && this.state.selectedSegmentIndex >= this.state.segments.length) {
+      this.state.selectedSegmentIndex = null;
+    }
   }
 
   _subtractRange(segments, start, end) {
