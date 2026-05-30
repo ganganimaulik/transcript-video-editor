@@ -116,6 +116,10 @@
               <div class="time-display">
                 <span id="time-current">00:00</span> / <span id="time-duration">00:00</span>
               </div>
+              <button id="btn-fullscreen" class="btn-icon btn-fullscreen" title="Fullscreen (F)">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-fullscreen"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-exit-fullscreen hidden"><path d="M4 14h6v6m10-6h-6v6M4 10h6V4m10 6h-6V4"/></svg>
+              </button>
             </div>
           </div>
           
@@ -126,7 +130,13 @@
       <section class="panel transcript-panel">
         <div class="panel-header">
           <h2>Transcript</h2>
-          <button id="btn-transcribe" class="btn-primary hidden">Generate Transcript</button>
+          <div class="header-actions">
+            <select id="provider-select" class="provider-select hidden">
+              <option value="google">Google Cloud STT</option>
+              <option value="openai">OpenAI Whisper</option>
+            </select>
+            <button id="btn-transcribe" class="btn-primary hidden">Generate Transcript</button>
+          </div>
         </div>
         <div class="panel-content">
           <div id="transcript-empty" class="empty-state">

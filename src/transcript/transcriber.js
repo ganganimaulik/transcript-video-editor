@@ -1,20 +1,33 @@
 import { $ } from '../utils/dom.js';
 import { store } from '../state.js';
 import { GoogleSTTProvider } from './google-stt.js';
+import { OpenAIWhisperProvider } from './openai-whisper.js';
 
 class Transcriber {
   constructor() {
     this.btnTranscribe = $('#btn-transcribe');
+    this.providerSelect = $('#provider-select');
     this.emptyState = $('#transcript-empty');
     this.loadingState = $('#transcript-loading');
     this.editorContainer = $('#transcript-editor');
     this.statusText = $('#transcribe-status-text');
     
-    // Default provider
-    this.provider = new GoogleSTTProvider();
+    // Default providers
+    this.providers = {
+      'google': new GoogleSTTProvider(),
+      'openai': new OpenAIWhisperProvider()
+    };
+    this.provider = this.providers['google'];
 
     // Subscribe to state to resume transcription on reload
     store.subscribe((state) => {
+      if (state.transcriptionProvider) {
+        this.provider = this.providers[state.transcriptionProvider] || this.providers['google'];
+        if (this.providerSelect && this.providerSelect.value !== state.transcriptionProvider) {
+           this.providerSelect.value = state.transcriptionProvider;
+        }
+      }
+
       if (state.transcriptionStatus === 'transcribing' && !this.isTranscribing) {
         // Resume if we have either a job ID or a GCS operation name
         if (state.transcriptionJobId || state.gcsOperationName) {
@@ -29,8 +42,17 @@ class Transcriber {
   }
 
   bindEvents() {
+    if (this.providerSelect) {
+      this.providerSelect.addEventListener('change', (e) => {
+        store.dispatch('SET_TRANSCRIPTION_PROVIDER', e.target.value);
+      });
+    }
+
     this.btnTranscribe.addEventListener('click', () => {
       const state = store.getState();
+      const providerKey = this.providerSelect ? this.providerSelect.value : 'google';
+      store.dispatch('SET_TRANSCRIPTION_PROVIDER', providerKey);
+      this.provider = this.providers[providerKey] || this.providers['google'];
       this.startTranscription(state);
     });
   }
@@ -52,7 +74,9 @@ class Transcriber {
 
     // UI Updates
     this.btnTranscribe.classList.add('hidden');
+    if (this.providerSelect) this.providerSelect.classList.add('hidden');
     this.emptyState.classList.add('hidden');
+    if (this.editorContainer) this.editorContainer.classList.add('hidden');
     this.loadingState.classList.remove('hidden');
     
     if (options.resumeOperationName) {
@@ -60,7 +84,8 @@ class Transcriber {
     } else if (options.jobId) {
       this.statusText.textContent = 'Resuming transcription...';
     } else {
-      this.statusText.textContent = 'Transcribing with Google Cloud STT...';
+      const providerName = state.transcriptionProvider === 'openai' ? 'OpenAI Whisper' : 'Google Cloud STT';
+      this.statusText.textContent = `Transcribing with ${providerName}...`;
     }
     
     if (!options.jobId && !options.resumeOperationName) {
@@ -74,10 +99,11 @@ class Transcriber {
         } else if (status === 'uploading') {
           this.statusText.textContent = `Uploading to Google Storage: ${progress}%`;
         } else if (status === 'transcribing') {
+          const providerName = state.transcriptionProvider === 'openai' ? 'OpenAI Whisper' : 'Google Cloud STT';
           if (progress !== undefined) {
-            this.statusText.textContent = `Transcribing with Google Cloud STT: ${progress}%`;
+            this.statusText.textContent = `Transcribing with ${providerName}: ${progress}%`;
           } else {
-            this.statusText.textContent = 'Transcribing with Google Cloud STT...';
+            this.statusText.textContent = `Transcribing with ${providerName}...`;
           }
         }
       }, {
@@ -95,6 +121,8 @@ class Transcriber {
       // UI Updates
       this.loadingState.classList.add('hidden');
       this.editorContainer.classList.remove('hidden');
+      this.btnTranscribe.classList.remove('hidden');
+      if (this.providerSelect) this.providerSelect.classList.remove('hidden');
       
     } catch (err) {
       console.error(err);
@@ -127,6 +155,7 @@ class Transcriber {
       store.dispatch('SET_TRANSCRIPTION_STATUS', 'error');
       store.dispatch('SET_GCS_OPERATION_NAME', null);
       this.btnTranscribe.classList.remove('hidden');
+      if (this.providerSelect) this.providerSelect.classList.remove('hidden');
       
       const currentState = store.getState();
       if (!currentState.words || currentState.words.length === 0) {
