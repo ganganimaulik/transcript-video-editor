@@ -125,6 +125,30 @@ class StateStore {
           emit('segments-changed', this.state.segments);
         }
         break;
+
+      case 'RESTORE_SELECTION':
+        if (this.state.selection.startId !== -1 && this.state.selection.endId !== -1) {
+          // Save for undo
+          this.state.undoStack.push(JSON.parse(JSON.stringify(this.state.words)));
+          this.state.redoStack = []; // Clear redo stack on new action
+          
+          const start = Math.min(this.state.selection.startId, this.state.selection.endId);
+          const end = Math.max(this.state.selection.startId, this.state.selection.endId);
+          
+          this.state.words = this.state.words.map(w => {
+            if (w.id >= start && w.id <= end) {
+              return { ...w, deleted: false };
+            }
+            return w;
+          });
+          
+          this.state.selection = { startId: -1, endId: -1 };
+          this._recalculateSegments();
+          this.state.revision++;
+          emit('segments-changed', this.state.segments);
+        }
+        break;
+
         
       case 'SET_SELECTION':
         this.state.selection = payload;
@@ -151,6 +175,46 @@ class StateStore {
           emit('segments-changed', this.state.segments);
         }
         break;
+        
+      case 'AUTO_CLEAN': {
+        const threshold = payload.silenceThreshold || 1.5;
+        
+        // Check if there's anything to clean
+        const hasCleanable = this.state.words.some(w =>
+          !w.deleted && (
+            w.isFiller ||
+            (w.isPause && (w.end - w.start) >= threshold)
+          )
+        );
+        
+        if (!hasCleanable) break;
+        
+        // Save for undo — entire operation is one undo step
+        this.state.undoStack.push(JSON.parse(JSON.stringify(this.state.words)));
+        this.state.redoStack = [];
+        
+        this.state.words = this.state.words.map(w => {
+          if (w.deleted) return w;
+          
+          // Remove filler words
+          if (w.isFiller) {
+            return { ...w, deleted: true };
+          }
+          
+          // Remove silences above threshold
+          if (w.isPause && (w.end - w.start) >= threshold) {
+            return { ...w, deleted: true };
+          }
+          
+          return w;
+        });
+        
+        this.state.selection = { startId: -1, endId: -1 };
+        this._recalculateSegments();
+        this.state.revision++;
+        emit('segments-changed', this.state.segments);
+        break;
+      }
     }
     
     this.notify();

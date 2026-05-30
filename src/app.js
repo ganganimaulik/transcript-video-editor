@@ -75,8 +75,7 @@ class App {
             $('#btn-transcribe').classList.add('hidden');
             $('#transcript-empty').classList.add('hidden');
             $('#transcript-loading').classList.add('hidden');
-            // Trigger transcript render by emitting words
-            emit('words-changed', fullProject.state.words);
+            $('#transcript-editor').classList.remove('hidden');
           } else if (fullProject.state.transcriptionStatus === 'transcribing') {
             // Show loading state for in-progress transcription
             $('#btn-transcribe').classList.add('hidden');
@@ -130,6 +129,41 @@ class App {
       this.handleExport();
     });
 
+    // --- Auto-Clean ---
+    this.silenceThreshold = 1.5;
+
+    // One-click clean button
+    $('#btn-auto-clean').addEventListener('click', () => {
+      store.dispatch('AUTO_CLEAN', { silenceThreshold: this.silenceThreshold });
+    });
+
+    // Caret button toggles popover
+    $('#btn-auto-clean-caret').addEventListener('click', (e) => {
+      e.stopPropagation();
+      $('#auto-clean-popover').classList.toggle('hidden');
+    });
+
+    // Threshold slider
+    $('#silence-threshold').addEventListener('input', (e) => {
+      this.silenceThreshold = parseFloat(e.target.value);
+      $('#threshold-value').textContent = `${this.silenceThreshold.toFixed(1)}s`;
+    });
+
+    // Apply button in popover
+    $('#btn-auto-clean-apply').addEventListener('click', () => {
+      store.dispatch('AUTO_CLEAN', { silenceThreshold: this.silenceThreshold });
+      $('#auto-clean-popover').classList.add('hidden');
+    });
+
+    // Close popover on click outside
+    document.addEventListener('click', (e) => {
+      const popover = $('#auto-clean-popover');
+      const group = $('#auto-clean-group');
+      if (!popover.classList.contains('hidden') && !group.contains(e.target)) {
+        popover.classList.add('hidden');
+      }
+    });
+
     // Custom events
     on('videoLoaded', async (data) => {
       store.dispatch('SET_VIDEO', data);
@@ -179,6 +213,11 @@ class App {
       $('#btn-undo').disabled = state.undoStack.length === 0;
       $('#btn-redo').disabled = state.redoStack.length === 0;
       $('#btn-export').disabled = !state.fileId;
+      
+      // Auto-clean buttons: enable when there are words
+      const hasWords = state.words && state.words.length > 0;
+      $('#btn-auto-clean').disabled = !hasWords;
+      $('#btn-auto-clean-caret').disabled = !hasWords;
       
       // If project changed (e.g. loaded a new one)
       if (state.projectId !== lastProjectId) {

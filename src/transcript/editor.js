@@ -62,6 +62,14 @@ class TranscriptEditor {
           store.dispatch('DELETE_SELECTION');
         }
       }
+
+      // Enter or 'r' to restore words
+      if (e.key === 'Enter' || e.key.toLowerCase() === 'r') {
+        const state = store.getState();
+        if (state.selection.startId !== -1) {
+          store.dispatch('RESTORE_SELECTION');
+        }
+      }
       
       // Ctrl+Z / Cmd+Z for Undo/Redo
       if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z') {

@@ -31,6 +31,42 @@
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 14l5-5-5-5"/><path d="M20 9H9.5A5.5 5.5 0 0 0 4 14.5v0A5.5 5.5 0 0 0 9.5 20H13"/></svg>
         </button>
         <div class="divider"></div>
+        <div class="auto-clean-group" id="auto-clean-group">
+          <button id="btn-auto-clean" class="btn-auto-clean" title="Auto-Clean: Remove filler words &amp; silences" disabled>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 3l1.912 5.813a2 2 0 0 0 1.275 1.275L21 12l-5.813 1.912a2 2 0 0 0-1.275 1.275L12 21l-1.912-5.813a2 2 0 0 0-1.275-1.275L3 12l5.813-1.912a2 2 0 0 0 1.275-1.275L12 3z"/>
+              <path d="M5 3v4"/><path d="M3 5h4"/>
+              <path d="M19 17v4"/><path d="M17 19h4"/>
+            </svg>
+            <span>Auto-Clean</span>
+          </button>
+          <button id="btn-auto-clean-caret" class="btn-auto-clean-caret" title="Auto-Clean settings" disabled>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div id="auto-clean-popover" class="auto-clean-popover hidden">
+            <div class="popover-header">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3l1.912 5.813a2 2 0 0 0 1.275 1.275L21 12l-5.813 1.912a2 2 0 0 0-1.275 1.275L12 21l-1.912-5.813a2 2 0 0 0-1.275-1.275L3 12l5.813-1.912a2 2 0 0 0 1.275-1.275L12 3z"/>
+              </svg>
+              <span>Auto-Clean Settings</span>
+            </div>
+            <p class="popover-description">Remove all filler words <em>(um, uh, ah…)</em> and silences longer than the threshold below.</p>
+            <div class="threshold-control">
+              <label for="silence-threshold">Silence threshold</label>
+              <div class="slider-row">
+                <input type="range" id="silence-threshold" min="0.5" max="5" step="0.1" value="1.5" class="threshold-slider">
+                <span id="threshold-value" class="threshold-value">1.5s</span>
+              </div>
+            </div>
+            <div class="popover-footer">
+              <button id="btn-auto-clean-apply" class="btn-primary">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.912 5.813a2 2 0 0 0 1.275 1.275L21 12l-5.813 1.912a2 2 0 0 0-1.275 1.275L12 21l-1.912-5.813a2 2 0 0 0-1.275-1.275L3 12l5.813-1.912a2 2 0 0 0 1.275-1.275L12 3z"/></svg>
+                Clean Now
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="divider"></div>
         <button id="btn-export" class="btn-primary" disabled>Export Video</button>
       </div>
     </header>
