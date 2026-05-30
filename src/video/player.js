@@ -12,6 +12,11 @@ class VideoPlayer {
     this.timeCurrent = $('#time-current');
     this.timeDuration = $('#time-duration');
     
+    this.btnFullscreen = $('#btn-fullscreen');
+    this.iconFullscreen = this.btnFullscreen?.querySelector('.icon-fullscreen');
+    this.iconExitFullscreen = this.btnFullscreen?.querySelector('.icon-exit-fullscreen');
+    this.playerContainer = $('#player-view');
+    
     this.currentSegmentIndex = 0;
     
     if (this.video && this.btnPlay) {
@@ -56,6 +61,67 @@ class VideoPlayer {
     this.video.addEventListener('loadedmetadata', () => {
       this.timeDuration.textContent = formatTime(this.video.duration);
     });
+
+    // Fullscreen toggle button click
+    if (this.btnFullscreen) {
+      this.btnFullscreen.addEventListener('click', () => {
+        this.toggleFullscreen();
+      });
+    }
+
+    // Video double-click to toggle fullscreen
+    if (this.video) {
+      this.video.addEventListener('dblclick', () => {
+        this.toggleFullscreen();
+      });
+    }
+
+    // Update controls icons when fullscreen state changes
+    document.addEventListener('fullscreenchange', () => {
+      this.updateFullscreenUI();
+    });
+
+    // Keyboard shortcut 'f' / 'F' to toggle fullscreen
+    document.addEventListener('keydown', (e) => {
+      // Don't toggle fullscreen if typing in input/textarea/contenteditable
+      if (
+        e.target.tagName === 'INPUT' || 
+        e.target.tagName === 'TEXTAREA' || 
+        e.target.isContentEditable
+      ) {
+        return;
+      }
+
+      if (e.key.toLowerCase() === 'f') {
+        e.preventDefault();
+        this.toggleFullscreen();
+      }
+    });
+  }
+
+  toggleFullscreen() {
+    if (!this.playerContainer) return;
+    
+    if (!document.fullscreenElement) {
+      this.playerContainer.requestFullscreen().catch(err => {
+        console.error(`Error attempting to enable fullscreen: ${err.message}`);
+      });
+    } else {
+      document.exitFullscreen().catch(err => {
+        console.error(`Error attempting to exit fullscreen: ${err.message}`);
+      });
+    }
+  }
+
+  updateFullscreenUI() {
+    const isFullscreen = !!document.fullscreenElement;
+    if (isFullscreen) {
+      this.iconFullscreen?.classList.add('hidden');
+      this.iconExitFullscreen?.classList.remove('hidden');
+    } else {
+      this.iconExitFullscreen?.classList.add('hidden');
+      this.iconFullscreen?.classList.remove('hidden');
+    }
   }
 
   setupStateListeners() {
