@@ -1,10 +1,21 @@
+// Reuse a single AudioContext to avoid leaking resources.
+// Browsers limit concurrent AudioContexts (~6); creating one per call
+// would break after a few video loads.
+let sharedAudioContext = null;
+
+function getAudioContext() {
+  if (!sharedAudioContext || sharedAudioContext.state === 'closed') {
+    sharedAudioContext = new (window.AudioContext || window.webkitAudioContext)({ sampleRate: 8000 });
+  }
+  return sharedAudioContext;
+}
+
 export async function generateWaveformData(audioUrl, samples = 100) {
   try {
     const response = await fetch(audioUrl);
     const arrayBuffer = await response.arrayBuffer();
     
-    // We only need a low sample rate for waveform visualization
-    const audioContext = new (window.AudioContext || window.webkitAudioContext)({ sampleRate: 8000 });
+    const audioContext = getAudioContext();
     const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
     
     const channelData = audioBuffer.getChannelData(0);

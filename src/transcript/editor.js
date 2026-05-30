@@ -10,6 +10,9 @@ class TranscriptEditor {
     this.isDragging = false;
     this.selectionStartWordId = -1;
     this.activeWordId = -1;
+
+    // Map of word id -> DOM element for targeted updates
+    this.wordElements = new Map();
     
     if (this.container) {
       this.bindEvents();
@@ -76,7 +79,7 @@ class TranscriptEditor {
     store.subscribe((state) => {
       // Re-render words if they changed
       if (this.lastWords !== state.words) {
-        this.renderWords(state.words);
+        this.patchWords(state.words);
         this.lastWords = state.words;
       }
       
@@ -84,37 +87,105 @@ class TranscriptEditor {
     });
   }
 
-  renderWords(words) {
-    this.container.innerHTML = '';
-    
-    if (!words || words.length === 0) return;
+  /**
+   * Targeted DOM patching — only adds, removes, or updates word elements
+   * that actually changed, instead of rebuilding the entire transcript.
+   * This preserves scroll position and avoids flickering.
+   */
+  patchWords(words) {
+    if (!words || words.length === 0) {
+      this.container.innerHTML = '';
+      this.wordElements.clear();
+      return;
+    }
 
-    const frag = document.createDocumentFragment();
-    
-    words.forEach(word => {
-      const el = createElement('span', 'word fade-in', word.text);
-      el.dataset.id = word.id;
-      el.dataset.start = word.start;
-      el.dataset.end = word.end;
-      el.id = `word-${word.id}`;
-      
-      if (word.deleted) {
-        el.classList.add('deleted');
+    // Build a set of current word IDs for quick lookup
+    const newWordIds = new Set(words.map(w => w.id));
+
+    // Remove DOM elements for words that no longer exist
+    for (const [id, el] of this.wordElements) {
+      if (!newWordIds.has(id)) {
+        // Remove the element and its trailing text node (space)
+        const nextSibling = el.nextSibling;
+        el.remove();
+        if (nextSibling && nextSibling.nodeType === Node.TEXT_NODE) {
+          nextSibling.remove();
+        }
+        this.wordElements.delete(id);
       }
-      if (word.isPause) {
-        el.classList.add('pause');
+    }
+
+    // Walk the new words array and add/update as needed
+    let previousElement = null; // Track insertion position
+
+    for (const word of words) {
+      let el = this.wordElements.get(word.id);
+
+      if (el) {
+        // Element exists — update it if needed
+        this._updateWordElement(el, word);
+        previousElement = el.nextSibling || el; // move past the trailing space
+      } else {
+        // Create new element
+        el = createElement('span', 'word fade-in', word.text);
+        el.dataset.id = word.id;
+        el.dataset.start = word.start;
+        el.dataset.end = word.end;
+        el.id = `word-${word.id}`;
+
+        this._applyWordClasses(el, word);
+
+        const space = document.createTextNode(' ');
+
+        // Insert after the previous element, or at the beginning
+        if (previousElement && previousElement.parentNode === this.container) {
+          // Insert after previousElement
+          const refNode = previousElement.nextSibling;
+          this.container.insertBefore(el, refNode);
+          this.container.insertBefore(space, refNode);
+        } else {
+          // Prepend to container
+          this.container.insertBefore(el, this.container.firstChild);
+          this.container.insertBefore(space, el.nextSibling);
+        }
+
+        this.wordElements.set(word.id, el);
+        previousElement = space;
       }
-      if (word.isFiller) {
-        el.classList.add('filler');
+
+      // Advance previousElement past the trailing space
+      if (el.nextSibling && el.nextSibling.nodeType === Node.TEXT_NODE) {
+        previousElement = el.nextSibling;
+      } else {
+        previousElement = el;
       }
-      
-      frag.appendChild(el);
-      
-      // Add space
-      frag.appendChild(document.createTextNode(' '));
-    });
-    
-    this.container.appendChild(frag);
+    }
+  }
+
+  /**
+   * Update an existing word element to match the current word data.
+   */
+  _updateWordElement(el, word) {
+    // Update text if changed
+    if (el.textContent !== word.text) {
+      el.textContent = word.text;
+    }
+
+    // Update data attributes if changed
+    if (el.dataset.start !== String(word.start)) el.dataset.start = word.start;
+    if (el.dataset.end !== String(word.end)) el.dataset.end = word.end;
+
+    // Update classes
+    this._applyWordClasses(el, word);
+  }
+
+  /**
+   * Apply the correct CSS classes based on word state.
+   */
+  _applyWordClasses(el, word) {
+    el.classList.toggle('deleted', !!word.deleted);
+    el.classList.toggle('pause', !!word.isPause);
+    el.classList.toggle('filler', !!word.isFiller);
   }
 
   updateVisualStates(state) {
@@ -125,12 +196,12 @@ class TranscriptEditor {
     
     if (activeId !== this.activeWordId) {
       if (this.activeWordId !== -1) {
-        const oldActive = document.getElementById(`word-${this.activeWordId}`);
+        const oldActive = this.wordElements.get(this.activeWordId);
         if (oldActive) oldActive.classList.remove('active');
       }
       
       if (activeId !== -1) {
-        const newActive = document.getElementById(`word-${activeId}`);
+        const newActive = this.wordElements.get(activeId);
         if (newActive) {
           newActive.classList.add('active');
           // Auto scroll
@@ -147,15 +218,13 @@ class TranscriptEditor {
     const selStart = Math.min(state.selection.startId, state.selection.endId);
     const selEnd = Math.max(state.selection.startId, state.selection.endId);
     
-    const wordEls = this.container.querySelectorAll('.word');
-    wordEls.forEach(el => {
-      const id = parseInt(el.dataset.id, 10);
+    for (const [id, el] of this.wordElements) {
       if (selStart !== -1 && id >= selStart && id <= selEnd) {
         el.classList.add('selected');
       } else {
         el.classList.remove('selected');
       }
-    });
+    }
   }
 
   findActiveWordId(words, time) {
