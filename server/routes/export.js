@@ -20,6 +20,20 @@ router.post('/', async (req, res) => {
     const uploadDir = process.env.UPLOAD_DIR || './uploads';
     const exportDir = process.env.EXPORT_DIR || './exports';
     const videoPath = path.join(uploadDir, fileId);
+
+    // Prevent path traversal attacks
+    if (!path.resolve(videoPath).startsWith(path.resolve(uploadDir))) {
+      return res.status(400).json({ error: 'Invalid file ID.' });
+    }
+
+    // Validate segment values to prevent injection via FFmpeg filter strings
+    for (const seg of segments) {
+      if (typeof seg.start !== 'number' || typeof seg.end !== 'number'
+          || !isFinite(seg.start) || !isFinite(seg.end)
+          || seg.start < 0 || seg.end < 0 || seg.end <= seg.start) {
+        return res.status(400).json({ error: 'Invalid segment data: start and end must be valid positive numbers with end > start.' });
+      }
+    }
     
     if (!fs.existsSync(videoPath)) {
       return res.status(404).json({ error: 'Source video file not found.' });

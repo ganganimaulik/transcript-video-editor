@@ -15,7 +15,8 @@ class StateStore {
       redoStack: [],
       transcriptionStatus: 'idle',
       transcriptionJobId: null,
-      projectId: null
+      projectId: null,
+      revision: 0
     };
     
     this.listeners = new Set();
@@ -46,6 +47,7 @@ class StateStore {
         this.state.segments = [{ start: 0, end: payload.duration }];
         this.state.undoStack = [];
         this.state.redoStack = [];
+        this.state.revision++;
         if (payload.projectId) {
           this.state.projectId = payload.projectId;
         } else if (!this.state.projectId) {
@@ -65,7 +67,8 @@ class StateStore {
           undoStack: [],
           redoStack: [],
           isPlaying: false,
-          currentTime: 0
+          currentTime: 0,
+          revision: payload.revision || 0
         };
         this._recalculateSegments();
         break;
@@ -89,6 +92,7 @@ class StateStore {
       case 'SET_WORDS':
         this.state.words = payload;
         this._recalculateSegments();
+        this.state.revision++;
         break;
         
       case 'DELETE_SELECTION':
@@ -109,6 +113,7 @@ class StateStore {
           
           this.state.selection = { startId: -1, endId: -1 };
           this._recalculateSegments();
+          this.state.revision++;
           emit('segments-changed', this.state.segments);
         }
         break;
@@ -123,6 +128,7 @@ class StateStore {
           this.state.words = this.state.undoStack.pop();
           this.state.selection = { startId: -1, endId: -1 };
           this._recalculateSegments();
+          this.state.revision++;
           emit('segments-changed', this.state.segments);
         }
         break;
@@ -133,6 +139,7 @@ class StateStore {
           this.state.words = this.state.redoStack.pop();
           this.state.selection = { startId: -1, endId: -1 };
           this._recalculateSegments();
+          this.state.revision++;
           emit('segments-changed', this.state.segments);
         }
         break;

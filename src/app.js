@@ -1,6 +1,6 @@
 import { store } from './state.js';
 import { api } from './api.js';
-import { $, $$ } from './utils/dom.js';
+import { $, $$, escapeHtml } from './utils/dom.js';
 import { emit, on } from './utils/events.js';
 
 // We'll import modules here as we create them
@@ -49,11 +49,11 @@ class App {
       
       card.innerHTML = `
         <div class="project-info">
-          <span class="project-name">${project.name}</span>
-          <span class="project-meta">Last edited: ${date} • ${duration}</span>
+          <span class="project-name">${escapeHtml(project.name)}</span>
+          <span class="project-meta">Last edited: ${escapeHtml(date)} • ${escapeHtml(duration)}</span>
         </div>
         <div class="project-actions">
-          <button class="btn-delete-project" data-id="${project.id}" title="Delete project">
+          <button class="btn-delete-project" data-id="${escapeHtml(project.id)}" title="Delete project">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
           </button>
         </div>
@@ -144,6 +144,8 @@ class App {
 
   setupStateListeners() {
     let saveTimeout = null;
+    let lastProjectId = null;
+    let lastRevision = 0;
 
     // Ensure save on close/refresh
     window.addEventListener('beforeunload', () => {
@@ -170,8 +172,20 @@ class App {
       $('#btn-redo').disabled = state.redoStack.length === 0;
       $('#btn-export').disabled = !state.fileId;
       
-      // Auto-save logic
-      if (state.projectId) {
+      // If project changed (e.g. loaded a new one)
+      if (state.projectId !== lastProjectId) {
+        lastProjectId = state.projectId;
+        lastRevision = state.revision; // Sync revision to avoid saving on load
+        if (saveTimeout) {
+          clearTimeout(saveTimeout);
+          saveTimeout = null;
+        }
+        return;
+      }
+      
+      // Auto-save logic based on structural revisions
+      if (state.projectId && state.revision !== lastRevision) {
+        lastRevision = state.revision;
         if (saveTimeout) clearTimeout(saveTimeout);
         saveTimeout = setTimeout(async () => {
           try {

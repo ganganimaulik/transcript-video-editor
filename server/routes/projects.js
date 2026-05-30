@@ -112,13 +112,39 @@ router.post('/', async (req, res) => {
 router.delete('/:id', async (req, res) => {
   try {
     const projects = await getProjectsData();
-    const filtered = projects.filter(p => p.id !== req.params.id);
+    const projectToDelete = projects.find(p => p.id === req.params.id);
     
-    if (projects.length === filtered.length) {
+    if (!projectToDelete) {
       return res.status(404).json({ error: 'Project not found' });
     }
     
+    const fileId = projectToDelete.state?.fileId;
+    const filtered = projects.filter(p => p.id !== req.params.id);
+    
     await saveProjectsData(filtered);
+    
+    // Clean up uploaded video file if not referenced by any other project
+    if (fileId) {
+      const isFileReferenced = filtered.some(p => p.state?.fileId === fileId);
+      if (!isFileReferenced) {
+        const uploadDir = process.env.UPLOAD_DIR || './uploads';
+        const filePath = path.join(uploadDir, fileId);
+        // Prevent path traversal
+        if (!path.resolve(filePath).startsWith(path.resolve(uploadDir))) {
+          console.warn(`Skipped file deletion — path traversal detected: ${fileId}`);
+        } else {
+          try {
+            await fs.unlink(filePath);
+            console.log(`Deleted source video file: ${filePath}`);
+          } catch (err) {
+            if (err.code !== 'ENOENT') {
+              console.error(`Failed to delete source video file ${filePath}:`, err);
+            }
+          }
+        }
+      }
+    }
+    
     res.json({ success: true });
   } catch (error) {
     console.error('Error deleting project:', error);

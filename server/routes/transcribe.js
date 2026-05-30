@@ -28,6 +28,11 @@ router.post('/', async (req, res) => {
 
     const uploadDir = process.env.UPLOAD_DIR || './uploads';
     const videoPath = path.join(uploadDir, fileId);
+
+    // Prevent path traversal attacks
+    if (!path.resolve(videoPath).startsWith(path.resolve(uploadDir))) {
+      return res.status(400).json({ error: 'Invalid file ID.' });
+    }
     
     if (!fs.existsSync(videoPath)) {
       return res.status(404).json({ error: 'Video file not found.' });
@@ -50,6 +55,11 @@ router.post('/', async (req, res) => {
       } catch(err) {
         console.error('Audio extraction failed:', err);
         jobs.set(jobId, { status: 'failed', error: 'Failed to extract audio from video.' });
+        try {
+          if (fs.existsSync(audioPath)) {
+            fs.unlinkSync(audioPath);
+          }
+        } catch (e) {}
         return;
       }
 
@@ -83,6 +93,11 @@ router.post('/', async (req, res) => {
       } catch(err) {
           console.error('GCS Upload failed:', err);
           jobs.set(jobId, { status: 'failed', error: 'Failed to upload audio to Google Cloud Storage.' });
+          try {
+            if (fs.existsSync(audioPath)) {
+              fs.unlinkSync(audioPath);
+            }
+          } catch (e) {}
           return;
       }
 
@@ -123,6 +138,11 @@ router.post('/', async (req, res) => {
         } catch (e) {
             console.warn('Failed to delete file from GCS after error', e);
         }
+        try {
+          if (fs.existsSync(audioPath)) {
+            fs.unlinkSync(audioPath);
+          }
+        } catch (e) {}
         jobs.set(jobId, { status: 'failed', error: err.message || 'Transcription failed.' });
         return;
     }
