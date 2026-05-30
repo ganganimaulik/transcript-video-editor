@@ -10,6 +10,9 @@ class Timeline {
     this.playhead = $('#playhead');
     
     this.isDragging = false;
+    this.dragged = false;
+    this.startX = 0;
+    this.startY = 0;
     this.duration = 0;
     this.zoom = 1;
     this.selectedSegmentIndex = null;
@@ -24,11 +27,19 @@ class Timeline {
     // Click to seek
     this.segmentsContainer.addEventListener('mousedown', (e) => {
       this.isDragging = true;
+      this.dragged = false;
+      this.startX = e.clientX;
+      this.startY = e.clientY;
       this.seekFromMouseEvent(e);
     });
 
     document.addEventListener('mousemove', (e) => {
       if (this.isDragging) {
+        const dx = e.clientX - this.startX;
+        const dy = e.clientY - this.startY;
+        if (Math.sqrt(dx * dx + dy * dy) > 5) {
+          this.dragged = true;
+        }
         this.seekFromMouseEvent(e);
       }
     });
@@ -99,9 +110,12 @@ class Timeline {
       }
       
       const block = createElement('div', 'segment-block');
+      block.classList.add(index % 2 === 0 ? 'even' : 'odd');
       if (index === this.selectedSegmentIndex) {
         block.classList.add('selected');
       }
+      block.innerHTML = `<span class="segment-label">Clip ${index + 1}</span>`;
+      
       const startPct = (seg.start / this.duration) * 100;
       const widthPct = ((seg.end - seg.start) / this.duration) * 100;
       
@@ -114,7 +128,9 @@ class Timeline {
         // Let's stop propagation so the container mousedown doesn't handle it
         e.stopPropagation();
         store.dispatch('SELECT_SEGMENT', index);
-        seekVideo(seg.start);
+        if (!this.dragged) {
+          seekVideo(seg.start);
+        }
       });
 
       frag.appendChild(block);

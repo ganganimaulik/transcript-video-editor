@@ -76,16 +76,24 @@ class Waveform {
       // Calculate time for this bar
       const time = (i / this.data.length) * this.duration;
       
-      // Check if this time is within an active segment
-      let isActive = false;
-      for (const seg of this.segments) {
+      // Check which segment this time belongs to
+      let segmentIndex = -1;
+      for (let s = 0; s < this.segments.length; s++) {
+        const seg = this.segments[s];
         if (time >= seg.start && time <= seg.end) {
-          isActive = true;
+          segmentIndex = s;
           break;
         }
       }
       
-      this.ctx.fillStyle = isActive ? 'rgba(67, 97, 238, 0.6)' : 'rgba(107, 114, 128, 0.2)';
+      if (segmentIndex !== -1) {
+        // Alternating colors: even index = blue-ish, odd index = purple-ish
+        this.ctx.fillStyle = (segmentIndex % 2 === 0) 
+          ? 'rgba(67, 97, 238, 0.65)'  // Blue waveform
+          : 'rgba(114, 9, 183, 0.65)';  // Purple waveform
+      } else {
+        this.ctx.fillStyle = 'rgba(107, 114, 128, 0.2)'; // Silent/deleted gap
+      }
       this.ctx.fillRect(x, y, barWidth - 1, barHeight);
     }
   }

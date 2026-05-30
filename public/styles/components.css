@@ -290,20 +290,59 @@ canvas#waveform-canvas {
 .segment-block {
   position: absolute;
   height: 100%;
-  background-color: rgba(67, 97, 238, 0.1);
-  border-left: 1px solid var(--accent-blue);
-  border-right: 1px solid var(--accent-blue);
   cursor: pointer;
+  box-sizing: border-box;
 }
 
-.segment-block:hover {
-  background-color: rgba(67, 97, 238, 0.2);
+/* Even segment blocks (Blue themed) */
+.segment-block.even {
+  background-color: rgba(67, 97, 238, 0.08);
+  border-left: 1.5px solid rgba(67, 97, 238, 0.6);
+  border-right: 1.5px solid rgba(67, 97, 238, 0.6);
 }
 
+.segment-block.even:hover {
+  background-color: rgba(67, 97, 238, 0.16);
+}
+
+/* Odd segment blocks (Purple themed) */
+.segment-block.odd {
+  background-color: rgba(114, 9, 183, 0.08);
+  border-left: 1.5px solid rgba(114, 9, 183, 0.6);
+  border-right: 1.5px solid rgba(114, 9, 183, 0.6);
+}
+
+.segment-block.odd:hover {
+  background-color: rgba(114, 9, 183, 0.16);
+}
+
+/* Selected segment block */
 .segment-block.selected {
-  background-color: rgba(67, 97, 238, 0.4);
-  border: 2px solid var(--accent-blue);
+  background-color: rgba(67, 97, 238, 0.25) !important;
+  border-left: 2px solid var(--text-primary) !important;
+  border-right: 2px solid var(--text-primary) !important;
+  box-shadow: inset 0 0 0 1px var(--accent-blue);
   z-index: 5;
+}
+
+/* Segment label styling */
+.segment-label {
+  position: absolute;
+  top: 4px;
+  left: 6px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  pointer-events: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: calc(100% - 12px);
+  user-select: none;
+  background-color: var(--bg-primary);
+  padding: 1px 4px;
+  border-radius: var(--radius-sm);
+  opacity: 0.85;
 }
 
 .segment-gap {
