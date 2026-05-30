@@ -12,6 +12,64 @@ const router = express.Router();
 // Store active transcribe jobs
 const jobs = new Map();
 
+/**
+ * Process transcription results into word objects with pauses and filler detection.
+ * @param {Object} data - The LongRunningRecognize response
+ * @returns {Array} Processed word objects
+ */
+function processTranscriptionResults(data) {
+  const words = [];
+  let wordId = 0;
+  let lastEnd = 0;
+
+  if (data.results) {
+    for (const result of data.results) {
+      if (result.alternatives && result.alternatives[0] && result.alternatives[0].words) {
+        for (const wordInfo of result.alternatives[0].words) {
+          let start = 0;
+          if (wordInfo.startTime) {
+            start = parseInt(wordInfo.startTime.seconds || 0) + (wordInfo.startTime.nanos || 0) / 1e9;
+          }
+          let end = 0;
+          if (wordInfo.endTime) {
+            end = parseInt(wordInfo.endTime.seconds || 0) + (wordInfo.endTime.nanos || 0) / 1e9;
+          }
+
+          const gap = start - lastEnd;
+          if (gap >= 0.5) {
+            words.push({
+              id: wordId++,
+              text: `[Pause ${(gap).toFixed(1)}s]`,
+              start: lastEnd,
+              end: start,
+              deleted: false,
+              isPause: true
+            });
+          }
+
+          const wordText = wordInfo.word;
+          const normalizedWord = wordText.toLowerCase().replace(/[^a-z]/g, '');
+          const fillerWords = ['uh', 'um', 'ah', 'er', 'hmm', 'mhm'];
+          const isFiller = fillerWords.includes(normalizedWord);
+
+          words.push({
+            id: wordId++,
+            text: wordText,
+            start,
+            end,
+            deleted: false,
+            isFiller
+          });
+
+          lastEnd = end;
+        }
+      }
+    }
+  }
+
+  return words;
+}
+
 router.post('/', async (req, res) => {
   try {
     const { fileId } = req.body;
@@ -101,7 +159,7 @@ router.post('/', async (req, res) => {
           return;
       }
 
-      jobs.set(jobId, { status: 'transcribing' });
+      jobs.set(jobId, { status: 'transcribing', progress: 0 });
       const gcsUri = `gs://${bucketName}/${destination}`;
 
     // 3. Transcribe using LongRunningRecognize
@@ -123,9 +181,11 @@ router.post('/', async (req, res) => {
         };
 
         const [operation] = await client.longRunningRecognize(request);
+        // Store the GCS operation name so the frontend can persist it for resume
+        jobs.set(jobId, { status: 'transcribing', progress: 0, operationName: operation.name });
         operation.on('progress', (metadata) => {
             if (metadata && metadata.progressPercent !== undefined) {
-                jobs.set(jobId, { status: 'transcribing', progress: metadata.progressPercent });
+                jobs.set(jobId, { status: 'transcribing', progress: metadata.progressPercent, operationName: operation.name });
             }
         });
         const [response] = await operation.promise();
@@ -162,56 +222,7 @@ router.post('/', async (req, res) => {
     }
 
     // 6. Process results
-    const words = [];
-    let wordId = 0;
-    let lastEnd = 0;
-    
-    if (data.results) {
-        for (const result of data.results) {
-            if (result.alternatives && result.alternatives[0] && result.alternatives[0].words) {
-                for (const wordInfo of result.alternatives[0].words) {
-                    // Google SDK returns { startTime: { seconds: '1', nanos: 500000000 } }
-                    let start = 0;
-                    if (wordInfo.startTime) {
-                        start = parseInt(wordInfo.startTime.seconds || 0) + (wordInfo.startTime.nanos || 0) / 1e9;
-                    }
-                    let end = 0;
-                    if (wordInfo.endTime) {
-                        end = parseInt(wordInfo.endTime.seconds || 0) + (wordInfo.endTime.nanos || 0) / 1e9;
-                    }
-                    
-                    const gap = start - lastEnd;
-                    if (gap >= 0.5) {
-                        words.push({
-                            id: wordId++,
-                            text: `[Pause ${(gap).toFixed(1)}s]`,
-                            start: lastEnd,
-                            end: start,
-                            deleted: false,
-                            isPause: true
-                        });
-                    }
-
-                    const wordText = wordInfo.word;
-                    const normalizedWord = wordText.toLowerCase().replace(/[^a-z]/g, '');
-                    const fillerWords = ['uh', 'um', 'ah', 'er', 'hmm', 'mhm'];
-                    const isFiller = fillerWords.includes(normalizedWord);
-
-                    words.push({
-                        id: wordId++,
-                        text: wordText,
-                        start,
-                        end,
-                        deleted: false,
-                        isFiller
-                    });
-                    
-                    lastEnd = end;
-                }
-            }
-        }
-    }
-
+    const words = processTranscriptionResults(data);
     jobs.set(jobId, { status: 'completed', words });
     
     })(); // End of async IIFE
@@ -219,6 +230,54 @@ router.post('/', async (req, res) => {
   } catch (error) {
     console.error('Transcription Init Error:', error);
     res.status(500).json({ error: error.message || 'Internal server error initializing transcription.' });
+  }
+});
+
+// Resume an existing Google Cloud operation after server restart
+router.post('/resume', async (req, res) => {
+  try {
+    const { operationName } = req.body;
+
+    if (!operationName) {
+      return res.status(400).json({ error: 'operationName is required' });
+    }
+
+    const jobId = uuidv4();
+    jobs.set(jobId, { status: 'transcribing', progress: 0, operationName });
+    res.json({ jobId });
+
+    // Reconnect to the existing Google Cloud operation in the background
+    (async () => {
+      try {
+        const client = new speech.SpeechClient();
+        const operation = await client.checkLongRunningRecognizeProgress(operationName);
+
+        if (operation.done) {
+          // Operation already completed on Google's side
+          const words = processTranscriptionResults(operation.result);
+          jobs.set(jobId, { status: 'completed', words });
+          return;
+        }
+
+        // Operation still in progress — attach progress listener and wait
+        operation.on('progress', (metadata) => {
+          if (metadata && metadata.progressPercent !== undefined) {
+            jobs.set(jobId, { status: 'transcribing', progress: metadata.progressPercent, operationName });
+          }
+        });
+
+        const [response] = await operation.promise();
+        const words = processTranscriptionResults(response);
+        jobs.set(jobId, { status: 'completed', words });
+      } catch (err) {
+        console.error('Resume transcription failed:', err);
+        jobs.set(jobId, { status: 'failed', error: err.message || 'Failed to resume transcription.' });
+      }
+    })();
+
+  } catch (error) {
+    console.error('Resume Init Error:', error);
+    res.status(500).json({ error: error.message || 'Internal server error resuming transcription.' });
   }
 });
 

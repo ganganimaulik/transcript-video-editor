@@ -20,10 +20,11 @@
       "undoStack": [],
       "redoStack": [],
       "transcriptionStatus": "transcribing",
-      "transcriptionJobId": "22d01f17-2dde-4709-bc7f-d11dc4c70e12",
-      "projectId": "1a7049ec-f2db-40a1-b616-71b31821774e"
+      "transcriptionJobId": "11ca8248-1e61-4536-8aef-aed758b863c7",
+      "projectId": "1a7049ec-f2db-40a1-b616-71b31821774e",
+      "revision": 3
     },
     "createdAt": 1780135074529,
-    "lastModified": 1780135833214
+    "lastModified": 1780138014760
   }
 ]

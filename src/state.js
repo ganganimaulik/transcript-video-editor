@@ -15,6 +15,7 @@ class StateStore {
       redoStack: [],
       transcriptionStatus: 'idle',
       transcriptionJobId: null,
+      gcsOperationName: null,
       projectId: null,
       revision: 0
     };
@@ -83,10 +84,17 @@ class StateStore {
         
       case 'SET_TRANSCRIPTION_STATUS':
         this.state.transcriptionStatus = payload;
+        this.state.revision++;
         break;
         
       case 'SET_TRANSCRIPTION_JOB_ID':
         this.state.transcriptionJobId = payload;
+        this.state.revision++;
+        break;
+        
+      case 'SET_GCS_OPERATION_NAME':
+        this.state.gcsOperationName = payload;
+        this.state.revision++;
         break;
         
       case 'SET_WORDS':

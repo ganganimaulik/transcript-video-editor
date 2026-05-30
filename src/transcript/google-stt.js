@@ -6,17 +6,33 @@ export class GoogleSTTProvider extends TranscriptionProvider {
     return new Promise(async (resolve, reject) => {
       try {
         let jobId = options.jobId;
+
         if (!jobId) {
-          const res = await api.transcribeVideo(fileId);
-          jobId = res.jobId;
-          if (options.onJobId) {
-            options.onJobId(jobId);
+          // Check if we have a GCS operation name to resume
+          if (options.resumeOperationName) {
+            const res = await api.resumeTranscription(options.resumeOperationName);
+            jobId = res.jobId;
+            if (options.onJobId) {
+              options.onJobId(jobId);
+            }
+          } else {
+            const res = await api.transcribeVideo(fileId);
+            jobId = res.jobId;
+            if (options.onJobId) {
+              options.onJobId(jobId);
+            }
           }
         }
+
         const eventSource = new EventSource(`/api/transcribe/${jobId}/progress`);
         
         eventSource.onmessage = (event) => {
           const data = JSON.parse(event.data);
+          
+          // Capture the GCS operation name when the server sends it
+          if (data.operationName && options.onOperationName) {
+            options.onOperationName(data.operationName);
+          }
           
           if (data.status === 'completed') {
             eventSource.close();

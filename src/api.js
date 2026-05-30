@@ -42,6 +42,26 @@ export const api = {
   },
 
   /**
+   * Resume transcription by reconnecting to an existing Google Cloud operation
+   * @param {string} operationName - The Google Cloud operation name
+   * @returns {Promise<{jobId: string}>}
+   */
+  async resumeTranscription(operationName) {
+    const response = await fetch('/api/transcribe/resume', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ operationName })
+    });
+
+    if (!response.ok) {
+      const err = await response.json().catch(() => ({}));
+      throw new Error(err.error || 'Resume failed');
+    }
+
+    return response.json();
+  },
+
+  /**
    * Start export job
    * @param {string} fileId 
    * @param {Array<{start: number, end: number}>} segments 
