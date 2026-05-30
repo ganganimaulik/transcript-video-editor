@@ -1,13 +1,10 @@
+import './loadEnv.js'; // Must be first to load environment variables before other imports
 import express from 'express';
 import cors from 'cors';
-import dotenv from 'dotenv';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { checkFFmpeg } from './utils/ffmpeg.js';
-
-// Load environment variables
-dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
