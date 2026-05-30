@@ -182,6 +182,25 @@ class App {
       $('#btn-transcribe').classList.remove('hidden');
       $('#transcript-empty').classList.add('hidden');
     });
+
+    // Timeline Toolbar actions
+    $('#btn-zoom-in').addEventListener('click', () => {
+      const currentZoom = store.getState().zoom;
+      store.dispatch('SET_ZOOM', Math.min(5, currentZoom + 0.25));
+    });
+
+    $('#btn-zoom-out').addEventListener('click', () => {
+      const currentZoom = store.getState().zoom;
+      store.dispatch('SET_ZOOM', Math.max(1, currentZoom - 0.25));
+    });
+
+    $('#btn-split').addEventListener('click', () => {
+      store.dispatch('SPLIT_SEGMENT');
+    });
+
+    $('#btn-delete-segment').addEventListener('click', () => {
+      store.dispatch('DELETE_SEGMENT');
+    });
   }
 
   setupStateListeners() {
@@ -214,6 +233,12 @@ class App {
       $('#btn-redo').disabled = state.redoStack.length === 0;
       $('#btn-export').disabled = !state.fileId;
       
+      // Timeline buttons
+      $('#btn-zoom-in').disabled = !state.fileId || state.zoom >= 5;
+      $('#btn-zoom-out').disabled = !state.fileId || state.zoom <= 1;
+      $('#btn-split').disabled = !state.fileId || state.currentTime <= 0 || state.currentTime >= state.duration;
+      $('#btn-delete-segment').disabled = !state.fileId || state.selectedSegmentIndex === null;
+
       // Auto-clean buttons: enable when there are words
       const hasWords = state.words && state.words.length > 0;
       $('#btn-auto-clean').disabled = !hasWords;

@@ -258,6 +258,12 @@ canvas#waveform-canvas {
   background-color: rgba(67, 97, 238, 0.2);
 }
 
+.segment-block.selected {
+  background-color: rgba(67, 97, 238, 0.4);
+  border: 2px solid var(--accent-blue);
+  z-index: 5;
+}
+
 .segment-gap {
   position: absolute;
   height: 100%;

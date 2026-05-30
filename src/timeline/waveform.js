@@ -14,6 +14,11 @@ class Waveform {
       this.resize();
       window.addEventListener('resize', () => this.resize());
       
+      const resizeObserver = new ResizeObserver(() => {
+        this.resize();
+      });
+      resizeObserver.observe(this.canvas.parentElement);
+
       this.setupStateListeners();
     }
   }

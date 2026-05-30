@@ -5,13 +5,16 @@ import { seekVideo } from '../video/player.js';
 class Timeline {
   constructor() {
     this.container = $('.timeline-container');
+    this.content = $('#timeline-content');
     this.segmentsContainer = $('#timeline-segments');
     this.playhead = $('#playhead');
     
     this.isDragging = false;
     this.duration = 0;
+    this.zoom = 1;
+    this.selectedSegmentIndex = null;
     
-    if (this.container && this.segmentsContainer && this.playhead) {
+    if (this.container && this.content && this.segmentsContainer && this.playhead) {
       this.bindEvents();
       this.setupStateListeners();
     }
@@ -38,7 +41,7 @@ class Timeline {
   seekFromMouseEvent(e) {
     if (this.duration <= 0) return;
     
-    const rect = this.container.getBoundingClientRect();
+    const rect = this.content.getBoundingClientRect();
     let x = e.clientX - rect.left;
     
     // Clamp to bounds
@@ -58,11 +61,18 @@ class Timeline {
       }
       
       // Re-render if segments changed (e.g. deletions)
-      if (this.lastSegments !== state.segments) {
+      if (this.lastSegments !== state.segments || this.selectedSegmentIndex !== state.selectedSegmentIndex) {
+        this.selectedSegmentIndex = state.selectedSegmentIndex;
         this.renderSegments(state.segments);
         this.lastSegments = state.segments;
       }
       
+      // Update Zoom
+      if (this.zoom !== state.zoom) {
+        this.zoom = state.zoom;
+        this.content.style.width = `${this.zoom * 100}%`;
+      }
+
       // Update playhead
       this.updatePlayhead(state.currentTime);
     });
@@ -89,11 +99,24 @@ class Timeline {
       }
       
       const block = createElement('div', 'segment-block');
+      if (index === this.selectedSegmentIndex) {
+        block.classList.add('selected');
+      }
       const startPct = (seg.start / this.duration) * 100;
       const widthPct = ((seg.end - seg.start) / this.duration) * 100;
       
       block.style.left = `${startPct}%`;
       block.style.width = `${widthPct}%`;
+
+      block.addEventListener('click', (e) => {
+        // Prevent default seek if we just want to select
+        // Actually, we probably want both: seek to start and select
+        // Let's stop propagation so the container mousedown doesn't handle it
+        e.stopPropagation();
+        store.dispatch('SELECT_SEGMENT', index);
+        seekVideo(seg.start);
+      });
+
       frag.appendChild(block);
       
       lastEnd = seg.end;
