@@ -1,0 +1,25 @@
+{
+  "name": "transcript-video-editor",
+  "version": "1.0.0",
+  "description": "Transcript-based video editor web app",
+  "type": "module",
+  "scripts": {
+    "dev": "npm run dev:backend & npm run dev:frontend",
+    "dev:frontend": "vite",
+    "dev:backend": "node server/index.js",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@google-cloud/speech": "^6.4.0",
+    "@google-cloud/storage": "^7.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "multer": "^1.4.5-lts.1"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "vite": "^5.4.21"
+  }
+}

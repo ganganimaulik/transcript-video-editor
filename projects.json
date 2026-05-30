@@ -1,0 +1,29 @@
+[
+  {
+    "id": "1a7049ec-f2db-40a1-b616-71b31821774e",
+    "name": "485b8721-c59d-4d43-b9a1-868f96fb2cd6.mp4",
+    "state": {
+      "fileId": "485b8721-c59d-4d43-b9a1-868f96fb2cd6.mp4",
+      "videoUrl": "/api/files/485b8721-c59d-4d43-b9a1-868f96fb2cd6.mp4",
+      "duration": 1896.5,
+      "words": [],
+      "segments": [
+        {
+          "start": 0,
+          "end": 1896.5
+        }
+      ],
+      "selection": {
+        "startId": -1,
+        "endId": -1
+      },
+      "undoStack": [],
+      "redoStack": [],
+      "transcriptionStatus": "transcribing",
+      "transcriptionJobId": "22d01f17-2dde-4709-bc7f-d11dc4c70e12",
+      "projectId": "1a7049ec-f2db-40a1-b616-71b31821774e"
+    },
+    "createdAt": 1780135074529,
+    "lastModified": 1780135523841
+  }
+]

@@ -1,0 +1,139 @@
+#app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+}
+
+/* Top Toolbar */
+.toolbar {
+  height: 56px;
+  background-color: var(--bg-secondary);
+  border-bottom: 1px solid var(--bg-surface);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--space-4);
+  flex-shrink: 0;
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 1.25rem;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.5px;
+}
+
+.toolbar-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.divider {
+  width: 1px;
+  height: 24px;
+  background-color: var(--bg-surface);
+  margin: 0 var(--space-2);
+}
+
+/* Main Workspace */
+.workspace {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  flex: 1;
+  overflow: hidden; /* Panels handle their own scroll */
+  gap: 1px; /* Creates borders between panels */
+  background-color: var(--bg-surface); /* Divider color */
+}
+
+/* Panel Common */
+.panel {
+  background-color: var(--bg-primary);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.panel-header {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--space-4);
+  background-color: var(--bg-secondary);
+  border-bottom: 1px solid var(--bg-surface);
+  flex-shrink: 0;
+}
+
+.panel-header h2 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.panel-content {
+  flex: 1;
+  overflow-y: auto;
+  position: relative;
+}
+
+/* Specific Panels */
+.video-panel .panel-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+  background-color: #000;
+}
+
+.transcript-panel .panel-content {
+  padding: var(--space-6) var(--space-8);
+}
+
+/* Timeline Panel */
+.timeline-panel {
+  height: 200px;
+  background-color: var(--bg-secondary);
+  border-top: 1px solid var(--bg-surface);
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.timeline-container {
+  flex: 1;
+  position: relative;
+  overflow-x: auto;
+  overflow-y: hidden;
+  background-color: var(--bg-primary);
+  margin: var(--space-4);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--bg-surface);
+}
+
+/* Modals */
+.modal {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--bg-surface);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8);
+  width: 90%;
+  max-width: 500px;
+  box-shadow: var(--shadow-lg);
+}
