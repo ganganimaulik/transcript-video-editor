@@ -74,7 +74,9 @@ class Transcriber {
 
     // UI Updates
     this.btnTranscribe.classList.add('hidden');
+    if (this.providerSelect) this.providerSelect.classList.add('hidden');
     this.emptyState.classList.add('hidden');
+    if (this.editorContainer) this.editorContainer.classList.add('hidden');
     this.loadingState.classList.remove('hidden');
     
     if (options.resumeOperationName) {
@@ -119,6 +121,8 @@ class Transcriber {
       // UI Updates
       this.loadingState.classList.add('hidden');
       this.editorContainer.classList.remove('hidden');
+      this.btnTranscribe.classList.remove('hidden');
+      if (this.providerSelect) this.providerSelect.classList.remove('hidden');
       
     } catch (err) {
       console.error(err);
@@ -151,6 +155,7 @@ class Transcriber {
       store.dispatch('SET_TRANSCRIPTION_STATUS', 'error');
       store.dispatch('SET_GCS_OPERATION_NAME', null);
       this.btnTranscribe.classList.remove('hidden');
+      if (this.providerSelect) this.providerSelect.classList.remove('hidden');
       
       const currentState = store.getState();
       if (!currentState.words || currentState.words.length === 0) {

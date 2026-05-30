@@ -72,8 +72,8 @@ class App {
           $('#player-view').classList.remove('hidden');
           
           if (fullProject.state.words && fullProject.state.words.length > 0) {
-            $('#btn-transcribe').classList.add('hidden');
-            $('#provider-select').classList.add('hidden');
+            $('#btn-transcribe').classList.remove('hidden');
+            $('#provider-select').classList.remove('hidden');
             $('#transcript-empty').classList.add('hidden');
             $('#transcript-loading').classList.add('hidden');
             $('#transcript-editor').classList.remove('hidden');
