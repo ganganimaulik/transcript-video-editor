@@ -34,6 +34,28 @@ export function getVideoDuration(filePath) {
   });
 }
 
+export function extractAudioMp3(videoPath, outputPath) {
+  return new Promise((resolve, reject) => {
+    // Extract audio as mp3 for OpenAI Whisper to save size (Whisper accepts 25MB limit)
+    const ffmpeg = spawn('ffmpeg', [
+      '-y',
+      '-i', videoPath,
+      '-vn',
+      '-acodec', 'libmp3lame',
+      '-q:a', '2', // VBR quality (approx 190 kbps)
+      outputPath
+    ]);
+
+    ffmpeg.on('close', (code) => {
+      if (code === 0) {
+        resolve(outputPath);
+      } else {
+        reject(new Error('Failed to extract mp3 audio'));
+      }
+    });
+  });
+}
+
 export function extractAudio(videoPath, outputPath) {
   return new Promise((resolve, reject) => {
     // Extract audio as 16kHz mono WAV for Google STT

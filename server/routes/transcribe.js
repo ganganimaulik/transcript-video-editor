@@ -3,11 +3,21 @@ import path from 'path';
 import fs from 'fs';
 import speech from '@google-cloud/speech';
 import { Storage } from '@google-cloud/storage';
-import { extractAudio } from '../utils/ffmpeg.js';
+import { extractAudio, extractAudioMp3 } from '../utils/ffmpeg.js';
+import OpenAI from 'openai';
 
 import { v4 as uuidv4 } from 'uuid';
 
 const router = express.Router();
+
+let openai;
+try {
+  openai = new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY
+  });
+} catch(e) {
+  console.warn("OpenAI initialized failed or missing API key");
+}
 
 // Store active transcribe jobs
 const jobs = new Map();
@@ -17,6 +27,49 @@ const jobs = new Map();
  * @param {Object} data - The LongRunningRecognize response
  * @returns {Array} Processed word objects
  */
+function processOpenAITranscriptionResults(data) {
+  const words = [];
+  let wordId = 0;
+  let lastEnd = 0;
+
+  if (data.words) {
+    for (const wordInfo of data.words) {
+      let start = wordInfo.start;
+      let end = wordInfo.end;
+
+      const gap = start - lastEnd;
+      if (gap >= 0.5) {
+        words.push({
+          id: wordId++,
+          text: `[Pause ${(gap).toFixed(1)}s]`,
+          start: lastEnd,
+          end: start,
+          deleted: false,
+          isPause: true
+        });
+      }
+
+      const wordText = wordInfo.word;
+      const normalizedWord = wordText.toLowerCase().replace(/[^a-z]/g, '');
+      const fillerWords = ['uh', 'um', 'ah', 'er', 'hmm', 'mhm'];
+      const isFiller = fillerWords.includes(normalizedWord);
+
+      words.push({
+        id: wordId++,
+        text: wordText,
+        start,
+        end,
+        deleted: false,
+        isFiller
+      });
+
+      lastEnd = end;
+    }
+  }
+
+  return words;
+}
+
 function processTranscriptionResults(data) {
   const words = [];
   let wordId = 0;
@@ -72,16 +125,10 @@ function processTranscriptionResults(data) {
 
 router.post('/', async (req, res) => {
   try {
-    const { fileId } = req.body;
+    const { fileId, provider = 'google' } = req.body;
     
     if (!fileId) {
       return res.status(400).json({ error: 'fileId is required' });
-    }
-
-    // Need credentials configuration for STT and Storage
-    const bucketName = process.env.GCS_BUCKET_NAME;
-    if (!bucketName) {
-       return res.status(500).json({ error: 'GCS_BUCKET_NAME not configured on the server.'});
     }
 
     const uploadDir = process.env.UPLOAD_DIR || './uploads';
@@ -96,137 +143,209 @@ router.post('/', async (req, res) => {
       return res.status(404).json({ error: 'Video file not found.' });
     }
 
-    const jobId = uuidv4();
-    jobs.set(jobId, { status: 'extracting', progress: 0 });
+    if (provider === 'google') {
+      // Need credentials configuration for STT and Storage
+      const bucketName = process.env.GCS_BUCKET_NAME;
+      if (!bucketName) {
+         return res.status(500).json({ error: 'GCS_BUCKET_NAME not configured on the server.'});
+      }
 
-    // Respond immediately with jobId
-    res.json({ jobId });
+      const jobId = uuidv4();
+      jobs.set(jobId, { status: 'extracting', progress: 0 });
 
-    // Run transcription asynchronously
-    (async () => {
-      // 1. Extract audio
-      const audioFileName = `${fileId}.wav`;
-      const audioPath = path.join(uploadDir, audioFileName);
-      
-      try {
-        await extractAudio(videoPath, audioPath);
-      } catch(err) {
-        console.error('Audio extraction failed:', err);
-        jobs.set(jobId, { status: 'failed', error: 'Failed to extract audio from video.' });
+      // Respond immediately with jobId
+      res.json({ jobId });
+
+      // Run transcription asynchronously
+      (async () => {
+        // 1. Extract audio
+        const audioFileName = `${fileId}.wav`;
+        const audioPath = path.join(uploadDir, audioFileName);
+
         try {
-          if (fs.existsSync(audioPath)) {
-            fs.unlinkSync(audioPath);
-          }
-        } catch (e) {}
-        return;
-      }
-
-      // Get audio file size for progress calculation
-      let audioSize = 1;
-      try {
-        audioSize = fs.statSync(audioPath).size;
-      } catch (e) {
-        console.warn('Failed to get audio file size', e);
-      }
-
-      jobs.set(jobId, { status: 'uploading', progress: 0 });
-
-      // 2. Upload to GCS
-      const storage = new Storage();
-      const bucket = storage.bucket(bucketName);
-      const destination = `audio-${Date.now()}-${audioFileName}`;
-      const file = bucket.file(destination);
-
-      try {
-          await bucket.upload(audioPath, {
-              destination: destination,
-              onUploadProgress: (progressEvent) => {
-                  let uploaded = progressEvent.bytesWritten || progressEvent.bytesRetained || progressEvent.loaded || 0;
-                  let total = progressEvent.bytesTotal || progressEvent.total || audioSize;
-                  if (total === 0) total = 1;
-                  const progress = Math.min(Math.round((uploaded / total) * 100), 99);
-                  jobs.set(jobId, { status: 'uploading', progress });
-              }
-          });
-      } catch(err) {
-          console.error('GCS Upload failed:', err);
-          jobs.set(jobId, { status: 'failed', error: 'Failed to upload audio to Google Cloud Storage.' });
+          await extractAudio(videoPath, audioPath);
+        } catch(err) {
+          console.error('Audio extraction failed:', err);
+          jobs.set(jobId, { status: 'failed', error: 'Failed to extract audio from video.' });
           try {
             if (fs.existsSync(audioPath)) {
               fs.unlinkSync(audioPath);
             }
           } catch (e) {}
           return;
+        }
+
+        // Get audio file size for progress calculation
+        let audioSize = 1;
+        try {
+          audioSize = fs.statSync(audioPath).size;
+        } catch (e) {
+          console.warn('Failed to get audio file size', e);
+        }
+
+        jobs.set(jobId, { status: 'uploading', progress: 0 });
+
+        // 2. Upload to GCS
+        const storage = new Storage();
+        const bucket = storage.bucket(bucketName);
+        const destination = `audio-${Date.now()}-${audioFileName}`;
+        const file = bucket.file(destination);
+
+        try {
+            await bucket.upload(audioPath, {
+                destination: destination,
+                onUploadProgress: (progressEvent) => {
+                    let uploaded = progressEvent.bytesWritten || progressEvent.bytesRetained || progressEvent.loaded || 0;
+                    let total = progressEvent.bytesTotal || progressEvent.total || audioSize;
+                    if (total === 0) total = 1;
+                    const progress = Math.min(Math.round((uploaded / total) * 100), 99);
+                    jobs.set(jobId, { status: 'uploading', progress });
+                }
+            });
+        } catch(err) {
+            console.error('GCS Upload failed:', err);
+            jobs.set(jobId, { status: 'failed', error: 'Failed to upload audio to Google Cloud Storage.' });
+            try {
+              if (fs.existsSync(audioPath)) {
+                fs.unlinkSync(audioPath);
+              }
+            } catch (e) {}
+            return;
+        }
+
+        jobs.set(jobId, { status: 'transcribing', progress: 0 });
+        const gcsUri = `gs://${bucketName}/${destination}`;
+
+      // 3. Transcribe using LongRunningRecognize
+      let data;
+      try {
+          const client = new speech.SpeechClient();
+          const audio = {
+              uri: gcsUri,
+          };
+          const config = {
+              encoding: 'LINEAR16',
+              sampleRateHertz: 16000,
+              languageCode: 'en-US',
+              enableWordTimeOffsets: true,
+          };
+          const request = {
+              audio: audio,
+              config: config,
+          };
+
+          const [operation] = await client.longRunningRecognize(request);
+          // Store the GCS operation name so the frontend can persist it for resume
+          jobs.set(jobId, { status: 'transcribing', progress: 0, operationName: operation.name });
+          operation.on('progress', (metadata) => {
+              if (metadata && metadata.progressPercent !== undefined) {
+                  jobs.set(jobId, { status: 'transcribing', progress: metadata.progressPercent, operationName: operation.name });
+              }
+          });
+          const [response] = await operation.promise();
+          data = response;
+      } catch(err) {
+          console.error('STT Transcription failed:', err);
+          // Attempt to clean up GCS file before throwing
+          try {
+              await file.delete();
+          } catch (e) {
+              console.warn('Failed to delete file from GCS after error', e);
+          }
+          try {
+            if (fs.existsSync(audioPath)) {
+              fs.unlinkSync(audioPath);
+            }
+          } catch (e) {}
+          jobs.set(jobId, { status: 'failed', error: err.message || 'Transcription failed.' });
+          return;
       }
 
-      jobs.set(jobId, { status: 'transcribing', progress: 0 });
-      const gcsUri = `gs://${bucketName}/${destination}`;
+      // 4. Clean up GCS
+      try {
+          await file.delete();
+      } catch (e) {
+          console.warn('Failed to delete file from GCS', e);
+      }
 
-    // 3. Transcribe using LongRunningRecognize
-    let data;
-    try {
-        const client = new speech.SpeechClient();
-        const audio = {
-            uri: gcsUri,
-        };
-        const config = {
-            encoding: 'LINEAR16',
-            sampleRateHertz: 16000,
-            languageCode: 'en-US',
-            enableWordTimeOffsets: true,
-        };
-        const request = {
-            audio: audio,
-            config: config,
-        };
+      // 5. Clean up local audio
+      try {
+        fs.unlinkSync(audioPath);
+      } catch(e) {
+        console.warn("Failed to delete temp local audio file", e);
+      }
 
-        const [operation] = await client.longRunningRecognize(request);
-        // Store the GCS operation name so the frontend can persist it for resume
-        jobs.set(jobId, { status: 'transcribing', progress: 0, operationName: operation.name });
-        operation.on('progress', (metadata) => {
-            if (metadata && metadata.progressPercent !== undefined) {
-                jobs.set(jobId, { status: 'transcribing', progress: metadata.progressPercent, operationName: operation.name });
+      // 6. Process results
+      const words = processTranscriptionResults(data);
+      jobs.set(jobId, { status: 'completed', words });
+
+      })(); // End of async IIFE
+    } else if (provider === 'openai') {
+      if (!openai) {
+        return res.status(500).json({ error: 'OpenAI is not configured on the server.'});
+      }
+
+      const jobId = uuidv4();
+      jobs.set(jobId, { status: 'extracting', progress: 0 });
+
+      // Respond immediately with jobId
+      res.json({ jobId });
+
+      (async () => {
+        // 1. Extract audio
+        const audioFileName = `${fileId}.mp3`;
+        const audioPath = path.join(uploadDir, audioFileName);
+
+        try {
+          await extractAudioMp3(videoPath, audioPath);
+        } catch(err) {
+          console.error('Audio extraction failed:', err);
+          jobs.set(jobId, { status: 'failed', error: 'Failed to extract mp3 audio from video.' });
+          try {
+            if (fs.existsSync(audioPath)) {
+              fs.unlinkSync(audioPath);
             }
-        });
-        const [response] = await operation.promise();
-        data = response;
-    } catch(err) {
-        console.error('STT Transcription failed:', err);
-        // Attempt to clean up GCS file before throwing
-        try {
-            await file.delete();
-        } catch (e) {
-            console.warn('Failed to delete file from GCS after error', e);
+          } catch (e) {}
+          return;
         }
+
+        jobs.set(jobId, { status: 'transcribing', progress: 0 });
+
+        // 2. Transcribe using OpenAI Whisper API
+        let data;
         try {
-          if (fs.existsSync(audioPath)) {
-            fs.unlinkSync(audioPath);
-          }
-        } catch (e) {}
-        jobs.set(jobId, { status: 'failed', error: err.message || 'Transcription failed.' });
-        return;
-    }
+          const transcription = await openai.audio.transcriptions.create({
+            file: fs.createReadStream(audioPath),
+            model: "whisper-1",
+            response_format: "verbose_json",
+            timestamp_granularities: ["word"],
+          });
+          data = transcription;
+        } catch (err) {
+          console.error('OpenAI Transcription failed:', err);
+          try {
+            if (fs.existsSync(audioPath)) {
+              fs.unlinkSync(audioPath);
+            }
+          } catch (e) {}
+          jobs.set(jobId, { status: 'failed', error: err.message || 'Transcription failed.' });
+          return;
+        }
 
-    // 4. Clean up GCS
-    try {
-        await file.delete();
-    } catch (e) {
-        console.warn('Failed to delete file from GCS', e);
-    }
-    
-    // 5. Clean up local audio
-    try {
-      fs.unlinkSync(audioPath);
-    } catch(e) {
-      console.warn("Failed to delete temp local audio file", e);
-    }
+        // 3. Clean up local audio
+        try {
+          fs.unlinkSync(audioPath);
+        } catch(e) {
+          console.warn("Failed to delete temp local audio file", e);
+        }
 
-    // 6. Process results
-    const words = processTranscriptionResults(data);
-    jobs.set(jobId, { status: 'completed', words });
-    
-    })(); // End of async IIFE
-    
+        // 4. Process results
+        const words = processOpenAITranscriptionResults(data);
+        jobs.set(jobId, { status: 'completed', words });
+      })();
+    } else {
+      res.status(400).json({ error: 'Invalid provider specified' });
+    }
   } catch (error) {
     console.error('Transcription Init Error:', error);
     res.status(500).json({ error: error.message || 'Internal server error initializing transcription.' });

@@ -72,18 +72,21 @@ class App {
           $('#player-view').classList.remove('hidden');
           
           if (fullProject.state.words && fullProject.state.words.length > 0) {
-            $('#btn-transcribe').classList.add('hidden');
+            $('#btn-transcribe').classList.remove('hidden');
+            $('#provider-select').classList.remove('hidden');
             $('#transcript-empty').classList.add('hidden');
             $('#transcript-loading').classList.add('hidden');
             $('#transcript-editor').classList.remove('hidden');
           } else if (fullProject.state.transcriptionStatus === 'transcribing') {
             // Show loading state for in-progress transcription
             $('#btn-transcribe').classList.add('hidden');
+            $('#provider-select').classList.add('hidden');
             $('#transcript-empty').classList.add('hidden');
             $('#transcript-loading').classList.remove('hidden');
             $('#transcribe-status-text').textContent = 'Resuming transcription...';
           } else {
             $('#btn-transcribe').classList.remove('hidden');
+            $('#provider-select').classList.remove('hidden');
             $('#transcript-empty').classList.remove('hidden');
             $('#transcript-loading').classList.add('hidden');
           }
@@ -180,6 +183,7 @@ class App {
       $('#upload-view').classList.add('hidden');
       $('#player-view').classList.remove('hidden');
       $('#btn-transcribe').classList.remove('hidden');
+      $('#provider-select').classList.remove('hidden');
       $('#transcript-empty').classList.add('hidden');
     });
   }
