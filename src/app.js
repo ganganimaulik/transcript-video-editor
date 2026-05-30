@@ -76,7 +76,7 @@ class App {
             $('#transcript-empty').classList.add('hidden');
             // Trigger transcript render by emitting words
             emit('words-changed', fullProject.state.words);
-          } else {
+          } else if (fullProject.state.transcriptionStatus !== 'transcribing') {
             $('#btn-transcribe').classList.remove('hidden');
             $('#transcript-empty').classList.remove('hidden');
           }
@@ -145,6 +145,25 @@ class App {
   setupStateListeners() {
     let saveTimeout = null;
 
+    // Ensure save on close/refresh
+    window.addEventListener('beforeunload', () => {
+      if (saveTimeout) {
+        const state = store.getState();
+        if (state.projectId) {
+          const stateToSave = { ...state };
+          delete stateToSave.isPlaying;
+          delete stateToSave.currentTime;
+          
+          fetch('/api/projects', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id: state.projectId, state: stateToSave }),
+            keepalive: true
+          }).catch(err => console.error('Save before unload failed:', err));
+        }
+      }
+    });
+
     store.subscribe((state) => {
       // Update toolbar buttons
       $('#btn-undo').disabled = state.undoStack.length === 0;
@@ -161,6 +180,7 @@ class App {
             delete stateToSave.isPlaying;
             delete stateToSave.currentTime;
             await api.saveProject(state.projectId, stateToSave);
+            saveTimeout = null;
           } catch (err) {
             console.error('Auto-save failed:', err);
           }

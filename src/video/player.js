@@ -89,9 +89,20 @@ class VideoPlayer {
         }
     }
     
-    // If not in a segment, jump to the first segment
+    // If not in a segment, jump to the next valid segment
     if (!inSegment) {
-        if (segments.length > 0) {
+        let nextSegIndex = -1;
+        for (let i = 0; i < segments.length; i++) {
+            if (segments[i].start >= time) {
+                nextSegIndex = i;
+                break;
+            }
+        }
+        
+        if (nextSegIndex !== -1) {
+            this.currentSegmentIndex = nextSegIndex;
+            this.video.currentTime = segments[nextSegIndex].start;
+        } else if (segments.length > 0) {
             this.currentSegmentIndex = 0;
             this.video.currentTime = segments[0].start;
         }
@@ -117,21 +128,38 @@ class VideoPlayer {
     
     // We only actively enforce segment skipping if playing
     if (!this.video.paused) {
-      const currentSegment = segments[this.currentSegmentIndex];
-      
-      // If we've played past the end of the current segment
-      if (currentSegment && time >= currentSegment.end) {
-        // Find next segment
-        this.currentSegmentIndex++;
-        
-        if (this.currentSegmentIndex < segments.length) {
-          // Jump to start of next segment
-          this.video.currentTime = segments[this.currentSegmentIndex].start;
-        } else {
-          // Reached end of last segment, pause
-          this.pause();
-          this.video.currentTime = segments[segments.length - 1].end;
-        }
+      // Find which segment we are currently in
+      let inSegIndex = -1;
+      for (let i = 0; i < segments.length; i++) {
+          if (time >= segments[i].start && time < segments[i].end) {
+              inSegIndex = i;
+              break;
+          }
+      }
+
+      if (inSegIndex !== -1) {
+          this.currentSegmentIndex = inSegIndex;
+      } else {
+          // We are in a deleted portion (or outside any valid segment).
+          // Find the next segment to jump to.
+          let nextSegIndex = -1;
+          for (let i = 0; i < segments.length; i++) {
+              if (segments[i].start >= time) {
+                  nextSegIndex = i;
+                  break;
+              }
+          }
+
+          if (nextSegIndex !== -1) {
+              this.currentSegmentIndex = nextSegIndex;
+              this.video.currentTime = segments[nextSegIndex].start;
+          } else {
+              // Reached end of all valid segments
+              this.pause();
+              if (segments.length > 0) {
+                  this.video.currentTime = segments[segments.length - 1].end;
+              }
+          }
       }
     }
   }
