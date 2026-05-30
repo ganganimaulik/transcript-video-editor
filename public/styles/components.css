@@ -444,7 +444,7 @@ canvas#waveform-canvas {
 .auto-clean-group {
   position: relative;
   display: flex;
-  align-items: center;
+  align-items: stretch;
 }
 
 .btn-auto-clean {
@@ -466,7 +466,6 @@ canvas#waveform-canvas {
 .btn-auto-clean:hover:not(:disabled) {
   background: linear-gradient(135deg, rgba(245, 158, 11, 0.25), rgba(217, 119, 6, 0.25));
   box-shadow: 0 0 12px rgba(245, 158, 11, 0.2);
-  transform: translateY(-1px);
 }
 
 .btn-auto-clean:disabled {
@@ -493,6 +492,7 @@ canvas#waveform-canvas {
 
 .btn-auto-clean-caret:hover:not(:disabled) {
   background: linear-gradient(135deg, rgba(245, 158, 11, 0.3), rgba(217, 119, 6, 0.3));
+  box-shadow: 0 0 12px rgba(245, 158, 11, 0.2);
 }
 
 .btn-auto-clean-caret:disabled {

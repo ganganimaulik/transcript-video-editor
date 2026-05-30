@@ -174,6 +174,10 @@ router.post('/', async (req, res) => {
             sampleRateHertz: 16000,
             languageCode: 'en-US',
             enableWordTimeOffsets: true,
+            speechContexts: [{
+                phrases: ['uh', 'um', 'ah', 'er', 'hmm', 'mhm'],
+                boost: 20
+            }]
         };
         const request = {
             audio: audio,
