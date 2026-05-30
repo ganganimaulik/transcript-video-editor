@@ -24,13 +24,14 @@ export const api = {
   /**
    * Request transcription
    * @param {string} fileId 
+   * @param {string} provider
    * @returns {Promise<{words: Array<{id: number, text: string, start: number, end: number, deleted: boolean}>}>}
    */
-  async transcribeVideo(fileId) {
+  async transcribeVideo(fileId, provider = 'google') {
     const response = await fetch('/api/transcribe', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ fileId })
+      body: JSON.stringify({ fileId, provider })
     });
 
     if (!response.ok) {
