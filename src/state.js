@@ -15,6 +15,7 @@ class StateStore {
       redoStack: [],
       transcriptionStatus: 'idle',
       transcriptionJobId: null,
+      transcriptionProvider: 'google',
       gcsOperationName: null,
       projectId: null,
       revision: 0
@@ -92,6 +93,11 @@ class StateStore {
         this.state.revision++;
         break;
         
+      case 'SET_TRANSCRIPTION_PROVIDER':
+        this.state.transcriptionProvider = payload;
+        this.state.revision++;
+        break;
+
       case 'SET_GCS_OPERATION_NAME':
         this.state.gcsOperationName = payload;
         this.state.revision++;
