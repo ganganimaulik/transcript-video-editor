@@ -100,12 +100,21 @@ class Timeline {
     segments.forEach((seg, index) => {
       // Add gap if there's space between last end and current start
       if (seg.start > lastEnd + 0.1) {
+        const gapStart = lastEnd;
+        const gapEnd = seg.start;
         const gap = createElement('div', 'segment-gap');
-        const gapStartPct = (lastEnd / this.duration) * 100;
-        const gapWidthPct = ((seg.start - lastEnd) / this.duration) * 100;
+        const gapStartPct = (gapStart / this.duration) * 100;
+        const gapWidthPct = ((gapEnd - gapStart) / this.duration) * 100;
         
         gap.style.left = `${gapStartPct}%`;
         gap.style.width = `${gapWidthPct}%`;
+        gap.title = "Click to restore deleted clip";
+        
+        gap.addEventListener('click', (e) => {
+          e.stopPropagation();
+          store.dispatch('RESTORE_REGION', { start: gapStart, end: gapEnd });
+        });
+        
         frag.appendChild(gap);
       }
       
@@ -140,12 +149,21 @@ class Timeline {
     
     // Add final gap if needed
     if (lastEnd < this.duration - 0.1) {
+      const gapStart = lastEnd;
+      const gapEnd = this.duration;
       const gap = createElement('div', 'segment-gap');
-      const gapStartPct = (lastEnd / this.duration) * 100;
-      const gapWidthPct = ((this.duration - lastEnd) / this.duration) * 100;
+      const gapStartPct = (gapStart / this.duration) * 100;
+      const gapWidthPct = ((gapEnd - gapStart) / this.duration) * 100;
       
       gap.style.left = `${gapStartPct}%`;
       gap.style.width = `${gapWidthPct}%`;
+      gap.title = "Click to restore deleted clip";
+      
+      gap.addEventListener('click', (e) => {
+        e.stopPropagation();
+        store.dispatch('RESTORE_REGION', { start: gapStart, end: gapEnd });
+      });
+      
       frag.appendChild(gap);
     }
     

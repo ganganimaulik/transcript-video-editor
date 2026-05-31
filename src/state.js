@@ -294,6 +294,35 @@ class StateStore {
         }
         break;
 
+      case 'RESTORE_REGION': {
+        const { start, end } = payload;
+        this._pushUndo();
+        
+        const threshold = 0.1; // Handle floating point inaccuracies
+        
+        // Remove deletedRegions that fall inside or overlap with this region
+        this.state.deletedRegions = this.state.deletedRegions.filter(region => {
+           const overlaps = (region.start < end + threshold && region.end > start - threshold);
+           return !overlaps;
+        });
+
+        // Restore words
+        if (this.state.words) {
+          this.state.words = this.state.words.map(w => {
+            if (w.deleted && w.start < end + threshold && w.end > start - threshold) {
+              return { ...w, deleted: false };
+            }
+            return w;
+          });
+        }
+        
+        this.state.selection = { startId: -1, endId: -1 };
+        this._recalculateSegments();
+        this.state.revision++;
+        emit('segments-changed', this.state.segments);
+        break;
+      }
+
       case 'SELECT_SEGMENT':
         this.state.selectedSegmentIndex = payload;
         break;
