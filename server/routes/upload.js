@@ -6,6 +6,8 @@ import { getVideoDuration } from '../utils/ffmpeg.js';
 
 const router = express.Router();
 
+const ALLOWED_EXTENSIONS = ['.mp4', '.webm', '.ogg', '.mov', '.avi', '.mkv', '.m4v'];
+
 // Configure multer for file storage
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -19,12 +21,31 @@ const storage = multer.diskStorage({
   }
 });
 
+const fileFilter = (req, file, cb) => {
+  const ext = path.extname(file.originalname).toLowerCase();
+  if (ALLOWED_EXTENSIONS.includes(ext)) {
+    cb(null, true);
+  } else {
+    cb(new Error('Invalid file type. Only video files are allowed.'));
+  }
+};
+
 const upload = multer({ 
   storage,
+  fileFilter,
   limits: { fileSize: 10 * 1024 * 1024 * 1024 } // 10GB limit (adjust as needed)
 });
 
-router.post('/', upload.single('video'), async (req, res) => {
+const uploadMiddleware = upload.single('video');
+
+router.post('/', (req, res, next) => {
+  uploadMiddleware(req, res, (err) => {
+    if (err) {
+      return res.status(400).json({ error: err.message });
+    }
+    next();
+  });
+}, async (req, res) => {
   try {
     if (!req.file) {
       return res.status(400).json({ error: 'No video file provided.' });
