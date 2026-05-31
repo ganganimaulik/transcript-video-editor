@@ -172,7 +172,7 @@ function processTranscriptionResults(data) {
 
 router.post('/', async (req, res) => {
   try {
-    const { fileId, provider = 'google' } = req.body;
+    const { fileId, provider = 'modal-crisperwhisper' } = req.body;
     
     if (!fileId) {
       return res.status(400).json({ error: 'fileId is required' });

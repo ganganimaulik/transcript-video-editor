@@ -27,7 +27,7 @@ export const api = {
    * @param {string} provider
    * @returns {Promise<{words: Array<{id: number, text: string, start: number, end: number, deleted: boolean}>}>}
    */
-  async transcribeVideo(fileId, provider = 'google') {
+  async transcribeVideo(fileId, provider = 'modal-crisperwhisper') {
     const response = await fetch('/api/transcribe', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

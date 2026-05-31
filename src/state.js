@@ -15,7 +15,7 @@ class StateStore {
       redoStack: [],
       transcriptionStatus: 'idle',
       transcriptionJobId: null,
-      transcriptionProvider: 'google',
+      transcriptionProvider: 'modal-crisperwhisper',
       gcsOperationName: null,
       projectId: null,
       revision: 0,

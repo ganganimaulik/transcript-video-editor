@@ -107,6 +107,8 @@ export function runExport(videoPath, segments, outputPath, onProgress) {
       '-c:v', 'libx264',
       '-preset', 'fast',
       '-crf', '22',
+      '-pix_fmt', 'yuv420p',
+      '-movflags', '+faststart',
       '-c:a', 'aac',
       '-b:a', '128k',
       outputPath

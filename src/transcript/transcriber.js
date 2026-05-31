@@ -20,12 +20,12 @@ class Transcriber {
       'crisperwhisper': new CrisperWhisperProvider(),
       'modal-crisperwhisper': new CrisperWhisperProvider('modal-crisperwhisper')
     };
-    this.provider = this.providers['google'];
+    this.provider = this.providers['modal-crisperwhisper'];
 
     // Subscribe to state to resume transcription on reload
     store.subscribe((state) => {
       if (state.transcriptionProvider) {
-        this.provider = this.providers[state.transcriptionProvider] || this.providers['google'];
+        this.provider = this.providers[state.transcriptionProvider] || this.providers['modal-crisperwhisper'];
         if (this.providerSelect && this.providerSelect.value !== state.transcriptionProvider) {
            this.providerSelect.value = state.transcriptionProvider;
         }
@@ -53,9 +53,9 @@ class Transcriber {
 
     this.btnTranscribe.addEventListener('click', () => {
       const state = store.getState();
-      const providerKey = this.providerSelect ? this.providerSelect.value : 'google';
+      const providerKey = this.providerSelect ? this.providerSelect.value : 'modal-crisperwhisper';
       store.dispatch('SET_TRANSCRIPTION_PROVIDER', providerKey);
-      this.provider = this.providers[providerKey] || this.providers['google'];
+      this.provider = this.providers[providerKey] || this.providers['modal-crisperwhisper'];
       this.startTranscription(state);
     });
   }
