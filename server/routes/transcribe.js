@@ -7,6 +7,7 @@ import { extractAudio, extractAudioMp3 } from '../utils/ffmpeg.js';
 import OpenAI from 'openai';
 
 import { v4 as uuidv4 } from 'uuid';
+import { exec, spawn } from 'child_process';
 
 const router = express.Router();
 
@@ -22,6 +23,49 @@ try {
 
 // Store active transcribe jobs
 const jobs = new Map();
+
+function processCrisperWhisperResults(data) {
+  const words = [];
+  let wordId = 0;
+  let lastEnd = 0;
+
+  if (data.chunks) {
+    for (const chunk of data.chunks) {
+      let start = chunk.timestamp[0];
+      let end = chunk.timestamp[1] || start + 0.5;
+
+      const gap = start - lastEnd;
+      if (gap >= 0.5) {
+        words.push({
+          id: wordId++,
+          text: `[Pause ${(gap).toFixed(1)}s]`,
+          start: lastEnd,
+          end: start,
+          deleted: false,
+          isPause: true
+        });
+      }
+
+      const wordText = chunk.text.trim();
+      const normalizedWord = wordText.toLowerCase().replace(/[^a-z]/g, '');
+      const fillerWords = ['uh', 'um', 'ah', 'er', 'hmm', 'mhm'];
+      const isFiller = fillerWords.includes(normalizedWord);
+
+      words.push({
+        id: wordId++,
+        text: wordText,
+        start,
+        end,
+        deleted: false,
+        isFiller
+      });
+
+      lastEnd = end;
+    }
+  }
+
+  return words;
+}
 
 /**
  * Process transcription results into word objects with pauses and filler detection.
@@ -343,6 +387,85 @@ router.post('/', async (req, res) => {
         // 4. Process results
         const words = processOpenAITranscriptionResults(data);
         jobs.set(jobId, { status: 'completed', words });
+      })();
+    } else if (provider === 'crisperwhisper') {
+      const jobId = uuidv4();
+      jobs.set(jobId, { status: 'extracting', progress: 0 });
+
+      // Respond immediately with jobId
+      res.json({ jobId });
+
+      (async () => {
+        // 1. Extract audio
+        const audioFileName = `${fileId}-crisper.wav`;
+        const audioPath = path.join(uploadDir, audioFileName);
+
+        try {
+          await extractAudio(videoPath, audioPath);
+        } catch(err) {
+          console.error('Audio extraction failed:', err);
+          jobs.set(jobId, { status: 'failed', error: 'Failed to extract audio for CrisperWhisper.' });
+          return;
+        }
+
+        jobs.set(jobId, { status: 'transcribing', progress: 0 });
+
+        // 2. Run Python Script
+        const scriptPath = path.resolve('server/transcribe.py');
+        const pythonProcess = spawn('python3', [scriptPath, audioPath]);
+        
+        let stdoutData = '';
+        let stderrData = '';
+
+        pythonProcess.stdout.on('data', (data) => {
+          stdoutData += data.toString();
+        });
+
+        pythonProcess.stderr.on('data', (data) => {
+          const str = data.toString();
+          stderrData += str;
+          
+          const lines = str.split('\n');
+          for (const line of lines) {
+            if (line.includes('PROGRESS:')) {
+              // Extract the value after PROGRESS:
+              const match = line.match(/PROGRESS:(\d+)/);
+              if (match) {
+                const progressVal = parseInt(match[1], 10);
+                if (!isNaN(progressVal)) {
+                  jobs.set(jobId, { status: 'transcribing', progress: progressVal });
+                }
+              }
+            }
+          }
+        });
+
+        pythonProcess.on('close', (code) => {
+          // Clean up audio
+          try {
+            if (fs.existsSync(audioPath)) fs.unlinkSync(audioPath);
+          } catch(e) {}
+
+          if (code !== 0) {
+            console.error('CrisperWhisper script error code:', code);
+            console.error('stderr:', stderrData);
+            jobs.set(jobId, { status: 'failed', error: 'Failed to run local CrisperWhisper transcription.' });
+            return;
+          }
+
+          try {
+            const data = JSON.parse(stdoutData);
+            if (data.error) {
+              jobs.set(jobId, { status: 'failed', error: data.error });
+              return;
+            }
+            const words = processCrisperWhisperResults(data);
+            jobs.set(jobId, { status: 'completed', words });
+          } catch (err) {
+            console.error('Failed to parse CrisperWhisper JSON output:', err);
+            jobs.set(jobId, { status: 'failed', error: 'Invalid output from CrisperWhisper script.' });
+          }
+        });
       })();
     } else {
       res.status(400).json({ error: 'Invalid provider specified' });

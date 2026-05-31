@@ -2,6 +2,7 @@ import { $ } from '../utils/dom.js';
 import { store } from '../state.js';
 import { GoogleSTTProvider } from './google-stt.js';
 import { OpenAIWhisperProvider } from './openai-whisper.js';
+import { CrisperWhisperProvider } from './crisper-whisper.js';
 
 class Transcriber {
   constructor() {
@@ -15,7 +16,8 @@ class Transcriber {
     // Default providers
     this.providers = {
       'google': new GoogleSTTProvider(),
-      'openai': new OpenAIWhisperProvider()
+      'openai': new OpenAIWhisperProvider(),
+      'crisperwhisper': new CrisperWhisperProvider()
     };
     this.provider = this.providers['google'];
 
@@ -84,7 +86,9 @@ class Transcriber {
     } else if (options.jobId) {
       this.statusText.textContent = 'Resuming transcription...';
     } else {
-      const providerName = state.transcriptionProvider === 'openai' ? 'OpenAI Whisper' : 'Google Cloud STT';
+      let providerName = 'Google Cloud STT';
+      if (state.transcriptionProvider === 'openai') providerName = 'OpenAI Whisper';
+      else if (state.transcriptionProvider === 'crisperwhisper') providerName = 'CrisperWhisper';
       this.statusText.textContent = `Transcribing with ${providerName}...`;
     }
     
@@ -99,7 +103,10 @@ class Transcriber {
         } else if (status === 'uploading') {
           this.statusText.textContent = `Uploading to Google Storage: ${progress}%`;
         } else if (status === 'transcribing') {
-          const providerName = state.transcriptionProvider === 'openai' ? 'OpenAI Whisper' : 'Google Cloud STT';
+          let providerName = 'Google Cloud STT';
+          if (state.transcriptionProvider === 'openai') providerName = 'OpenAI Whisper';
+          else if (state.transcriptionProvider === 'crisperwhisper') providerName = 'CrisperWhisper';
+          
           if (progress !== undefined) {
             this.statusText.textContent = `Transcribing with ${providerName}: ${progress}%`;
           } else {
