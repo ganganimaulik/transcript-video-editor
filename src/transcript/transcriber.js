@@ -12,6 +12,7 @@ class Transcriber {
     this.loadingState = $('#transcript-loading');
     this.editorContainer = $('#transcript-editor');
     this.statusText = $('#transcribe-status-text');
+    this.errorText = $('#transcript-error-text');
     
     // Default providers
     this.providers = {
@@ -35,6 +36,17 @@ class Transcriber {
         // Resume if we have either a job ID or a GCS operation name
         if (state.transcriptionJobId || state.gcsOperationName) {
           this.resumeTranscription(state);
+        }
+      }
+      
+      // Update error text visibility
+      if (this.errorText) {
+        if (state.transcriptionStatus === 'error' && state.transcriptionError) {
+          this.errorText.textContent = `Error: ${state.transcriptionError}`;
+          this.errorText.classList.remove('hidden');
+        } else {
+          this.errorText.classList.add('hidden');
+          this.errorText.textContent = '';
         }
       }
     });
@@ -79,6 +91,7 @@ class Transcriber {
     this.btnTranscribe.classList.add('hidden');
     if (this.providerSelect) this.providerSelect.classList.add('hidden');
     this.emptyState.classList.add('hidden');
+    if (this.errorText) this.errorText.classList.add('hidden');
     if (this.editorContainer) this.editorContainer.classList.add('hidden');
     this.loadingState.classList.remove('hidden');
     
@@ -161,9 +174,11 @@ class Transcriber {
         return;
       }
       
-      this.statusText.textContent = `Error: ${err.message}`;
+      store.dispatch('SET_TRANSCRIPTION_ERROR', err.message);
       store.dispatch('SET_TRANSCRIPTION_STATUS', 'error');
       store.dispatch('SET_GCS_OPERATION_NAME', null);
+      
+      this.loadingState.classList.add('hidden');
       this.btnTranscribe.classList.remove('hidden');
       if (this.providerSelect) this.providerSelect.classList.remove('hidden');
       

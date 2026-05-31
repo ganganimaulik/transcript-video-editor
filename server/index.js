@@ -4,7 +4,7 @@ import cors from 'cors';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { checkFFmpeg } from './utils/ffmpeg.js';
+import { checkFFmpeg, checkVideoToolboxSupport } from './utils/ffmpeg.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -44,7 +44,11 @@ app.use('/api/downloads', express.static(EXPORT_DIR));
 
 // Health check
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok', ffmpeg: checkFFmpeg() });
+  res.json({ 
+    status: 'ok', 
+    ffmpeg: checkFFmpeg(),
+    videotoolbox: checkVideoToolboxSupport()
+  });
 });
 
 app.listen(PORT, () => {
@@ -55,5 +59,10 @@ app.listen(PORT, () => {
     console.error('Please install FFmpeg to use this application.');
   } else {
     console.log('FFmpeg is available.');
+    if (checkVideoToolboxSupport()) {
+      console.log('Apple Silicon VideoToolbox acceleration is supported!');
+    } else {
+      console.log('Apple Silicon VideoToolbox acceleration is not supported. Falling back to software encoding.');
+    }
   }
 });

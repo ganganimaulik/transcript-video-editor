@@ -143,6 +143,7 @@
         <div class="panel-content">
           <div id="transcript-empty" class="empty-state">
             <p>Upload a video to generate a transcript.</p>
+            <p id="transcript-error-text" class="error-text hidden" style="color: var(--danger-color); margin-top: 1rem; font-size: 0.875rem;"></p>
           </div>
           <div id="transcript-loading" class="loading-state hidden">
             <div class="spinner"></div>
@@ -163,14 +164,14 @@
             <div class="threshold-control" style="margin-bottom: 8px;">
               <label for="buffer-start-slider">Start Buffer</label>
               <div class="slider-row">
-                <input type="range" id="buffer-start-slider" min="0" max="0.5" step="0.01" value="0.15" class="threshold-slider">
+                <input type="range" id="buffer-start-slider" min="-1" max="1" step="0.01" value="0.15" class="threshold-slider">
                 <span id="buffer-start-value" class="threshold-value">0.15s</span>
               </div>
             </div>
             <div class="threshold-control">
               <label for="buffer-end-slider">End Buffer</label>
               <div class="slider-row">
-                <input type="range" id="buffer-end-slider" min="0" max="0.5" step="0.01" value="0.15" class="threshold-slider">
+                <input type="range" id="buffer-end-slider" min="-1" max="1" step="0.01" value="0.15" class="threshold-slider">
                 <span id="buffer-end-value" class="threshold-value">0.15s</span>
               </div>
             </div>

@@ -10,6 +10,22 @@ export function checkFFmpeg() {
   }
 }
 
+let hasVideoToolbox = null;
+
+export function checkVideoToolboxSupport() {
+  if (hasVideoToolbox !== null) {
+    return hasVideoToolbox;
+  }
+  try {
+    const output = execSync('ffmpeg -encoders', { encoding: 'utf8', stdio: ['pipe', 'pipe', 'ignore'] });
+    hasVideoToolbox = output.includes('h264_videotoolbox');
+    return hasVideoToolbox;
+  } catch (error) {
+    hasVideoToolbox = false;
+    return false;
+  }
+}
+
 export function getVideoDuration(filePath) {
   return new Promise((resolve, reject) => {
     const ffprobe = spawn('ffprobe', [
@@ -80,71 +96,97 @@ export function extractAudio(videoPath, outputPath) {
 }
 
 export function runExport(videoPath, segments, outputPath, onProgress) {
-  return new Promise((resolve, reject) => {
-    if (!segments || segments.length === 0) {
-      return reject(new Error('No segments provided'));
-    }
+  const hasVT = checkVideoToolboxSupport();
 
-    // Build filter complex
-    let filterComplex = '';
-    let concatInputs = '';
+  const runWithEncoder = (useVT) => {
+    return new Promise((resolve, reject) => {
+      if (!segments || segments.length === 0) {
+        return reject(new Error('No segments provided'));
+      }
 
-    segments.forEach((seg, i) => {
-      filterComplex += `[0:v]trim=start=${seg.start}:end=${seg.end},setpts=PTS-STARTPTS[v${i}];`;
-      filterComplex += `[0:a]atrim=start=${seg.start}:end=${seg.end},asetpts=PTS-STARTPTS[a${i}];`;
-      concatInputs += `[v${i}][a${i}]`;
-    });
+      // Build filter complex
+      let filterComplex = '';
+      let concatInputs = '';
 
-    filterComplex += `${concatInputs}concat=n=${segments.length}:v=1:a=1[outv][outa]`;
+      segments.forEach((seg, i) => {
+        filterComplex += `[0:v]trim=start=${seg.start}:end=${seg.end},setpts=PTS-STARTPTS[v${i}];`;
+        filterComplex += `[0:a]atrim=start=${seg.start}:end=${seg.end},asetpts=PTS-STARTPTS[a${i}];`;
+        concatInputs += `[v${i}][a${i}]`;
+      });
 
-    const args = [
-      '-y', // Overwrite output
-      '-i', videoPath,
-      '-filter_complex', filterComplex,
-      '-map', '[outv]',
-      '-map', '[outa]',
-      // Use efficient encodings
-      '-c:v', 'libx264',
-      '-preset', 'fast',
-      '-crf', '22',
-      '-pix_fmt', 'yuv420p',
-      '-movflags', '+faststart',
-      '-c:a', 'aac',
-      '-b:a', '128k',
-      outputPath
-    ];
+      filterComplex += `${concatInputs}concat=n=${segments.length}:v=1:a=1[outv][outa]`;
 
-    const ffmpeg = spawn('ffmpeg', args);
+      const videoEncoderArgs = useVT ? [
+        '-c:v', 'h264_videotoolbox',
+        '-q:v', '55', // Quality factor for VideoToolbox (1-100 scale, typical values around 50-65)
+      ] : [
+        '-c:v', 'libx264',
+        '-preset', 'fast',
+        '-crf', '22',
+      ];
 
-    let errorOutput = '';
+      const args = [
+        '-y', // Overwrite output
+        '-i', videoPath,
+        '-filter_complex', filterComplex,
+        '-map', '[outv]',
+        '-map', '[outa]',
+        ...videoEncoderArgs,
+        '-pix_fmt', 'yuv420p',
+        '-movflags', '+faststart',
+        '-c:a', 'aac',
+        '-b:a', '128k',
+        outputPath
+      ];
 
-    // Parse progress from stderr
-    // ffmpeg outputs lines like: frame=  123 fps= 30 q=28.0 size=     256kB time=00:00:04.10 bitrate= 511.0kbits/s speed=1.01x
-    ffmpeg.stderr.on('data', (data) => {
-      const output = data.toString();
-      errorOutput += output;
-      const timeMatch = output.match(/time=(\d{2}):(\d{2}):(\d{2}\.\d{2})/);
-      
-      if (timeMatch && onProgress) {
-        const hours = parseInt(timeMatch[1], 10);
-        const minutes = parseInt(timeMatch[2], 10);
-        const seconds = parseFloat(timeMatch[3]);
-        const currentSeconds = hours * 3600 + minutes * 60 + seconds;
+      const ffmpeg = spawn('ffmpeg', args);
+
+      let errorOutput = '';
+
+      ffmpeg.stderr.on('data', (data) => {
+        const output = data.toString();
+        errorOutput += output;
+        const timeMatch = output.match(/time=(\d{2}):(\d{2}):(\d{2}\.\d{2})/);
         
-        onProgress({
-          timeRaw: timeMatch[0],
-          currentSeconds: currentSeconds
-        });
-      }
-    });
+        if (timeMatch && onProgress) {
+          const hours = parseInt(timeMatch[1], 10);
+          const minutes = parseInt(timeMatch[2], 10);
+          const seconds = parseFloat(timeMatch[3]);
+          const currentSeconds = hours * 3600 + minutes * 60 + seconds;
+          
+          onProgress({
+            timeRaw: timeMatch[0],
+            currentSeconds: currentSeconds
+          });
+        }
+      });
 
-    ffmpeg.on('close', (code) => {
-      if (code === 0) {
-        resolve(outputPath);
-      } else {
-        console.error('FFmpeg export error:', errorOutput);
-        reject(new Error(`FFmpeg exited with code ${code}. Error: ${errorOutput.split('\\n').slice(-5).join('\\n')}`));
-      }
+      ffmpeg.on('close', (code) => {
+        if (code === 0) {
+          resolve(outputPath);
+        } else {
+          reject({ code, errorOutput });
+        }
+      });
     });
-  });
+  };
+
+  if (hasVT) {
+    console.log('Attempting export using Apple Silicon VideoToolbox hardware acceleration...');
+    return runWithEncoder(true).catch((err) => {
+      console.warn(`VideoToolbox hardware encoding failed to initialize (exit code ${err.code}).`);
+      console.warn('Falling back to software encoding (libx264)...');
+      return runWithEncoder(false);
+    }).catch((finalErr) => {
+      const errorStr = finalErr.errorOutput || '';
+      console.error('FFmpeg export error (software fallback):', errorStr);
+      throw new Error(`FFmpeg exited with code ${finalErr.code}. Error: ${errorStr.split('\n').slice(-5).join('\n')}`);
+    });
+  } else {
+    return runWithEncoder(false).catch((err) => {
+      const errorStr = err.errorOutput || '';
+      console.error('FFmpeg export error:', errorStr);
+      throw new Error(`FFmpeg exited with code ${err.code}. Error: ${errorStr.split('\n').slice(-5).join('\n')}`);
+    });
+  }
 }

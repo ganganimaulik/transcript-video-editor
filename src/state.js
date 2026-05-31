@@ -14,6 +14,7 @@ class StateStore {
       undoStack: [],
       redoStack: [],
       transcriptionStatus: 'idle',
+      transcriptionError: null,
       transcriptionJobId: null,
       transcriptionProvider: 'modal-crisperwhisper',
       gcsOperationName: null,
@@ -105,6 +106,14 @@ class StateStore {
         
       case 'SET_TRANSCRIPTION_STATUS':
         this.state.transcriptionStatus = payload;
+        if (payload === 'transcribing' || payload === 'idle') {
+          this.state.transcriptionError = null;
+        }
+        this.state.revision++;
+        break;
+        
+      case 'SET_TRANSCRIPTION_ERROR':
+        this.state.transcriptionError = payload;
         this.state.revision++;
         break;
         
@@ -368,26 +377,30 @@ class StateStore {
           const maxBufferStart = word.bufferStart !== undefined ? word.bufferStart : defaultBuffer;
           const maxBufferEnd = word.bufferEnd !== undefined ? word.bufferEnd : defaultBuffer;
           
-          if (maxBufferStart > 0 || maxBufferEnd > 0) {
-            // Allow up to 50% of the duration for each side, proportional to their requested buffers if needed
-            // Actually, for regular words, we might not want to restrict it to 50% if the user specifically requests a large buffer?
-            // Yes, let's keep the 50% restriction to prevent the segment from inverting (start > end).
+          if (maxBufferStart !== 0 || maxBufferEnd !== 0) {
             const duration = end - start;
-            const maxAllowedTotal = duration * 0.5;
-            const requestedTotal = maxBufferStart + maxBufferEnd;
             
             let bufferStart = maxBufferStart;
             let bufferEnd = maxBufferEnd;
             
-            if (requestedTotal > maxAllowedTotal && requestedTotal > 0) {
-               // Scale down proportionally
-               const scale = maxAllowedTotal / requestedTotal;
-               bufferStart *= scale;
-               bufferEnd *= scale;
+            // Only scale down positive buffers if their total exceeds the duration.
+            // Negative buffers expand the cut range, so they don't cause the endpoints to cross.
+            const posBufferStart = Math.max(0, bufferStart);
+            const posBufferEnd = Math.max(0, bufferEnd);
+            const posTotal = posBufferStart + posBufferEnd;
+            
+            if (posTotal > duration && posTotal > 0) {
+              const scale = duration / posTotal;
+              if (bufferStart > 0) bufferStart *= scale;
+              if (bufferEnd > 0) bufferEnd *= scale;
             }
             
             start += bufferStart;
             end -= bufferEnd;
+
+            // Clamp start and end to the video bounds [0, duration]
+            start = Math.max(0, start);
+            end = Math.min(this.state.duration || 0, end);
           }
 
           segments = this._subtractRange(segments, start, end);

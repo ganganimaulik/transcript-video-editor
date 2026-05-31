@@ -94,12 +94,12 @@ class VideoPlayer {
         return;
       }
 
-      if (e.key.toLowerCase() === 'f') {
+      if (e.key.toLowerCase() === 'f' && !e.ctrlKey && !e.metaKey && !e.altKey) {
         e.preventDefault();
         this.toggleFullscreen();
       }
 
-      if (e.key === ' ' || e.code === 'Space') {
+      if ((e.key === ' ' || e.code === 'Space') && !e.ctrlKey && !e.metaKey && !e.altKey && !e.shiftKey) {
         e.preventDefault(); // prevent page scroll
         if (this.video.paused) {
           this.play();

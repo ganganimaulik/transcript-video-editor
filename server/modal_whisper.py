@@ -51,6 +51,10 @@ def adjust_pauses_for_hf_pipeline_output(pipeline_output, split_threshold=0.12):
 
         current_start, current_end = current_chunk["timestamp"]
         next_start, next_end = next_chunk["timestamp"]
+
+        if current_end is None or next_start is None:
+            continue
+
         pause_duration = next_start - current_end
 
         if pause_duration > 0:
@@ -60,13 +64,16 @@ def adjust_pauses_for_hf_pipeline_output(pipeline_output, split_threshold=0.12):
                 distribute = pause_duration / 2
 
             adjusted_chunks[i]["timestamp"] = (current_start, current_end + distribute)
-            adjusted_chunks[i + 1]["timestamp"] = (next_start - distribute, next_end)
+            if next_end is not None:
+                adjusted_chunks[i + 1]["timestamp"] = (next_start - distribute, next_end)
+            else:
+                adjusted_chunks[i + 1]["timestamp"] = (next_start - distribute, None)
 
     pipeline_output["chunks"] = adjusted_chunks
     return pipeline_output
 
 
-@app.cls(gpu="A100", timeout=600, image=image)
+@app.cls(gpu="A100-80GB", timeout=600, image=image)
 class CrisperWhisper:
     @enter()
     def load_model(self):
@@ -93,7 +100,7 @@ class CrisperWhisper:
             tokenizer=processor.tokenizer,
             feature_extractor=processor.feature_extractor,
             chunk_length_s=30,
-            batch_size=32 if self.device == "cuda:0" else 1,
+            batch_size=8 if self.device == "cuda:0" else 1,
             return_timestamps="word",
             torch_dtype=self.torch_dtype,
             device=self.device,
@@ -148,6 +155,10 @@ class CrisperWhisper:
             self.pipe.forward = orig_forward
             if os.path.exists(tmp_path):
                 os.remove(tmp_path)
+            
+            import torch
+            if torch.cuda.is_available():
+                torch.cuda.empty_cache()
 
 
 @app.function(image=image)

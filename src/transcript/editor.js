@@ -72,7 +72,7 @@ class TranscriptEditor {
       }
 
       // Enter or 'r' to restore words
-      if (e.key === 'Enter' || e.key.toLowerCase() === 'r') {
+      if (e.key === 'Enter' || (e.key.toLowerCase() === 'r' && !e.ctrlKey && !e.metaKey && !e.altKey)) {
         const state = store.getState();
         if (state.selection.startId !== -1) {
           store.dispatch('RESTORE_SELECTION');

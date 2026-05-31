@@ -32,6 +32,10 @@ def adjust_pauses_for_hf_pipeline_output(pipeline_output, split_threshold=0.12):
 
         current_start, current_end = current_chunk["timestamp"]
         next_start, next_end = next_chunk["timestamp"]
+
+        if current_end is None or next_start is None:
+            continue
+
         pause_duration = next_start - current_end
 
         if pause_duration > 0:
@@ -41,7 +45,10 @@ def adjust_pauses_for_hf_pipeline_output(pipeline_output, split_threshold=0.12):
                 distribute = pause_duration / 2
 
             adjusted_chunks[i]["timestamp"] = (current_start, current_end + distribute)
-            adjusted_chunks[i + 1]["timestamp"] = (next_start - distribute, next_end)
+            if next_end is not None:
+                adjusted_chunks[i + 1]["timestamp"] = (next_start - distribute, next_end)
+            else:
+                adjusted_chunks[i + 1]["timestamp"] = (next_start - distribute, None)
 
     pipeline_output["chunks"] = adjusted_chunks
     return pipeline_output
