@@ -26,41 +26,103 @@ A transcript-based video editor that lets you edit video by editing text. Upload
 
 ## Setup
 
+### 1. General Setup
+
+Clone the repository and install the frontend/backend Node.js dependencies:
+
 ```bash
-# 1. Clone the repo
+# Clone the repository
 git clone <repo-url>
 cd video-editor
 
-# 2. Install Node.js dependencies
+# Install Node.js dependencies
 npm install
 
-# 3. Set up Python virtual environment (required for CrisperWhisper)
-python3 -m venv .venv
-.venv/bin/pip install -r requirements.txt
-
-# 4. Copy and configure environment variables
+# Copy environment template
 cp .env.example .env
-# Edit .env with your API keys (optional, only needed for Google/OpenAI providers)
+```
 
-# 5. Start the dev server
+### 2. Transcription Setup
+
+You can choose one of the following transcription providers:
+
+#### Option A: Modal.com (Recommended for Speed)
+This offloads the heavy machine learning model to a cloud GPU (e.g., NVIDIA T4) on Modal, which is much faster and doesn't require local GPU resources.
+
+1. Create a free account at [Modal.com](https://modal.com/).
+2. Install the Modal client:
+   ```bash
+   pip install modal
+   ```
+3. Authenticate with your Modal account:
+   ```bash
+   modal setup
+   ```
+4. Deploy the transcription endpoint:
+   ```bash
+   modal deploy server/modal_whisper.py
+   ```
+5. Copy the deployment URL printed in your terminal (e.g. `https://<username>--crisper-whisper-app-transcribe-endpoint.modal.run`) and set it in your `.env` file:
+   ```env
+   MODAL_CRISPER_URL=https://your-username--crisper-whisper-app-transcribe-endpoint.modal.run
+   ```
+
+#### Option B: Local CrisperWhisper (Offline)
+Runs the model locally using your machine's CPU or local GPU.
+
+1. Create and activate a Python virtual environment:
+   ```bash
+   python3 -m venv .venv
+   source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+   ```
+2. Install the required Python dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+#### Option C: Google Cloud STT
+Uses Google Cloud Speech-to-Text API.
+1. Create a Google Cloud Project and enable the Speech-to-Text API.
+2. Create a GCS bucket.
+3. Configure `GOOGLE_CLOUD_API_KEY` and `GCS_BUCKET_NAME` in your `.env` file.
+
+#### Option D: OpenAI Whisper
+Uses OpenAI's Whisper API.
+1. Create an OpenAI API key.
+2. Configure `OPENAI_API_KEY` in your `.env` file.
+
+### 3. Run the Project
+
+Start both the frontend Vite dev server and the backend Express server concurrently:
+
+```bash
 npm run dev
 ```
 
-The app will be available at `http://localhost:5173` with the backend API on port `3001`.
+- **Frontend:** `http://localhost:5173`
+- **Backend:** `http://localhost:3001`
+
+---
 
 ## Environment Variables
+
+Configure these variables in your `.env` file:
 
 | Variable | Required | Description |
 |----------|----------|-------------|
 | `UPLOAD_DIR` | Yes | Directory for uploaded videos (default: `./uploads`) |
 | `EXPORT_DIR` | Yes | Directory for exported videos (default: `./exports`) |
 | `PORT` | No | Backend server port (default: `3001`) |
-| `GOOGLE_CLOUD_API_KEY` | No | Google Cloud API key (for Google STT provider) |
-| `GCS_BUCKET_NAME` | No | Google Cloud Storage bucket name (for Google STT provider) |
-| `OPENAI_API_KEY` | No | OpenAI API key (for OpenAI Whisper provider) |
+| `MODAL_CRISPER_URL` | No | Your deployed Modal endpoint URL (required for Modal provider) |
+| `GOOGLE_CLOUD_API_KEY` | No | Google Cloud API key (required for Google STT provider) |
+| `GCS_BUCKET_NAME` | No | Google Cloud Storage bucket name (required for Google STT provider) |
+| `OPENAI_API_KEY` | No | OpenAI API key (required for OpenAI Whisper provider) |
+
+---
 
 ## Tech Stack
 
 - **Frontend** — Vanilla JS + Vite
 - **Backend** — Node.js + Express
-- **Transcription** — [CrisperWhisper](https://github.com/nyrahealth/CrisperWhisper) (local) / Google Cloud STT / OpenAI Whisper
+- **Transcription** — [CrisperWhisper](https://github.com/nyrahealth/CrisperWhisper) (local/Modal GPU) / Google Cloud STT / OpenAI Whisper
+
