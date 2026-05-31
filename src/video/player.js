@@ -154,35 +154,55 @@ class VideoPlayer {
     
     if (!segments || segments.length === 0) return;
     
-    // Check if we are currently in a valid segment
     const time = this.video.currentTime;
+
+    // O(1) fast path: check if we're in the currently tracked segment or the next one
     let inSegment = false;
+    let csi = this.currentSegmentIndex;
     
-    for (let i = 0; i < segments.length; i++) {
-        if (time >= segments[i].start && time < segments[i].end) {
-            inSegment = true;
-            this.currentSegmentIndex = i;
-            break;
-        }
+    if (csi >= 0 && csi < segments.length) {
+      if (time >= segments[csi].start && time < segments[csi].end) {
+        inSegment = true;
+      } else if (csi + 1 < segments.length && time >= segments[csi + 1].start && time < segments[csi + 1].end) {
+        inSegment = true;
+        this.currentSegmentIndex = csi + 1;
+      }
     }
-    
-    // If not in a segment, jump to the next valid segment
+
+    // O(log N) slow path: binary search to find current or next segment
     if (!inSegment) {
-        let nextSegIndex = -1;
-        for (let i = 0; i < segments.length; i++) {
-            if (segments[i].start >= time) {
-                nextSegIndex = i;
-                break;
-            }
-        }
+      let low = 0;
+      let high = segments.length - 1;
+      let inSegIndex = -1;
+      let nextSegIndex = -1;
+
+      while (low <= high) {
+        const mid = Math.floor((low + high) / 2);
+        const seg = segments[mid];
         
-        if (nextSegIndex !== -1) {
-            this.currentSegmentIndex = nextSegIndex;
-            this.video.currentTime = segments[nextSegIndex].start;
-        } else if (segments.length > 0) {
-            this.currentSegmentIndex = 0;
-            this.video.currentTime = segments[0].start;
+        if (time >= seg.start && time < seg.end) {
+          inSegIndex = mid;
+          break;
+        } else if (time < seg.start) {
+          nextSegIndex = mid;
+          high = mid - 1;
+        } else {
+          low = mid + 1;
         }
+      }
+
+      if (inSegIndex !== -1) {
+          this.currentSegmentIndex = inSegIndex;
+      } else {
+          // If we are not in a segment, we jump to the next valid segment
+          if (nextSegIndex !== -1 && segments[nextSegIndex].start >= time) {
+              this.currentSegmentIndex = nextSegIndex;
+              this.video.currentTime = segments[nextSegIndex].start;
+          } else if (segments.length > 0) {
+              this.currentSegmentIndex = 0;
+              this.video.currentTime = segments[0].start;
+          }
+      }
     }
     
     this.video.play().catch(e => console.warn("Playback prevented:", e));
@@ -228,12 +248,41 @@ class VideoPlayer {
     
     if (!segments || segments.length === 0) return;
     
-    let inSegIndex = -1;
-    for (let i = 0; i < segments.length; i++) {
-        if (time >= segments[i].start && time < segments[i].end) {
-            inSegIndex = i;
-            break;
+    // O(1) fast path: check if we are in the currently tracked segment or the next one
+    let csi = this.currentSegmentIndex;
+    if (csi >= 0 && csi < segments.length) {
+      if (time >= segments[csi].start && time < segments[csi].end) {
+        return; // Still in the current segment
+      }
+
+      // Moving sequentially into the next segment
+      if (csi + 1 < segments.length) {
+        if (time >= segments[csi + 1].start && time < segments[csi + 1].end) {
+          this.currentSegmentIndex = csi + 1;
+          return;
         }
+      }
+    }
+
+    // O(log N) slow path: fallback to binary search if not playing sequentially
+    let low = 0;
+    let high = segments.length - 1;
+    let inSegIndex = -1;
+    let nextSegIndex = -1;
+
+    while (low <= high) {
+      const mid = Math.floor((low + high) / 2);
+      const seg = segments[mid];
+
+      if (time >= seg.start && time < seg.end) {
+        inSegIndex = mid;
+        break;
+      } else if (time < seg.start) {
+        nextSegIndex = mid;
+        high = mid - 1;
+      } else {
+        low = mid + 1;
+      }
     }
 
     if (inSegIndex !== -1) {
@@ -241,15 +290,7 @@ class VideoPlayer {
     } else {
         // We are in a deleted portion (or outside any valid segment).
         // Find the next segment to jump to.
-        let nextSegIndex = -1;
-        for (let i = 0; i < segments.length; i++) {
-            if (segments[i].start >= time) {
-                nextSegIndex = i;
-                break;
-            }
-        }
-
-        if (nextSegIndex !== -1) {
+        if (nextSegIndex !== -1 && segments[nextSegIndex].start >= time) {
             // Prevent getting stuck in a seeking loop if the browser's keyframe
             // lands slightly before the exact start time.
             if (Math.abs(time - segments[nextSegIndex].start) < 0.05) {
