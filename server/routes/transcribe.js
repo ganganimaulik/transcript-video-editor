@@ -410,9 +410,10 @@ router.post('/', async (req, res) => {
 
         jobs.set(jobId, { status: 'transcribing', progress: 0 });
 
-        // 2. Run Python Script
+        // 2. Run Python Script (use venv python for CrisperWhisper's custom transformers fork)
         const scriptPath = path.resolve('server/transcribe.py');
-        const pythonProcess = spawn('python3', [scriptPath, audioPath]);
+        const venvPython = path.resolve('.venv/bin/python3');
+        const pythonProcess = spawn(venvPython, [scriptPath, audioPath]);
         
         let stdoutData = '';
         let stderrData = '';
