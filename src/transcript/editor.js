@@ -1,6 +1,6 @@
 import { $, createElement } from '../utils/dom.js';
 import { store } from '../state.js';
-import { seekVideo } from '../video/player.js';
+import { seekVideo, playVideo } from '../video/player.js';
 
 class TranscriptEditor {
   constructor() {
@@ -41,6 +41,9 @@ class TranscriptEditor {
         // Also seek on click
         const start = parseFloat(wordEl.dataset.start);
         seekVideo(start);
+        if (!wordEl.classList.contains('deleted')) {
+          playVideo();
+        }
       } else {
         // Clicked outside, clear selection
         store.dispatch('SET_SELECTION', { startId: -1, endId: -1 });

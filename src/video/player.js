@@ -281,3 +281,9 @@ export function seekVideo(time) {
     video.currentTime = time;
   }
 }
+
+export function playVideo() {
+  if (playerInstance) {
+    playerInstance.play();
+  }
+}
