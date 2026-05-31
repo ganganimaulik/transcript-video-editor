@@ -46,12 +46,14 @@ class VideoPlayer {
       this.iconPlay.classList.add('hidden');
       this.iconPause.classList.remove('hidden');
       store.dispatch('SET_PLAYING', true);
+      this.startPlaybackLoop();
     });
 
     this.video.addEventListener('pause', () => {
       this.iconPause.classList.add('hidden');
       this.iconPlay.classList.remove('hidden');
       store.dispatch('SET_PLAYING', false);
+      this.stopPlaybackLoop();
     });
 
     this.video.addEventListener('timeupdate', () => {
@@ -192,50 +194,76 @@ class VideoPlayer {
 
   handleTimeUpdate() {
     const time = this.video.currentTime;
-    const state = store.getState();
     
     store.dispatch('SET_TIME', time);
     this.timeCurrent.textContent = formatTime(time);
-    
-    // Segment-aware playback logic
+  }
+
+  startPlaybackLoop() {
+    if (this.playbackLoopId) return;
+    const loop = () => {
+      this.checkSegments();
+      if (!this.video.paused) {
+        this.playbackLoopId = requestAnimationFrame(loop);
+      } else {
+        this.playbackLoopId = null;
+      }
+    };
+    this.playbackLoopId = requestAnimationFrame(loop);
+  }
+
+  stopPlaybackLoop() {
+    if (this.playbackLoopId) {
+      cancelAnimationFrame(this.playbackLoopId);
+      this.playbackLoopId = null;
+    }
+  }
+
+  checkSegments() {
+    if (this.video.paused || this.video.seeking) return;
+
+    const time = this.video.currentTime;
+    const state = store.getState();
     const segments = state.segments;
+    
     if (!segments || segments.length === 0) return;
     
-    // We only actively enforce segment skipping if playing
-    if (!this.video.paused) {
-      // Find which segment we are currently in
-      let inSegIndex = -1;
-      for (let i = 0; i < segments.length; i++) {
-          if (time >= segments[i].start && time < segments[i].end) {
-              inSegIndex = i;
-              break;
-          }
-      }
+    let inSegIndex = -1;
+    for (let i = 0; i < segments.length; i++) {
+        if (time >= segments[i].start && time < segments[i].end) {
+            inSegIndex = i;
+            break;
+        }
+    }
 
-      if (inSegIndex !== -1) {
-          this.currentSegmentIndex = inSegIndex;
-      } else {
-          // We are in a deleted portion (or outside any valid segment).
-          // Find the next segment to jump to.
-          let nextSegIndex = -1;
-          for (let i = 0; i < segments.length; i++) {
-              if (segments[i].start >= time) {
-                  nextSegIndex = i;
-                  break;
-              }
-          }
+    if (inSegIndex !== -1) {
+        this.currentSegmentIndex = inSegIndex;
+    } else {
+        // We are in a deleted portion (or outside any valid segment).
+        // Find the next segment to jump to.
+        let nextSegIndex = -1;
+        for (let i = 0; i < segments.length; i++) {
+            if (segments[i].start >= time) {
+                nextSegIndex = i;
+                break;
+            }
+        }
 
-          if (nextSegIndex !== -1) {
-              this.currentSegmentIndex = nextSegIndex;
-              this.video.currentTime = segments[nextSegIndex].start;
-          } else {
-              // Reached end of all valid segments
-              this.pause();
-              if (segments.length > 0) {
-                  this.video.currentTime = segments[segments.length - 1].end;
-              }
-          }
-      }
+        if (nextSegIndex !== -1) {
+            // Prevent getting stuck in a seeking loop if the browser's keyframe
+            // lands slightly before the exact start time.
+            if (Math.abs(time - segments[nextSegIndex].start) < 0.05) {
+                return;
+            }
+            this.currentSegmentIndex = nextSegIndex;
+            this.video.currentTime = segments[nextSegIndex].start;
+        } else {
+            // Reached end of all valid segments
+            this.pause();
+            if (segments.length > 0) {
+                this.video.currentTime = segments[segments.length - 1].end;
+            }
+        }
     }
   }
 }

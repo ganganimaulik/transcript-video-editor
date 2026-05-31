@@ -17,7 +17,8 @@ class Transcriber {
     this.providers = {
       'google': new GoogleSTTProvider(),
       'openai': new OpenAIWhisperProvider(),
-      'crisperwhisper': new CrisperWhisperProvider()
+      'crisperwhisper': new CrisperWhisperProvider(),
+      'modal-crisperwhisper': new CrisperWhisperProvider('modal-crisperwhisper')
     };
     this.provider = this.providers['google'];
 
@@ -89,6 +90,7 @@ class Transcriber {
       let providerName = 'Google Cloud STT';
       if (state.transcriptionProvider === 'openai') providerName = 'OpenAI Whisper';
       else if (state.transcriptionProvider === 'crisperwhisper') providerName = 'CrisperWhisper';
+      else if (state.transcriptionProvider === 'modal-crisperwhisper') providerName = 'CrisperWhisper (Modal GPU)';
       this.statusText.textContent = `Transcribing with ${providerName}...`;
     }
     
@@ -106,6 +108,7 @@ class Transcriber {
           let providerName = 'Google Cloud STT';
           if (state.transcriptionProvider === 'openai') providerName = 'OpenAI Whisper';
           else if (state.transcriptionProvider === 'crisperwhisper') providerName = 'CrisperWhisper';
+          else if (state.transcriptionProvider === 'modal-crisperwhisper') providerName = 'CrisperWhisper (Modal GPU)';
           
           if (progress !== undefined) {
             this.statusText.textContent = `Transcribing with ${providerName}: ${progress}%`;

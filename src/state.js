@@ -128,6 +128,21 @@ class StateStore {
         this._recalculateSegments();
         this.state.revision++;
         break;
+
+      case 'SET_WORD_BUFFER':
+        if (this.state.words) {
+          this.state.words = this.state.words.map(w => {
+            if (w.id === payload.id) {
+              return { ...w, bufferStart: payload.bufferStart, bufferEnd: payload.bufferEnd };
+            }
+            return w;
+          });
+          this._recalculateSegments();
+          this.state.revision++;
+          emit('segments-changed', this.state.segments);
+        }
+        break;
+
         
       case 'DELETE_SELECTION':
         if (this.state.selection.startId !== -1 && this.state.selection.endId !== -1) {
@@ -344,7 +359,38 @@ class StateStore {
     if (this.state.words && this.state.words.length > 0) {
       for (const word of this.state.words) {
         if (word.deleted) {
-          segments = this._subtractRange(segments, word.start, word.end);
+          let start = word.start;
+          let end = word.end;
+
+          // Apply buffer to deleted pauses, and any deleted words that have custom buffers set
+          // Use word's specific buffer, defaulting to 150ms for pauses, and 0s for regular words
+          const defaultBuffer = word.isPause ? 0.15 : 0;
+          const maxBufferStart = word.bufferStart !== undefined ? word.bufferStart : defaultBuffer;
+          const maxBufferEnd = word.bufferEnd !== undefined ? word.bufferEnd : defaultBuffer;
+          
+          if (maxBufferStart > 0 || maxBufferEnd > 0) {
+            // Allow up to 50% of the duration for each side, proportional to their requested buffers if needed
+            // Actually, for regular words, we might not want to restrict it to 50% if the user specifically requests a large buffer?
+            // Yes, let's keep the 50% restriction to prevent the segment from inverting (start > end).
+            const duration = end - start;
+            const maxAllowedTotal = duration * 0.5;
+            const requestedTotal = maxBufferStart + maxBufferEnd;
+            
+            let bufferStart = maxBufferStart;
+            let bufferEnd = maxBufferEnd;
+            
+            if (requestedTotal > maxAllowedTotal && requestedTotal > 0) {
+               // Scale down proportionally
+               const scale = maxAllowedTotal / requestedTotal;
+               bufferStart *= scale;
+               bufferEnd *= scale;
+            }
+            
+            start += bufferStart;
+            end -= bufferEnd;
+          }
+
+          segments = this._subtractRange(segments, start, end);
         }
       }
     }

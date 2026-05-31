@@ -2,8 +2,13 @@ import { api } from '../api.js';
 import { TranscriptionProvider } from './provider.js';
 
 export class CrisperWhisperProvider extends TranscriptionProvider {
+  constructor(providerName = 'crisperwhisper') {
+    super();
+    this.providerName = providerName;
+  }
+
   /**
-   * Transcribe a video file using local CrisperWhisper script
+   * Transcribe a video file using CrisperWhisper
    * @param {string} fileId 
    * @param {Function} onProgress Callback for status updates
    * @param {Object} options Options like jobId for resume
@@ -16,7 +21,7 @@ export class CrisperWhisperProvider extends TranscriptionProvider {
       if (!jobId) {
         onProgress('uploading', 0);
         try {
-          const res = await api.transcribeVideo(fileId, 'crisperwhisper');
+          const res = await api.transcribeVideo(fileId, this.providerName);
           jobId = res.jobId;
           if (options.onJobId) options.onJobId(jobId);
         } catch(e) {

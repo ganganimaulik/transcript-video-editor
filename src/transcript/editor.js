@@ -13,6 +13,14 @@ class TranscriptEditor {
 
     // Map of word id -> DOM element for targeted updates
     this.wordElements = new Map();
+
+    this.bufferPopover = $('#pause-buffer-popover');
+    this.bufferStartSlider = $('#buffer-start-slider');
+    this.bufferStartValue = $('#buffer-start-value');
+    this.bufferEndSlider = $('#buffer-end-slider');
+    this.bufferEndValue = $('#buffer-end-value');
+    this.btnCloseBuffer = $('#btn-close-buffer');
+    this.currentBufferWordId = null;
     
     if (this.container) {
       this.bindEvents();
@@ -81,6 +89,86 @@ class TranscriptEditor {
         }
       }
     });
+
+    // Context menu on deleted words or pause words to adjust buffer
+    this.container.addEventListener('contextmenu', (e) => {
+      const wordEl = e.target.closest('.word.deleted, .word.pause');
+      if (wordEl) {
+        e.preventDefault();
+        const id = parseInt(wordEl.dataset.id, 10);
+        this.openBufferPopover(id, e.clientX, e.clientY);
+      }
+    });
+
+    if (this.btnCloseBuffer) {
+      this.btnCloseBuffer.addEventListener('click', () => {
+        if (this.bufferPopover) this.bufferPopover.classList.add('hidden');
+      });
+    }
+
+    if (this.bufferStartSlider && this.bufferEndSlider) {
+      const updateBuffer = () => {
+        const startVal = parseFloat(this.bufferStartSlider.value);
+        const endVal = parseFloat(this.bufferEndSlider.value);
+        
+        if (this.bufferStartValue) this.bufferStartValue.textContent = startVal.toFixed(2) + 's';
+        if (this.bufferEndValue) this.bufferEndValue.textContent = endVal.toFixed(2) + 's';
+        
+        if (this.currentBufferWordId !== null) {
+          store.dispatch('SET_WORD_BUFFER', { 
+            id: this.currentBufferWordId, 
+            bufferStart: startVal,
+            bufferEnd: endVal
+          });
+        }
+      };
+
+      this.bufferStartSlider.addEventListener('input', updateBuffer);
+      this.bufferEndSlider.addEventListener('input', updateBuffer);
+    }
+  }
+
+  openBufferPopover(wordId, x, y) {
+    this.currentBufferWordId = wordId;
+    
+    // Find the word to get its current buffer
+    const state = store.getState();
+    const word = state.words.find(w => w.id === wordId);
+    if (!word) return;
+    
+    const defaultBuffer = word.isPause ? 0.15 : 0;
+    const bufferStart = word.bufferStart !== undefined ? word.bufferStart : defaultBuffer;
+    const bufferEnd = word.bufferEnd !== undefined ? word.bufferEnd : defaultBuffer;
+    
+    if (this.bufferStartSlider) this.bufferStartSlider.value = bufferStart;
+    if (this.bufferStartValue) this.bufferStartValue.textContent = bufferStart.toFixed(2) + 's';
+    
+    if (this.bufferEndSlider) this.bufferEndSlider.value = bufferEnd;
+    if (this.bufferEndValue) this.bufferEndValue.textContent = bufferEnd.toFixed(2) + 's';
+    
+    // Position popover (using fixed positioning relative to viewport)
+    if (this.bufferPopover) {
+      this.bufferPopover.style.position = 'fixed';
+      this.bufferPopover.classList.remove('hidden');
+      
+      const rect = this.bufferPopover.getBoundingClientRect();
+      const viewportWidth = window.innerWidth;
+      const viewportHeight = window.innerHeight;
+      
+      let left = x;
+      let top = y;
+      
+      if (left + rect.width > viewportWidth) {
+        left = Math.max(0, viewportWidth - rect.width - 10);
+      }
+      
+      if (top + rect.height > viewportHeight) {
+        top = Math.max(0, viewportHeight - rect.height - 10);
+      }
+      
+      this.bufferPopover.style.left = `${left}px`;
+      this.bufferPopover.style.top = `${top}px`;
+    }
   }
 
   setupStateListeners() {

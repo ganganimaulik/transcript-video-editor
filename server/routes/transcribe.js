@@ -470,6 +470,101 @@ router.post('/', async (req, res) => {
           }
         });
       })();
+    } else if (provider === 'modal-crisperwhisper') {
+      const jobId = uuidv4();
+      jobs.set(jobId, { status: 'extracting', progress: 0 });
+
+      // Respond immediately with jobId
+      res.json({ jobId });
+
+      (async () => {
+        // 1. Extract audio
+        const audioFileName = `${fileId}-crisper.wav`;
+        const audioPath = path.join(uploadDir, audioFileName);
+
+        try {
+          await extractAudio(videoPath, audioPath);
+        } catch(err) {
+          console.error('Audio extraction failed:', err);
+          jobs.set(jobId, { status: 'failed', error: 'Failed to extract audio for CrisperWhisper.' });
+          return;
+        }
+
+        jobs.set(jobId, { status: 'transcribing', progress: 0 });
+
+        // 2. Transcribe using Modal
+        const modalUrl = process.env.MODAL_CRISPER_URL;
+        if (!modalUrl) {
+           jobs.set(jobId, { status: 'failed', error: 'MODAL_CRISPER_URL is not configured on the server.' });
+           try { if (fs.existsSync(audioPath)) fs.unlinkSync(audioPath); } catch(e) {}
+           return;
+        }
+
+        try {
+          const audioBuffer = fs.readFileSync(audioPath);
+          const response = await fetch(modalUrl, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/octet-stream'
+            },
+            body: audioBuffer
+          });
+
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+
+          let currentBuffer = '';
+          const decoder = new TextDecoder();
+
+          const processBuffer = () => {
+            const lines = currentBuffer.split('\n');
+            currentBuffer = lines.pop(); // Keep incomplete line
+            for (const line of lines) {
+              if (!line.trim()) continue;
+              try {
+                const msg = JSON.parse(line);
+                if (msg.progress !== undefined) {
+                  jobs.set(jobId, { status: 'transcribing', progress: msg.progress });
+                } else if (msg.result) {
+                  const words = processCrisperWhisperResults(msg.result);
+                  jobs.set(jobId, { status: 'completed', words });
+                } else if (msg.error) {
+                  jobs.set(jobId, { status: 'failed', error: msg.error });
+                }
+              } catch (e) {
+                console.error("Failed to parse JSON stream line:", line, e);
+              }
+            }
+          };
+
+          if (response.body && response.body.getReader) {
+            const reader = response.body.getReader();
+            while (true) {
+              const { done, value } = await reader.read();
+              if (done) break;
+              currentBuffer += decoder.decode(value, { stream: true });
+              processBuffer();
+            }
+          } else if (response.body) {
+             for await (const chunk of response.body) {
+                currentBuffer += typeof chunk === 'string' ? chunk : decoder.decode(chunk, { stream: true });
+                processBuffer();
+             }
+          } else {
+             throw new Error('Response body is missing.');
+          }
+
+        } catch (err) {
+          console.error('Modal transcription error:', err);
+          jobs.set(jobId, { status: 'failed', error: 'Failed to communicate with Modal endpoint.' });
+        } finally {
+          // Clean up audio
+          try {
+            if (fs.existsSync(audioPath)) fs.unlinkSync(audioPath);
+          } catch(e) {}
+        }
+      })();
     } else {
       res.status(400).json({ error: 'Invalid provider specified' });
     }
