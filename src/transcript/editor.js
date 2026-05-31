@@ -143,10 +143,19 @@ class TranscriptEditor {
     const bufferStart = word.bufferStart !== undefined ? word.bufferStart : defaultBuffer;
     const bufferEnd = word.bufferEnd !== undefined ? word.bufferEnd : defaultBuffer;
     
-    if (this.bufferStartSlider) this.bufferStartSlider.value = bufferStart;
+    const wordDuration = word.end - word.start;
+    const maxBuffer = Math.max(1, wordDuration);
+    
+    if (this.bufferStartSlider) {
+      this.bufferStartSlider.max = maxBuffer;
+      this.bufferStartSlider.value = bufferStart;
+    }
     if (this.bufferStartValue) this.bufferStartValue.textContent = bufferStart.toFixed(2) + 's';
     
-    if (this.bufferEndSlider) this.bufferEndSlider.value = bufferEnd;
+    if (this.bufferEndSlider) {
+      this.bufferEndSlider.max = maxBuffer;
+      this.bufferEndSlider.value = bufferEnd;
+    }
     if (this.bufferEndValue) this.bufferEndValue.textContent = bufferEnd.toFixed(2) + 's';
     
     // Position popover (using fixed positioning relative to viewport)

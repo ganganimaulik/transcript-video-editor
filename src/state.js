@@ -366,45 +366,77 @@ class StateStore {
     
     // Subtract times of deleted words if we have words
     if (this.state.words && this.state.words.length > 0) {
+      let deletedChunks = [];
+      let currentChunk = null;
+
+      // Group contiguous deleted words into chunks
       for (const word of this.state.words) {
         if (word.deleted) {
-          let start = word.start;
-          let end = word.end;
-
-          // Apply buffer to deleted pauses, and any deleted words that have custom buffers set
-          // Use word's specific buffer, defaulting to 150ms for pauses, and 0s for regular words
-          const defaultBuffer = word.isPause ? 0.15 : 0;
-          const maxBufferStart = word.bufferStart !== undefined ? word.bufferStart : defaultBuffer;
-          const maxBufferEnd = word.bufferEnd !== undefined ? word.bufferEnd : defaultBuffer;
-          
-          if (maxBufferStart !== 0 || maxBufferEnd !== 0) {
-            const duration = end - start;
-            
-            let bufferStart = maxBufferStart;
-            let bufferEnd = maxBufferEnd;
-            
-            // Only scale down positive buffers if their total exceeds the duration.
-            // Negative buffers expand the cut range, so they don't cause the endpoints to cross.
-            const posBufferStart = Math.max(0, bufferStart);
-            const posBufferEnd = Math.max(0, bufferEnd);
-            const posTotal = posBufferStart + posBufferEnd;
-            
-            if (posTotal > duration && posTotal > 0) {
-              const scale = duration / posTotal;
-              if (bufferStart > 0) bufferStart *= scale;
-              if (bufferEnd > 0) bufferEnd *= scale;
-            }
-            
-            start += bufferStart;
-            end -= bufferEnd;
-
-            // Clamp start and end to the video bounds [0, duration]
-            start = Math.max(0, start);
-            end = Math.min(this.state.duration || 0, end);
+          if (!currentChunk) {
+            currentChunk = { 
+              start: word.start, 
+              end: word.end, 
+              words: [word] 
+            };
+          } else {
+            currentChunk.start = Math.min(currentChunk.start, word.start);
+            currentChunk.end = Math.max(currentChunk.end, word.end);
+            currentChunk.words.push(word);
           }
-
-          segments = this._subtractRange(segments, start, end);
+        } else {
+          if (currentChunk) {
+            deletedChunks.push(currentChunk);
+            currentChunk = null;
+          }
         }
+      }
+      if (currentChunk) {
+        deletedChunks.push(currentChunk);
+      }
+
+      // Process each chunk
+      for (const chunk of deletedChunks) {
+        let start = chunk.start;
+        let end = chunk.end;
+
+        const firstWord = chunk.words[0];
+        const lastWord = chunk.words[chunk.words.length - 1];
+
+        // Apply buffer to deleted pauses, and any deleted words that have custom buffers set
+        // Use word's specific buffer, defaulting to 150ms for pauses, and 0s for regular words
+        const defaultBufferStart = firstWord.isPause ? 0.15 : 0;
+        const defaultBufferEnd = lastWord.isPause ? 0.15 : 0;
+
+        const maxBufferStart = firstWord.bufferStart !== undefined ? firstWord.bufferStart : defaultBufferStart;
+        const maxBufferEnd = lastWord.bufferEnd !== undefined ? lastWord.bufferEnd : defaultBufferEnd;
+        
+        if (maxBufferStart !== 0 || maxBufferEnd !== 0) {
+          const duration = end - start;
+          
+          let bufferStart = maxBufferStart;
+          let bufferEnd = maxBufferEnd;
+          
+          // Only scale down positive buffers if their total exceeds the duration.
+          // Negative buffers expand the cut range, so they don't cause the endpoints to cross.
+          const posBufferStart = Math.max(0, bufferStart);
+          const posBufferEnd = Math.max(0, bufferEnd);
+          const posTotal = posBufferStart + posBufferEnd;
+          
+          if (posTotal > duration && posTotal > 0) {
+            const scale = duration / posTotal;
+            if (bufferStart > 0) bufferStart *= scale;
+            if (bufferEnd > 0) bufferEnd *= scale;
+          }
+          
+          start += bufferStart;
+          end -= bufferEnd;
+
+          // Clamp start and end to the video bounds [0, duration]
+          start = Math.max(0, start);
+          end = Math.min(this.state.duration || 0, end);
+        }
+
+        segments = this._subtractRange(segments, start, end);
       }
     }
 
