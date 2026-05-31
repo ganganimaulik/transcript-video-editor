@@ -322,16 +322,39 @@ class TranscriptEditor {
       this.activeWordId = activeId;
     }
     
-    // Update selection highlight
-    const selStart = Math.min(state.selection.startId, state.selection.endId);
-    const selEnd = Math.max(state.selection.startId, state.selection.endId);
-    
-    for (const [id, el] of this.wordElements) {
-      if (selStart !== -1 && id >= selStart && id <= selEnd) {
-        el.classList.add('selected');
-      } else {
-        el.classList.remove('selected');
+    // Update selection highlight only if selection changed
+    if (!this.lastSelection ||
+        this.lastSelection.startId !== state.selection.startId ||
+        this.lastSelection.endId !== state.selection.endId) {
+
+      const selStart = Math.min(state.selection.startId, state.selection.endId);
+      const selEnd = Math.max(state.selection.startId, state.selection.endId);
+      const oldSelStart = this.lastSelection ? Math.min(this.lastSelection.startId, this.lastSelection.endId) : -1;
+      const oldSelEnd = this.lastSelection ? Math.max(this.lastSelection.startId, this.lastSelection.endId) : -1;
+
+      // If we had an old selection, remove the selected class from those words
+      if (oldSelStart !== -1) {
+        for (let id = oldSelStart; id <= oldSelEnd; id++) {
+          // If this ID is not in the new selection range, remove the class
+          if (selStart === -1 || id < selStart || id > selEnd) {
+            const el = this.wordElements.get(id);
+            if (el) el.classList.remove('selected');
+          }
+        }
       }
+
+      // Add the selected class to the new selection words
+      if (selStart !== -1) {
+        for (let id = selStart; id <= selEnd; id++) {
+          // If it wasn't in the old selection range, add the class
+          if (oldSelStart === -1 || id < oldSelStart || id > oldSelEnd) {
+            const el = this.wordElements.get(id);
+            if (el) el.classList.add('selected');
+          }
+        }
+      }
+
+      this.lastSelection = { ...state.selection };
     }
   }
 
