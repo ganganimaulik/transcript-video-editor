@@ -81,9 +81,9 @@ class VideoPlayer {
       this.updateFullscreenUI();
     });
 
-    // Keyboard shortcut 'f' / 'F' to toggle fullscreen
+    // Keyboard shortcuts
     document.addEventListener('keydown', (e) => {
-      // Don't toggle fullscreen if typing in input/textarea/contenteditable
+      // Don't trigger shortcuts if typing in input/textarea/contenteditable
       if (
         e.target.tagName === 'INPUT' || 
         e.target.tagName === 'TEXTAREA' || 
@@ -95,6 +95,15 @@ class VideoPlayer {
       if (e.key.toLowerCase() === 'f') {
         e.preventDefault();
         this.toggleFullscreen();
+      }
+
+      if (e.key === ' ' || e.code === 'Space') {
+        e.preventDefault(); // prevent page scroll
+        if (this.video.paused) {
+          this.play();
+        } else {
+          this.pause();
+        }
       }
     });
   }

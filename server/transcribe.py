@@ -8,6 +8,7 @@ import contextlib
 import math
 from transformers import AutoModelForSpeechSeq2Seq, AutoProcessor, pipeline
 
+
 def get_audio_duration(file_path):
     try:
         with contextlib.closing(wave.open(file_path, 'r')) as f:
@@ -16,6 +17,35 @@ def get_audio_duration(file_path):
             return frames / float(rate)
     except Exception:
         return 0
+
+
+def adjust_pauses_for_hf_pipeline_output(pipeline_output, split_threshold=0.12):
+    """
+    Adjust pause timings by distributing pauses up to the threshold evenly
+    between adjacent words (from official CrisperWhisper docs).
+    """
+    adjusted_chunks = pipeline_output["chunks"].copy()
+
+    for i in range(len(adjusted_chunks) - 1):
+        current_chunk = adjusted_chunks[i]
+        next_chunk = adjusted_chunks[i + 1]
+
+        current_start, current_end = current_chunk["timestamp"]
+        next_start, next_end = next_chunk["timestamp"]
+        pause_duration = next_start - current_end
+
+        if pause_duration > 0:
+            if pause_duration > split_threshold:
+                distribute = split_threshold / 2
+            else:
+                distribute = pause_duration / 2
+
+            adjusted_chunks[i]["timestamp"] = (current_start, current_end + distribute)
+            adjusted_chunks[i + 1]["timestamp"] = (next_start - distribute, next_end)
+
+    pipeline_output["chunks"] = adjusted_chunks
+    return pipeline_output
+
 
 def main():
     parser = argparse.ArgumentParser(description="Transcribe audio using CrisperWhisper")
@@ -27,7 +57,7 @@ def main():
 
     try:
         device = "cuda:0" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu"
-        torch_dtype = torch.float16 if device == "cuda:0" else torch.float32
+        torch_dtype = torch.float16 if device != "cpu" else torch.float32
 
         model_id = "nyrahealth/CrisperWhisper"
 
@@ -36,7 +66,8 @@ def main():
             model_id,
             torch_dtype=torch_dtype,
             low_cpu_mem_usage=True,
-            use_safetensors=True
+            use_safetensors=True,
+            attn_implementation="eager"
         )
         model.to(device)
         processor = AutoProcessor.from_pretrained(model_id)
@@ -47,14 +78,14 @@ def main():
             tokenizer=processor.tokenizer,
             feature_extractor=processor.feature_extractor,
             chunk_length_s=30,
-            batch_size=1,
+            batch_size=16 if device == "cuda:0" else 1,
             return_timestamps="word",
             torch_dtype=torch_dtype,
-            device=device
+            device=device,
         )
 
         duration = get_audio_duration(args.audio_path)
-        step = 20 # 30 - 5(left) - 5(right)
+        step = 20  # 30 - 5(left) - 5(right)
         total_chunks = max(1, math.ceil((duration - 30) / step) + 1) if duration > 30 else 1
 
         orig_forward = pipe.forward
@@ -70,12 +101,16 @@ def main():
         pipe.forward = patched_forward
 
         result = pipe(args.audio_path)
-        
+
+        # Adjust pause timings for better word boundaries
+        result = adjust_pauses_for_hf_pipeline_output(result)
+
         # Ensure only JSON is printed to stdout
         print(json.dumps(result))
     except Exception as e:
         print(json.dumps({"error": str(e)}), file=sys.stderr)
         sys.exit(1)
+
 
 if __name__ == "__main__":
     main()

@@ -31,8 +31,10 @@ function processCrisperWhisperResults(data) {
 
   if (data.chunks) {
     for (const chunk of data.chunks) {
-      let start = chunk.timestamp[0];
-      let end = chunk.timestamp[1] || start + 0.5;
+      // CrisperWhisper timestamps can be slightly late. Shift start time 150ms earlier
+      // to ensure we cut out the starting pronunciation when removing words.
+      let start = Math.max(0, chunk.timestamp[0] - 0.15);
+      let end = chunk.timestamp[1] || (chunk.timestamp[0] + 0.5);
 
       const gap = start - lastEnd;
       if (gap >= 0.5) {

@@ -1,16 +1,5961 @@
 [
   {
-    "id": "cdbe3e07-d6e7-4e20-8439-2c1c6cfbb689",
-    "name": "3ed957e8-2c48-40c3-a918-a74beecf1dbb.mp4",
+    "id": "2e35dee3-bde1-4d4d-98eb-585d42c7e921",
+    "name": "19c8abf6-ba98-4ee0-aff4-ff7a9b046144.mp4",
     "state": {
-      "fileId": "3ed957e8-2c48-40c3-a918-a74beecf1dbb.mp4",
-      "videoUrl": "/api/files/3ed957e8-2c48-40c3-a918-a74beecf1dbb.mp4",
-      "duration": 1896.5,
+      "fileId": "19c8abf6-ba98-4ee0-aff4-ff7a9b046144.mp4",
+      "videoUrl": "/api/files/19c8abf6-ba98-4ee0-aff4-ff7a9b046144.mp4",
+      "duration": 90.533333,
+      "words": [
+        {
+          "id": 0,
+          "text": "[Pause 1.2s]",
+          "start": 0,
+          "end": 1.22,
+          "deleted": false,
+          "isPause": true
+        },
+        {
+          "id": 1,
+          "text": "What",
+          "start": 1.07,
+          "end": 1.48,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 2,
+          "text": "is",
+          "start": 1.33,
+          "end": 1.69,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 3,
+          "text": "the",
+          "start": 1.54,
+          "end": 1.82,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 4,
+          "text": "agent?",
+          "start": 1.6700000000000002,
+          "end": 2.44,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 5,
+          "text": "[Pause 1.3s]",
+          "start": 2.44,
+          "end": 3.78,
+          "deleted": false,
+          "isPause": true
+        },
+        {
+          "id": 6,
+          "text": "So",
+          "start": 3.63,
+          "end": 4.119999999999999,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 7,
+          "text": "I",
+          "start": 3.97,
+          "end": 4.38,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 8,
+          "text": "asked",
+          "start": 4.25,
+          "end": 4.8999999999999995,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 9,
+          "text": "the",
+          "start": 4.7700000000000005,
+          "end": 5.05,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 10,
+          "text": "to",
+          "start": 4.8999999999999995,
+          "end": 5.38,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 11,
+          "text": "[Pause 0.7s]",
+          "start": 5.38,
+          "end": 6.0600000000000005,
+          "deleted": false,
+          "isPause": true
+        },
+        {
+          "id": 12,
+          "text": "create",
+          "start": 5.91,
+          "end": 6.4,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 13,
+          "text": "a",
+          "start": 6.25,
+          "end": 6.51,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 14,
+          "text": "full",
+          "start": 6.359999999999999,
+          "end": 6.739999999999999,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 15,
+          "text": "step",
+          "start": 6.65,
+          "end": 7.1,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 16,
+          "text": "for",
+          "start": 6.95,
+          "end": 7.640000000000001,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 17,
+          "text": "me.",
+          "start": 7.49,
+          "end": 8.120000000000001,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 18,
+          "text": "[Pause 0.9s]",
+          "start": 8.120000000000001,
+          "end": 9.02,
+          "deleted": false,
+          "isPause": true
+        },
+        {
+          "id": 19,
+          "text": "It",
+          "start": 8.87,
+          "end": 9.29,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 20,
+          "text": "gave",
+          "start": 9.139999999999999,
+          "end": 9.559999999999999,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 21,
+          "text": "me",
+          "start": 9.409999999999998,
+          "end": 9.73,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 22,
+          "text": "all",
+          "start": 9.58,
+          "end": 10.010000000000002,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 23,
+          "text": "this",
+          "start": 9.860000000000001,
+          "end": 10.4,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 24,
+          "text": "code",
+          "start": 10.51,
+          "end": 11.200000000000001,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 25,
+          "text": "and",
+          "start": 11.069999999999999,
+          "end": 11.64,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 26,
+          "text": "[Pause 0.7s]",
+          "start": 11.64,
+          "end": 12.34,
+          "deleted": false,
+          "isPause": true
+        },
+        {
+          "id": 27,
+          "text": "I",
+          "start": 12.19,
+          "end": 12.530000000000001,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 28,
+          "text": "will",
+          "start": 12.38,
+          "end": 12.739999999999998,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 29,
+          "text": "have",
+          "start": 12.589999999999998,
+          "end": 12.93,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 30,
+          "text": "to",
+          "start": 12.78,
+          "end": 13.09,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 31,
+          "text": "manually",
+          "start": 12.94,
+          "end": 13.68,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 32,
+          "text": "create",
+          "start": 13.67,
+          "end": 14.23,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 33,
+          "text": "them",
+          "start": 14.08,
+          "end": 14.6,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 34,
+          "text": "locally,",
+          "start": 14.489999999999998,
+          "end": 15.26,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 35,
+          "text": "create",
+          "start": 15.549999999999999,
+          "end": 16.11,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 36,
+          "text": "these",
+          "start": 15.959999999999999,
+          "end": 16.34,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 37,
+          "text": "files",
+          "start": 16.19,
+          "end": 16.759999999999998,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 38,
+          "text": "locally,",
+          "start": 16.610000000000003,
+          "end": 17.32,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 39,
+          "text": "[Pause 0.5s]",
+          "start": 17.32,
+          "end": 17.82,
+          "deleted": false,
+          "isPause": true
+        },
+        {
+          "id": 40,
+          "text": "and",
+          "start": 17.67,
+          "end": 18.13,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 41,
+          "text": "then",
+          "start": 17.98,
+          "end": 18.369999999999997,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 42,
+          "text": "I",
+          "start": 18.22,
+          "end": 18.5,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 43,
+          "text": "will",
+          "start": 18.35,
+          "end": 18.64,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 44,
+          "text": "have",
+          "start": 18.490000000000002,
+          "end": 18.810000000000002,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 45,
+          "text": "to",
+          "start": 18.660000000000004,
+          "end": 19.04,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 46,
+          "text": "follow",
+          "start": 18.950000000000003,
+          "end": 19.57,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 47,
+          "text": "all",
+          "start": 19.42,
+          "end": 19.83,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 48,
+          "text": "these",
+          "start": 19.68,
+          "end": 20.18,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 49,
+          "text": "[UH]",
+          "start": 20.250000000000004,
+          "end": 20.91,
+          "deleted": false,
+          "isFiller": true,
+          "_fixed": true
+        },
+        {
+          "id": 50,
+          "text": "instruction",
+          "start": 20.76,
+          "end": 21,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 51,
+          "text": "in",
+          "start": 21.050000000000004,
+          "end": 22.08,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 52,
+          "text": "order",
+          "start": 21.950000000000003,
+          "end": 22.490000000000002,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 53,
+          "text": "to",
+          "start": 22.340000000000003,
+          "end": 22.9,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 54,
+          "text": "[UH]",
+          "start": 23.230000000000004,
+          "end": 23.98,
+          "deleted": true,
+          "isFiller": true,
+          "_fixed": true
+        },
+        {
+          "id": 55,
+          "text": "[Pause 0.6s]",
+          "start": 23.98,
+          "end": 24.560000000000002,
+          "deleted": true,
+          "isPause": true
+        },
+        {
+          "id": 56,
+          "text": "create",
+          "start": 24.410000000000004,
+          "end": 24.950000000000003,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 57,
+          "text": "a",
+          "start": 24.800000000000004,
+          "end": 25.07,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 58,
+          "text": "right",
+          "start": 24.92,
+          "end": 25.599999999999998,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 59,
+          "text": "now.",
+          "start": 25.550000000000004,
+          "end": 27.54,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 60,
+          "text": "If",
+          "start": 27.390000000000004,
+          "end": 27.740000000000002,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 61,
+          "text": "I",
+          "start": 27.590000000000003,
+          "end": 27.919999999999998,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 62,
+          "text": "ask",
+          "start": 27.790000000000003,
+          "end": 28.26,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 63,
+          "text": "in",
+          "start": 21.85,
+          "end": 22.099999999999998,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 64,
+          "text": "order",
+          "start": 21.970000000000002,
+          "end": 22.490000000000002,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 65,
+          "text": "to",
+          "start": 22.340000000000003,
+          "end": 22.9,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 66,
+          "text": "[UH]",
+          "start": 23.230000000000004,
+          "end": 24.02,
+          "deleted": false,
+          "isFiller": true,
+          "_fixed": true
+        },
+        {
+          "id": 67,
+          "text": "[Pause 0.6s]",
+          "start": 24.02,
+          "end": 24.580000000000002,
+          "deleted": false,
+          "isPause": true
+        },
+        {
+          "id": 68,
+          "text": "create",
+          "start": 24.430000000000003,
+          "end": 24.96,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 69,
+          "text": "a",
+          "start": 24.810000000000002,
+          "end": 25.07,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 70,
+          "text": "doo",
+          "start": 24.92,
+          "end": 25.25,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 71,
+          "text": "doo",
+          "start": 25.1,
+          "end": 25.36,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 72,
+          "text": "web.",
+          "start": 25.270000000000003,
+          "end": 25.639999999999997,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 73,
+          "text": "Right",
+          "start": 25.490000000000002,
+          "end": 26.04,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 74,
+          "text": "[Pause 1.1s]",
+          "start": 26.04,
+          "end": 27.1,
+          "deleted": false,
+          "isPause": true
+        },
+        {
+          "id": 75,
+          "text": "now,",
+          "start": 26.950000000000003,
+          "end": 27.54,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 76,
+          "text": "if",
+          "start": 27.410000000000004,
+          "end": 27.759999999999998,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 77,
+          "text": "I",
+          "start": 27.61,
+          "end": 27.919999999999998,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 78,
+          "text": "ask",
+          "start": 27.790000000000003,
+          "end": 28.34,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 79,
+          "text": "same",
+          "start": 28.250000000000004,
+          "end": 28.82,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 80,
+          "text": "thing",
+          "start": 28.69,
+          "end": 29.279999999999998,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 81,
+          "text": "to",
+          "start": 29.53,
+          "end": 30.04,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 82,
+          "text": "A",
+          "start": 29.890000000000004,
+          "end": 30.22,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 83,
+          "text": ".I.",
+          "start": 30.07,
+          "end": 30.439999999999998,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 84,
+          "text": "agent",
+          "start": 30.35,
+          "end": 31.139999999999997,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 85,
+          "text": "[Pause 1.4s]",
+          "start": 31.139999999999997,
+          "end": 32.5,
+          "deleted": false,
+          "isPause": true
+        },
+        {
+          "id": 86,
+          "text": "[UH]",
+          "start": 32.35,
+          "end": 32.84,
+          "deleted": true,
+          "isFiller": true,
+          "_fixed": true
+        },
+        {
+          "id": 87,
+          "text": "let's",
+          "start": 32.690000000000005,
+          "end": 33.17,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 88,
+          "text": "open",
+          "start": 33.02,
+          "end": 33.54,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 89,
+          "text": "anti",
+          "start": 33.39,
+          "end": 33.78,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 90,
+          "text": "-gravity.",
+          "start": 33.63,
+          "end": 34.440000000000005,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 91,
+          "text": "[Pause 2.4s]",
+          "start": 34.440000000000005,
+          "end": 36.839999999999996,
+          "deleted": false,
+          "isPause": true
+        },
+        {
+          "id": 92,
+          "text": "It",
+          "start": 36.69,
+          "end": 37.14,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 93,
+          "text": "is",
+          "start": 36.99,
+          "end": 37.46,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 94,
+          "text": "a",
+          "start": 37.39,
+          "end": 37.7,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 95,
+          "text": "coding",
+          "start": 37.73,
+          "end": 38.36,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 96,
+          "text": "agent.",
+          "start": 38.25,
+          "end": 38.86,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 97,
+          "text": "[Pause 1.1s]",
+          "start": 38.86,
+          "end": 40,
+          "deleted": false,
+          "isPause": true
+        },
+        {
+          "id": 98,
+          "text": "I",
+          "start": 39.85,
+          "end": 40.32,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 99,
+          "text": "asked",
+          "start": 40.17,
+          "end": 40.67,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 100,
+          "text": "it",
+          "start": 40.52,
+          "end": 40.980000000000004,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 101,
+          "text": "[UH]",
+          "start": 40.93,
+          "end": 41.379999999999995,
+          "deleted": false,
+          "isFiller": true,
+          "_fixed": true
+        },
+        {
+          "id": 102,
+          "text": "same",
+          "start": 41.23,
+          "end": 41.760000000000005,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 103,
+          "text": "thing,",
+          "start": 41.61000000000001,
+          "end": 42.010000000000005,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 104,
+          "text": "create",
+          "start": 41.86000000000001,
+          "end": 42.36,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 105,
+          "text": "a",
+          "start": 42.21,
+          "end": 42.49,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 106,
+          "text": "full",
+          "start": 42.34,
+          "end": 42.760000000000005,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 107,
+          "text": "staked",
+          "start": 42.63,
+          "end": 43.07,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 108,
+          "text": "doo",
+          "start": 42.92,
+          "end": 43.28,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 109,
+          "text": "doo",
+          "start": 43.13,
+          "end": 43.39,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 110,
+          "text": "web.",
+          "start": 43.24,
+          "end": 43.72,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 111,
+          "text": "[Pause 1.1s]",
+          "start": 43.72,
+          "end": 44.839999999999996,
+          "deleted": false,
+          "isPause": true
+        },
+        {
+          "id": 112,
+          "text": "You",
+          "start": 44.69,
+          "end": 45.02,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 113,
+          "text": "see,",
+          "start": 42.83,
+          "end": 47.620000000000005,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 114,
+          "text": "it",
+          "start": 47.51,
+          "end": 48.52,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 115,
+          "text": "[Pause 0.6s]",
+          "start": 48.52,
+          "end": 49.12,
+          "deleted": false,
+          "isPause": true
+        },
+        {
+          "id": 116,
+          "text": "has",
+          "start": 48.97,
+          "end": 49.980000000000004,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 117,
+          "text": "[Pause 0.6s]",
+          "start": 49.980000000000004,
+          "end": 50.58,
+          "deleted": false,
+          "isPause": true
+        },
+        {
+          "id": 118,
+          "text": "[UH]",
+          "start": 50.43,
+          "end": 51.300000000000004,
+          "deleted": false,
+          "isFiller": true,
+          "_fixed": true
+        },
+        {
+          "id": 119,
+          "text": "[Pause 0.7s]",
+          "start": 51.300000000000004,
+          "end": 52.019999999999996,
+          "deleted": false,
+          "isPause": true
+        },
+        {
+          "id": 120,
+          "text": "come",
+          "start": 51.87,
+          "end": 52.78,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 121,
+          "text": "up",
+          "start": 53.03,
+          "end": 53.72,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 122,
+          "text": "with",
+          "start": 53.57,
+          "end": 53.86,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 123,
+          "text": "a",
+          "start": 53.73,
+          "end": 53.97,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 124,
+          "text": "plan.",
+          "start": 53.82,
+          "end": 54.14,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 125,
+          "text": "If",
+          "start": 54.11,
+          "end": 55.06,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 126,
+          "text": "I",
+          "start": 54.910000000000004,
+          "end": 55.11,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 127,
+          "text": "click",
+          "start": 54.96,
+          "end": 55.22,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 128,
+          "text": "proceed,",
+          "start": 55.07,
+          "end": 55.480000000000004,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 129,
+          "text": "it",
+          "start": 55.37,
+          "end": 55.660000000000004,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 130,
+          "text": "has",
+          "start": 55.63,
+          "end": 56.47,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 131,
+          "text": "[UH]",
+          "start": 56.32,
+          "end": 57.1,
+          "deleted": false,
+          "isFiller": true,
+          "_fixed": true
+        },
+        {
+          "id": 132,
+          "text": "started",
+          "start": 57.089999999999996,
+          "end": 57.400000000000006,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 133,
+          "text": "working",
+          "start": 57.589999999999996,
+          "end": 57.870000000000005,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 134,
+          "text": "and",
+          "start": 57.720000000000006,
+          "end": 57.95,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 135,
+          "text": "[UH]",
+          "start": 57.800000000000004,
+          "end": 58.080000000000005,
+          "deleted": false,
+          "isFiller": true,
+          "_fixed": true
+        },
+        {
+          "id": 136,
+          "text": "now",
+          "start": 58.07,
+          "end": 58.45,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 137,
+          "text": "it's",
+          "start": 58.300000000000004,
+          "end": 58.55,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 138,
+          "text": "creating",
+          "start": 58.4,
+          "end": 58.709999999999994,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 139,
+          "text": "all",
+          "start": 58.559999999999995,
+          "end": 58.91,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 140,
+          "text": "these",
+          "start": 58.76,
+          "end": 59.03,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 141,
+          "text": "files.",
+          "start": 58.88,
+          "end": 59.17,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 142,
+          "text": "If",
+          "start": 59.02,
+          "end": 59.26,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 143,
+          "text": "you",
+          "start": 59.11,
+          "end": 59.44,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 144,
+          "text": "open",
+          "start": 59.29,
+          "end": 59.65,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 145,
+          "text": "this,",
+          "start": 59.5,
+          "end": 59.72,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 146,
+          "text": "you",
+          "start": 59.57,
+          "end": 59.83,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 147,
+          "text": "see,",
+          "start": 59.68,
+          "end": 59.980000000000004,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 148,
+          "text": "it",
+          "start": 59.89,
+          "end": 60.24,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 149,
+          "text": "[UH]",
+          "start": 60.15,
+          "end": 60.400000000000006,
+          "deleted": false,
+          "isFiller": true,
+          "_fixed": true
+        },
+        {
+          "id": 150,
+          "text": "already",
+          "start": 60.25000000000001,
+          "end": 60.57,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 151,
+          "text": "started",
+          "start": 60.42,
+          "end": 60.74,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 152,
+          "text": "[Pause 0.6s]",
+          "start": 60.74,
+          "end": 61.3,
+          "deleted": false,
+          "isPause": true
+        },
+        {
+          "id": 153,
+          "text": "[UH]",
+          "start": 61.15,
+          "end": 61.51,
+          "deleted": false,
+          "isFiller": true,
+          "_fixed": true
+        },
+        {
+          "id": 154,
+          "text": "creating",
+          "start": 61.36,
+          "end": 61.65,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 155,
+          "text": "this",
+          "start": 61.5,
+          "end": 62.440000000000005,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 156,
+          "text": "[Pause 0.6s]",
+          "start": 62.440000000000005,
+          "end": 63.019999999999996,
+          "deleted": false,
+          "isPause": true
+        },
+        {
+          "id": 157,
+          "text": "file.",
+          "start": 62.87,
+          "end": 63.58,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 158,
+          "text": "Now",
+          "start": 63.43,
+          "end": 64.37,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 159,
+          "text": "it's",
+          "start": 64.22,
+          "end": 64.54,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 160,
+          "text": "creating",
+          "start": 64.64999999999999,
+          "end": 65.68,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 161,
+          "text": "front",
+          "start": 65.83,
+          "end": 66.32,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 162,
+          "text": "end.",
+          "start": 66.16999999999999,
+          "end": 64.48,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 163,
+          "text": "[Pause 1.2s]",
+          "start": 64.48,
+          "end": 65.67999999999999,
+          "deleted": false,
+          "isPause": true
+        },
+        {
+          "id": 164,
+          "text": "Let",
+          "start": 65.52999999999999,
+          "end": 65.99000000000001,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 165,
+          "text": "it",
+          "start": 65.84,
+          "end": 66.19,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 166,
+          "text": "finish.",
+          "start": 66.03999999999999,
+          "end": 66.78,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 167,
+          "text": "[Pause 1.0s]",
+          "start": 66.78,
+          "end": 67.78,
+          "deleted": false,
+          "isPause": true
+        },
+        {
+          "id": 168,
+          "text": "So",
+          "start": 67.63,
+          "end": 68.09,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 169,
+          "text": "it",
+          "start": 67.94,
+          "end": 68.28,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 170,
+          "text": "has",
+          "start": 68.13,
+          "end": 68.58000000000001,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 171,
+          "text": "created",
+          "start": 68.43,
+          "end": 69.2,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 172,
+          "text": "entire",
+          "start": 69.24999999999999,
+          "end": 70.05,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 173,
+          "text": "app",
+          "start": 69.89999999999999,
+          "end": 70.4,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 174,
+          "text": "here.",
+          "start": 70.27,
+          "end": 70.88,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 175,
+          "text": "[Pause 0.6s]",
+          "start": 70.88,
+          "end": 71.44,
+          "deleted": false,
+          "isPause": true
+        },
+        {
+          "id": 176,
+          "text": "Now",
+          "start": 71.28999999999999,
+          "end": 71.78,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 177,
+          "text": "let's",
+          "start": 71.63,
+          "end": 72.1,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 178,
+          "text": "ask",
+          "start": 71.94999999999999,
+          "end": 72.4,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 179,
+          "text": "it",
+          "start": 72.25,
+          "end": 72.6,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 180,
+          "text": "to",
+          "start": 72.44999999999999,
+          "end": 72.78,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 181,
+          "text": "run",
+          "start": 72.63,
+          "end": 73.22,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 182,
+          "text": "run",
+          "start": 73.24999999999999,
+          "end": 73.74000000000001,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 183,
+          "text": "it.",
+          "start": 73.59,
+          "end": 74.06,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 184,
+          "text": "[Pause 2.2s]",
+          "start": 74.06,
+          "end": 76.24,
+          "deleted": false,
+          "isPause": true
+        },
+        {
+          "id": 185,
+          "text": "I",
+          "start": 76.08999999999999,
+          "end": 76.56,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 186,
+          "text": "don't",
+          "start": 76.41,
+          "end": 76.82,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 187,
+          "text": "have",
+          "start": 76.66999999999999,
+          "end": 77,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 188,
+          "text": "to",
+          "start": 76.85,
+          "end": 77.14,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 189,
+          "text": "do",
+          "start": 76.99,
+          "end": 77.36,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 190,
+          "text": "anything.",
+          "start": 77.21,
+          "end": 77.80000000000001,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 191,
+          "text": "It",
+          "start": 77.65,
+          "end": 77.93,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 192,
+          "text": "will",
+          "start": 77.78,
+          "end": 78.12,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 193,
+          "text": "do",
+          "start": 77.97,
+          "end": 78.33,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 194,
+          "text": "everything",
+          "start": 78.17999999999999,
+          "end": 78.83,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 195,
+          "text": "for",
+          "start": 78.67999999999999,
+          "end": 79.03,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 196,
+          "text": "me.",
+          "start": 78.88,
+          "end": 79.3,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 197,
+          "text": "[Pause 1.5s]",
+          "start": 79.3,
+          "end": 80.75999999999999,
+          "deleted": false,
+          "isPause": true
+        },
+        {
+          "id": 198,
+          "text": "It's",
+          "start": 80.60999999999999,
+          "end": 81.22,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 199,
+          "text": "[UH]",
+          "start": 81.08999999999999,
+          "end": 81.62,
+          "deleted": false,
+          "isFiller": true,
+          "_fixed": true
+        },
+        {
+          "id": 200,
+          "text": "[Pause 0.8s]",
+          "start": 81.62,
+          "end": 82.42,
+          "deleted": false,
+          "isPause": true
+        },
+        {
+          "id": 201,
+          "text": "giving",
+          "start": 82.27,
+          "end": 82.80000000000001,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 202,
+          "text": "me",
+          "start": 82.65,
+          "end": 82.99,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 203,
+          "text": "an",
+          "start": 82.83999999999999,
+          "end": 83.19,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 204,
+          "text": "URL",
+          "start": 83.03999999999999,
+          "end": 83.84,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 205,
+          "text": "if",
+          "start": 83.71,
+          "end": 84.12,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 206,
+          "text": "I",
+          "start": 83.97,
+          "end": 84.3,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 207,
+          "text": "open",
+          "start": 84.14999999999999,
+          "end": 84.67,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 208,
+          "text": "it",
+          "start": 84.52,
+          "end": 84.9,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 209,
+          "text": "on",
+          "start": 84.75,
+          "end": 85.44,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 210,
+          "text": "[Pause 0.6s]",
+          "start": 85.44,
+          "end": 86,
+          "deleted": false,
+          "isPause": true
+        },
+        {
+          "id": 211,
+          "text": "my",
+          "start": 85.85,
+          "end": 86.28,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 212,
+          "text": "browser,",
+          "start": 86.13,
+          "end": 86.98,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 213,
+          "text": "[Pause 1.0s]",
+          "start": 86.98,
+          "end": 87.94,
+          "deleted": false,
+          "isPause": true
+        },
+        {
+          "id": 214,
+          "text": "so",
+          "start": 87.78999999999999,
+          "end": 88.4,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 215,
+          "text": "this",
+          "start": 88.27,
+          "end": 88.72,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 216,
+          "text": "is",
+          "start": 88.57,
+          "end": 88.88,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 217,
+          "text": "our",
+          "start": 88.72999999999999,
+          "end": 89.19,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 218,
+          "text": "to",
+          "start": 89.03999999999999,
+          "end": 89.38,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 219,
+          "text": "-do",
+          "start": 89.22999999999999,
+          "end": 89.57,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        },
+        {
+          "id": 220,
+          "text": "app.",
+          "start": 89.41999999999999,
+          "end": 90.5,
+          "deleted": false,
+          "isFiller": false,
+          "_fixed": true
+        }
+      ],
+      "segments": [
+        {
+          "start": 0,
+          "end": 23.230000000000004
+        },
+        {
+          "start": 24.560000000000002,
+          "end": 32.35
+        },
+        {
+          "start": 32.84,
+          "end": 90.533333
+        }
+      ],
+      "selection": {
+        "startId": 84,
+        "endId": 84
+      },
+      "undoStack": [
+        {
+          "words": [
+            {
+              "id": 0,
+              "text": "[Pause 1.2s]",
+              "start": 0,
+              "end": 1.22,
+              "deleted": false,
+              "isPause": true
+            },
+            {
+              "id": 1,
+              "text": "What",
+              "start": 1.07,
+              "end": 1.48,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 2,
+              "text": "is",
+              "start": 1.33,
+              "end": 1.69,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 3,
+              "text": "the",
+              "start": 1.54,
+              "end": 1.82,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 4,
+              "text": "agent?",
+              "start": 1.6700000000000002,
+              "end": 2.44,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 5,
+              "text": "[Pause 1.3s]",
+              "start": 2.44,
+              "end": 3.78,
+              "deleted": false,
+              "isPause": true
+            },
+            {
+              "id": 6,
+              "text": "So",
+              "start": 3.63,
+              "end": 4.119999999999999,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 7,
+              "text": "I",
+              "start": 3.97,
+              "end": 4.38,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 8,
+              "text": "asked",
+              "start": 4.25,
+              "end": 4.8999999999999995,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 9,
+              "text": "the",
+              "start": 4.7700000000000005,
+              "end": 5.05,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 10,
+              "text": "to",
+              "start": 4.8999999999999995,
+              "end": 5.38,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 11,
+              "text": "[Pause 0.7s]",
+              "start": 5.38,
+              "end": 6.0600000000000005,
+              "deleted": false,
+              "isPause": true
+            },
+            {
+              "id": 12,
+              "text": "create",
+              "start": 5.91,
+              "end": 6.4,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 13,
+              "text": "a",
+              "start": 6.25,
+              "end": 6.51,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 14,
+              "text": "full",
+              "start": 6.359999999999999,
+              "end": 6.739999999999999,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 15,
+              "text": "step",
+              "start": 6.65,
+              "end": 7.1,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 16,
+              "text": "for",
+              "start": 6.95,
+              "end": 7.640000000000001,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 17,
+              "text": "me.",
+              "start": 7.49,
+              "end": 8.120000000000001,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 18,
+              "text": "[Pause 0.9s]",
+              "start": 8.120000000000001,
+              "end": 9.02,
+              "deleted": false,
+              "isPause": true
+            },
+            {
+              "id": 19,
+              "text": "It",
+              "start": 8.87,
+              "end": 9.29,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 20,
+              "text": "gave",
+              "start": 9.139999999999999,
+              "end": 9.559999999999999,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 21,
+              "text": "me",
+              "start": 9.409999999999998,
+              "end": 9.73,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 22,
+              "text": "all",
+              "start": 9.58,
+              "end": 10.010000000000002,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 23,
+              "text": "this",
+              "start": 9.860000000000001,
+              "end": 10.4,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 24,
+              "text": "code",
+              "start": 10.51,
+              "end": 11.200000000000001,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 25,
+              "text": "and",
+              "start": 11.069999999999999,
+              "end": 11.64,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 26,
+              "text": "[Pause 0.7s]",
+              "start": 11.64,
+              "end": 12.34,
+              "deleted": false,
+              "isPause": true
+            },
+            {
+              "id": 27,
+              "text": "I",
+              "start": 12.19,
+              "end": 12.530000000000001,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 28,
+              "text": "will",
+              "start": 12.38,
+              "end": 12.739999999999998,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 29,
+              "text": "have",
+              "start": 12.589999999999998,
+              "end": 12.93,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 30,
+              "text": "to",
+              "start": 12.78,
+              "end": 13.09,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 31,
+              "text": "manually",
+              "start": 12.94,
+              "end": 13.68,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 32,
+              "text": "create",
+              "start": 13.67,
+              "end": 14.23,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 33,
+              "text": "them",
+              "start": 14.08,
+              "end": 14.6,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 34,
+              "text": "locally,",
+              "start": 14.489999999999998,
+              "end": 15.26,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 35,
+              "text": "create",
+              "start": 15.549999999999999,
+              "end": 16.11,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 36,
+              "text": "these",
+              "start": 15.959999999999999,
+              "end": 16.34,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 37,
+              "text": "files",
+              "start": 16.19,
+              "end": 16.759999999999998,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 38,
+              "text": "locally,",
+              "start": 16.610000000000003,
+              "end": 17.32,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 39,
+              "text": "[Pause 0.5s]",
+              "start": 17.32,
+              "end": 17.82,
+              "deleted": false,
+              "isPause": true
+            },
+            {
+              "id": 40,
+              "text": "and",
+              "start": 17.67,
+              "end": 18.13,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 41,
+              "text": "then",
+              "start": 17.98,
+              "end": 18.369999999999997,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 42,
+              "text": "I",
+              "start": 18.22,
+              "end": 18.5,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 43,
+              "text": "will",
+              "start": 18.35,
+              "end": 18.64,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 44,
+              "text": "have",
+              "start": 18.490000000000002,
+              "end": 18.810000000000002,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 45,
+              "text": "to",
+              "start": 18.660000000000004,
+              "end": 19.04,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 46,
+              "text": "follow",
+              "start": 18.950000000000003,
+              "end": 19.57,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 47,
+              "text": "all",
+              "start": 19.42,
+              "end": 19.83,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 48,
+              "text": "these",
+              "start": 19.68,
+              "end": 20.18,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 49,
+              "text": "[UH]",
+              "start": 20.250000000000004,
+              "end": 20.91,
+              "deleted": false,
+              "isFiller": true,
+              "_fixed": true
+            },
+            {
+              "id": 50,
+              "text": "instruction",
+              "start": 20.76,
+              "end": 21,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 51,
+              "text": "in",
+              "start": 21.050000000000004,
+              "end": 22.08,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 52,
+              "text": "order",
+              "start": 21.950000000000003,
+              "end": 22.490000000000002,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 53,
+              "text": "to",
+              "start": 22.340000000000003,
+              "end": 22.9,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 54,
+              "text": "[UH]",
+              "start": 23.230000000000004,
+              "end": 23.98,
+              "deleted": false,
+              "isFiller": true,
+              "_fixed": true
+            },
+            {
+              "id": 55,
+              "text": "[Pause 0.6s]",
+              "start": 23.98,
+              "end": 24.560000000000002,
+              "deleted": true,
+              "isPause": true
+            },
+            {
+              "id": 56,
+              "text": "create",
+              "start": 24.410000000000004,
+              "end": 24.950000000000003,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 57,
+              "text": "a",
+              "start": 24.800000000000004,
+              "end": 25.07,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 58,
+              "text": "right",
+              "start": 24.92,
+              "end": 25.599999999999998,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 59,
+              "text": "now.",
+              "start": 25.550000000000004,
+              "end": 27.54,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 60,
+              "text": "If",
+              "start": 27.390000000000004,
+              "end": 27.740000000000002,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 61,
+              "text": "I",
+              "start": 27.590000000000003,
+              "end": 27.919999999999998,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 62,
+              "text": "ask",
+              "start": 27.790000000000003,
+              "end": 28.26,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 63,
+              "text": "in",
+              "start": 21.85,
+              "end": 22.099999999999998,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 64,
+              "text": "order",
+              "start": 21.970000000000002,
+              "end": 22.490000000000002,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 65,
+              "text": "to",
+              "start": 22.340000000000003,
+              "end": 22.9,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 66,
+              "text": "[UH]",
+              "start": 23.230000000000004,
+              "end": 24.02,
+              "deleted": false,
+              "isFiller": true,
+              "_fixed": true
+            },
+            {
+              "id": 67,
+              "text": "[Pause 0.6s]",
+              "start": 24.02,
+              "end": 24.580000000000002,
+              "deleted": false,
+              "isPause": true
+            },
+            {
+              "id": 68,
+              "text": "create",
+              "start": 24.430000000000003,
+              "end": 24.96,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 69,
+              "text": "a",
+              "start": 24.810000000000002,
+              "end": 25.07,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 70,
+              "text": "doo",
+              "start": 24.92,
+              "end": 25.25,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 71,
+              "text": "doo",
+              "start": 25.1,
+              "end": 25.36,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 72,
+              "text": "web.",
+              "start": 25.270000000000003,
+              "end": 25.639999999999997,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 73,
+              "text": "Right",
+              "start": 25.490000000000002,
+              "end": 26.04,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 74,
+              "text": "[Pause 1.1s]",
+              "start": 26.04,
+              "end": 27.1,
+              "deleted": false,
+              "isPause": true
+            },
+            {
+              "id": 75,
+              "text": "now,",
+              "start": 26.950000000000003,
+              "end": 27.54,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 76,
+              "text": "if",
+              "start": 27.410000000000004,
+              "end": 27.759999999999998,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 77,
+              "text": "I",
+              "start": 27.61,
+              "end": 27.919999999999998,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 78,
+              "text": "ask",
+              "start": 27.790000000000003,
+              "end": 28.34,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 79,
+              "text": "same",
+              "start": 28.250000000000004,
+              "end": 28.82,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 80,
+              "text": "thing",
+              "start": 28.69,
+              "end": 29.279999999999998,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 81,
+              "text": "to",
+              "start": 29.53,
+              "end": 30.04,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 82,
+              "text": "A",
+              "start": 29.890000000000004,
+              "end": 30.22,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 83,
+              "text": ".I.",
+              "start": 30.07,
+              "end": 30.439999999999998,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 84,
+              "text": "agent",
+              "start": 30.35,
+              "end": 31.139999999999997,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 85,
+              "text": "[Pause 1.4s]",
+              "start": 31.139999999999997,
+              "end": 32.5,
+              "deleted": false,
+              "isPause": true
+            },
+            {
+              "id": 86,
+              "text": "[UH]",
+              "start": 32.35,
+              "end": 32.84,
+              "deleted": false,
+              "isFiller": true,
+              "_fixed": true
+            },
+            {
+              "id": 87,
+              "text": "let's",
+              "start": 32.690000000000005,
+              "end": 33.17,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 88,
+              "text": "open",
+              "start": 33.02,
+              "end": 33.54,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 89,
+              "text": "anti",
+              "start": 33.39,
+              "end": 33.78,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 90,
+              "text": "-gravity.",
+              "start": 33.63,
+              "end": 34.440000000000005,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 91,
+              "text": "[Pause 2.4s]",
+              "start": 34.440000000000005,
+              "end": 36.839999999999996,
+              "deleted": false,
+              "isPause": true
+            },
+            {
+              "id": 92,
+              "text": "It",
+              "start": 36.69,
+              "end": 37.14,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 93,
+              "text": "is",
+              "start": 36.99,
+              "end": 37.46,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 94,
+              "text": "a",
+              "start": 37.39,
+              "end": 37.7,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 95,
+              "text": "coding",
+              "start": 37.73,
+              "end": 38.36,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 96,
+              "text": "agent.",
+              "start": 38.25,
+              "end": 38.86,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 97,
+              "text": "[Pause 1.1s]",
+              "start": 38.86,
+              "end": 40,
+              "deleted": false,
+              "isPause": true
+            },
+            {
+              "id": 98,
+              "text": "I",
+              "start": 39.85,
+              "end": 40.32,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 99,
+              "text": "asked",
+              "start": 40.17,
+              "end": 40.67,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 100,
+              "text": "it",
+              "start": 40.52,
+              "end": 40.980000000000004,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 101,
+              "text": "[UH]",
+              "start": 40.93,
+              "end": 41.379999999999995,
+              "deleted": false,
+              "isFiller": true,
+              "_fixed": true
+            },
+            {
+              "id": 102,
+              "text": "same",
+              "start": 41.23,
+              "end": 41.760000000000005,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 103,
+              "text": "thing,",
+              "start": 41.61000000000001,
+              "end": 42.010000000000005,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 104,
+              "text": "create",
+              "start": 41.86000000000001,
+              "end": 42.36,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 105,
+              "text": "a",
+              "start": 42.21,
+              "end": 42.49,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 106,
+              "text": "full",
+              "start": 42.34,
+              "end": 42.760000000000005,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 107,
+              "text": "staked",
+              "start": 42.63,
+              "end": 43.07,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 108,
+              "text": "doo",
+              "start": 42.92,
+              "end": 43.28,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 109,
+              "text": "doo",
+              "start": 43.13,
+              "end": 43.39,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 110,
+              "text": "web.",
+              "start": 43.24,
+              "end": 43.72,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 111,
+              "text": "[Pause 1.1s]",
+              "start": 43.72,
+              "end": 44.839999999999996,
+              "deleted": false,
+              "isPause": true
+            },
+            {
+              "id": 112,
+              "text": "You",
+              "start": 44.69,
+              "end": 45.02,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 113,
+              "text": "see,",
+              "start": 42.83,
+              "end": 47.620000000000005,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 114,
+              "text": "it",
+              "start": 47.51,
+              "end": 48.52,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 115,
+              "text": "[Pause 0.6s]",
+              "start": 48.52,
+              "end": 49.12,
+              "deleted": false,
+              "isPause": true
+            },
+            {
+              "id": 116,
+              "text": "has",
+              "start": 48.97,
+              "end": 49.980000000000004,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 117,
+              "text": "[Pause 0.6s]",
+              "start": 49.980000000000004,
+              "end": 50.58,
+              "deleted": false,
+              "isPause": true
+            },
+            {
+              "id": 118,
+              "text": "[UH]",
+              "start": 50.43,
+              "end": 51.300000000000004,
+              "deleted": false,
+              "isFiller": true,
+              "_fixed": true
+            },
+            {
+              "id": 119,
+              "text": "[Pause 0.7s]",
+              "start": 51.300000000000004,
+              "end": 52.019999999999996,
+              "deleted": false,
+              "isPause": true
+            },
+            {
+              "id": 120,
+              "text": "come",
+              "start": 51.87,
+              "end": 52.78,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 121,
+              "text": "up",
+              "start": 53.03,
+              "end": 53.72,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 122,
+              "text": "with",
+              "start": 53.57,
+              "end": 53.86,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 123,
+              "text": "a",
+              "start": 53.73,
+              "end": 53.97,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 124,
+              "text": "plan.",
+              "start": 53.82,
+              "end": 54.14,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 125,
+              "text": "If",
+              "start": 54.11,
+              "end": 55.06,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 126,
+              "text": "I",
+              "start": 54.910000000000004,
+              "end": 55.11,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 127,
+              "text": "click",
+              "start": 54.96,
+              "end": 55.22,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 128,
+              "text": "proceed,",
+              "start": 55.07,
+              "end": 55.480000000000004,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 129,
+              "text": "it",
+              "start": 55.37,
+              "end": 55.660000000000004,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 130,
+              "text": "has",
+              "start": 55.63,
+              "end": 56.47,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 131,
+              "text": "[UH]",
+              "start": 56.32,
+              "end": 57.1,
+              "deleted": false,
+              "isFiller": true,
+              "_fixed": true
+            },
+            {
+              "id": 132,
+              "text": "started",
+              "start": 57.089999999999996,
+              "end": 57.400000000000006,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 133,
+              "text": "working",
+              "start": 57.589999999999996,
+              "end": 57.870000000000005,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 134,
+              "text": "and",
+              "start": 57.720000000000006,
+              "end": 57.95,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 135,
+              "text": "[UH]",
+              "start": 57.800000000000004,
+              "end": 58.080000000000005,
+              "deleted": false,
+              "isFiller": true,
+              "_fixed": true
+            },
+            {
+              "id": 136,
+              "text": "now",
+              "start": 58.07,
+              "end": 58.45,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 137,
+              "text": "it's",
+              "start": 58.300000000000004,
+              "end": 58.55,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 138,
+              "text": "creating",
+              "start": 58.4,
+              "end": 58.709999999999994,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 139,
+              "text": "all",
+              "start": 58.559999999999995,
+              "end": 58.91,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 140,
+              "text": "these",
+              "start": 58.76,
+              "end": 59.03,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 141,
+              "text": "files.",
+              "start": 58.88,
+              "end": 59.17,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 142,
+              "text": "If",
+              "start": 59.02,
+              "end": 59.26,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 143,
+              "text": "you",
+              "start": 59.11,
+              "end": 59.44,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 144,
+              "text": "open",
+              "start": 59.29,
+              "end": 59.65,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 145,
+              "text": "this,",
+              "start": 59.5,
+              "end": 59.72,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 146,
+              "text": "you",
+              "start": 59.57,
+              "end": 59.83,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 147,
+              "text": "see,",
+              "start": 59.68,
+              "end": 59.980000000000004,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 148,
+              "text": "it",
+              "start": 59.89,
+              "end": 60.24,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 149,
+              "text": "[UH]",
+              "start": 60.15,
+              "end": 60.400000000000006,
+              "deleted": false,
+              "isFiller": true,
+              "_fixed": true
+            },
+            {
+              "id": 150,
+              "text": "already",
+              "start": 60.25000000000001,
+              "end": 60.57,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 151,
+              "text": "started",
+              "start": 60.42,
+              "end": 60.74,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 152,
+              "text": "[Pause 0.6s]",
+              "start": 60.74,
+              "end": 61.3,
+              "deleted": false,
+              "isPause": true
+            },
+            {
+              "id": 153,
+              "text": "[UH]",
+              "start": 61.15,
+              "end": 61.51,
+              "deleted": false,
+              "isFiller": true,
+              "_fixed": true
+            },
+            {
+              "id": 154,
+              "text": "creating",
+              "start": 61.36,
+              "end": 61.65,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 155,
+              "text": "this",
+              "start": 61.5,
+              "end": 62.440000000000005,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 156,
+              "text": "[Pause 0.6s]",
+              "start": 62.440000000000005,
+              "end": 63.019999999999996,
+              "deleted": false,
+              "isPause": true
+            },
+            {
+              "id": 157,
+              "text": "file.",
+              "start": 62.87,
+              "end": 63.58,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 158,
+              "text": "Now",
+              "start": 63.43,
+              "end": 64.37,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 159,
+              "text": "it's",
+              "start": 64.22,
+              "end": 64.54,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 160,
+              "text": "creating",
+              "start": 64.64999999999999,
+              "end": 65.68,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 161,
+              "text": "front",
+              "start": 65.83,
+              "end": 66.32,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 162,
+              "text": "end.",
+              "start": 66.16999999999999,
+              "end": 64.48,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 163,
+              "text": "[Pause 1.2s]",
+              "start": 64.48,
+              "end": 65.67999999999999,
+              "deleted": false,
+              "isPause": true
+            },
+            {
+              "id": 164,
+              "text": "Let",
+              "start": 65.52999999999999,
+              "end": 65.99000000000001,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 165,
+              "text": "it",
+              "start": 65.84,
+              "end": 66.19,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 166,
+              "text": "finish.",
+              "start": 66.03999999999999,
+              "end": 66.78,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 167,
+              "text": "[Pause 1.0s]",
+              "start": 66.78,
+              "end": 67.78,
+              "deleted": false,
+              "isPause": true
+            },
+            {
+              "id": 168,
+              "text": "So",
+              "start": 67.63,
+              "end": 68.09,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 169,
+              "text": "it",
+              "start": 67.94,
+              "end": 68.28,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 170,
+              "text": "has",
+              "start": 68.13,
+              "end": 68.58000000000001,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 171,
+              "text": "created",
+              "start": 68.43,
+              "end": 69.2,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 172,
+              "text": "entire",
+              "start": 69.24999999999999,
+              "end": 70.05,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 173,
+              "text": "app",
+              "start": 69.89999999999999,
+              "end": 70.4,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 174,
+              "text": "here.",
+              "start": 70.27,
+              "end": 70.88,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 175,
+              "text": "[Pause 0.6s]",
+              "start": 70.88,
+              "end": 71.44,
+              "deleted": false,
+              "isPause": true
+            },
+            {
+              "id": 176,
+              "text": "Now",
+              "start": 71.28999999999999,
+              "end": 71.78,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 177,
+              "text": "let's",
+              "start": 71.63,
+              "end": 72.1,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 178,
+              "text": "ask",
+              "start": 71.94999999999999,
+              "end": 72.4,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 179,
+              "text": "it",
+              "start": 72.25,
+              "end": 72.6,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 180,
+              "text": "to",
+              "start": 72.44999999999999,
+              "end": 72.78,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 181,
+              "text": "run",
+              "start": 72.63,
+              "end": 73.22,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 182,
+              "text": "run",
+              "start": 73.24999999999999,
+              "end": 73.74000000000001,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 183,
+              "text": "it.",
+              "start": 73.59,
+              "end": 74.06,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 184,
+              "text": "[Pause 2.2s]",
+              "start": 74.06,
+              "end": 76.24,
+              "deleted": false,
+              "isPause": true
+            },
+            {
+              "id": 185,
+              "text": "I",
+              "start": 76.08999999999999,
+              "end": 76.56,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 186,
+              "text": "don't",
+              "start": 76.41,
+              "end": 76.82,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 187,
+              "text": "have",
+              "start": 76.66999999999999,
+              "end": 77,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 188,
+              "text": "to",
+              "start": 76.85,
+              "end": 77.14,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 189,
+              "text": "do",
+              "start": 76.99,
+              "end": 77.36,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 190,
+              "text": "anything.",
+              "start": 77.21,
+              "end": 77.80000000000001,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 191,
+              "text": "It",
+              "start": 77.65,
+              "end": 77.93,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 192,
+              "text": "will",
+              "start": 77.78,
+              "end": 78.12,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 193,
+              "text": "do",
+              "start": 77.97,
+              "end": 78.33,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 194,
+              "text": "everything",
+              "start": 78.17999999999999,
+              "end": 78.83,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 195,
+              "text": "for",
+              "start": 78.67999999999999,
+              "end": 79.03,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 196,
+              "text": "me.",
+              "start": 78.88,
+              "end": 79.3,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 197,
+              "text": "[Pause 1.5s]",
+              "start": 79.3,
+              "end": 80.75999999999999,
+              "deleted": false,
+              "isPause": true
+            },
+            {
+              "id": 198,
+              "text": "It's",
+              "start": 80.60999999999999,
+              "end": 81.22,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 199,
+              "text": "[UH]",
+              "start": 81.08999999999999,
+              "end": 81.62,
+              "deleted": false,
+              "isFiller": true,
+              "_fixed": true
+            },
+            {
+              "id": 200,
+              "text": "[Pause 0.8s]",
+              "start": 81.62,
+              "end": 82.42,
+              "deleted": false,
+              "isPause": true
+            },
+            {
+              "id": 201,
+              "text": "giving",
+              "start": 82.27,
+              "end": 82.80000000000001,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 202,
+              "text": "me",
+              "start": 82.65,
+              "end": 82.99,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 203,
+              "text": "an",
+              "start": 82.83999999999999,
+              "end": 83.19,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 204,
+              "text": "URL",
+              "start": 83.03999999999999,
+              "end": 83.84,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 205,
+              "text": "if",
+              "start": 83.71,
+              "end": 84.12,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 206,
+              "text": "I",
+              "start": 83.97,
+              "end": 84.3,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 207,
+              "text": "open",
+              "start": 84.14999999999999,
+              "end": 84.67,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 208,
+              "text": "it",
+              "start": 84.52,
+              "end": 84.9,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 209,
+              "text": "on",
+              "start": 84.75,
+              "end": 85.44,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 210,
+              "text": "[Pause 0.6s]",
+              "start": 85.44,
+              "end": 86,
+              "deleted": false,
+              "isPause": true
+            },
+            {
+              "id": 211,
+              "text": "my",
+              "start": 85.85,
+              "end": 86.28,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 212,
+              "text": "browser,",
+              "start": 86.13,
+              "end": 86.98,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 213,
+              "text": "[Pause 1.0s]",
+              "start": 86.98,
+              "end": 87.94,
+              "deleted": false,
+              "isPause": true
+            },
+            {
+              "id": 214,
+              "text": "so",
+              "start": 87.78999999999999,
+              "end": 88.4,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 215,
+              "text": "this",
+              "start": 88.27,
+              "end": 88.72,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 216,
+              "text": "is",
+              "start": 88.57,
+              "end": 88.88,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 217,
+              "text": "our",
+              "start": 88.72999999999999,
+              "end": 89.19,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 218,
+              "text": "to",
+              "start": 89.03999999999999,
+              "end": 89.38,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 219,
+              "text": "-do",
+              "start": 89.22999999999999,
+              "end": 89.57,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 220,
+              "text": "app.",
+              "start": 89.41999999999999,
+              "end": 90.5,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            }
+          ],
+          "cuts": [],
+          "deletedRegions": []
+        },
+        {
+          "words": [
+            {
+              "id": 0,
+              "text": "[Pause 1.2s]",
+              "start": 0,
+              "end": 1.22,
+              "deleted": false,
+              "isPause": true
+            },
+            {
+              "id": 1,
+              "text": "What",
+              "start": 1.07,
+              "end": 1.48,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 2,
+              "text": "is",
+              "start": 1.33,
+              "end": 1.69,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 3,
+              "text": "the",
+              "start": 1.54,
+              "end": 1.82,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 4,
+              "text": "agent?",
+              "start": 1.6700000000000002,
+              "end": 2.44,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 5,
+              "text": "[Pause 1.3s]",
+              "start": 2.44,
+              "end": 3.78,
+              "deleted": false,
+              "isPause": true
+            },
+            {
+              "id": 6,
+              "text": "So",
+              "start": 3.63,
+              "end": 4.119999999999999,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 7,
+              "text": "I",
+              "start": 3.97,
+              "end": 4.38,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 8,
+              "text": "asked",
+              "start": 4.25,
+              "end": 4.8999999999999995,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 9,
+              "text": "the",
+              "start": 4.7700000000000005,
+              "end": 5.05,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 10,
+              "text": "to",
+              "start": 4.8999999999999995,
+              "end": 5.38,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 11,
+              "text": "[Pause 0.7s]",
+              "start": 5.38,
+              "end": 6.0600000000000005,
+              "deleted": false,
+              "isPause": true
+            },
+            {
+              "id": 12,
+              "text": "create",
+              "start": 5.91,
+              "end": 6.4,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 13,
+              "text": "a",
+              "start": 6.25,
+              "end": 6.51,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 14,
+              "text": "full",
+              "start": 6.359999999999999,
+              "end": 6.739999999999999,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 15,
+              "text": "step",
+              "start": 6.65,
+              "end": 7.1,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 16,
+              "text": "for",
+              "start": 6.95,
+              "end": 7.640000000000001,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 17,
+              "text": "me.",
+              "start": 7.49,
+              "end": 8.120000000000001,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 18,
+              "text": "[Pause 0.9s]",
+              "start": 8.120000000000001,
+              "end": 9.02,
+              "deleted": false,
+              "isPause": true
+            },
+            {
+              "id": 19,
+              "text": "It",
+              "start": 8.87,
+              "end": 9.29,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 20,
+              "text": "gave",
+              "start": 9.139999999999999,
+              "end": 9.559999999999999,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 21,
+              "text": "me",
+              "start": 9.409999999999998,
+              "end": 9.73,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 22,
+              "text": "all",
+              "start": 9.58,
+              "end": 10.010000000000002,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 23,
+              "text": "this",
+              "start": 9.860000000000001,
+              "end": 10.4,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 24,
+              "text": "code",
+              "start": 10.51,
+              "end": 11.200000000000001,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 25,
+              "text": "and",
+              "start": 11.069999999999999,
+              "end": 11.64,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 26,
+              "text": "[Pause 0.7s]",
+              "start": 11.64,
+              "end": 12.34,
+              "deleted": false,
+              "isPause": true
+            },
+            {
+              "id": 27,
+              "text": "I",
+              "start": 12.19,
+              "end": 12.530000000000001,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 28,
+              "text": "will",
+              "start": 12.38,
+              "end": 12.739999999999998,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 29,
+              "text": "have",
+              "start": 12.589999999999998,
+              "end": 12.93,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 30,
+              "text": "to",
+              "start": 12.78,
+              "end": 13.09,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 31,
+              "text": "manually",
+              "start": 12.94,
+              "end": 13.68,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 32,
+              "text": "create",
+              "start": 13.67,
+              "end": 14.23,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 33,
+              "text": "them",
+              "start": 14.08,
+              "end": 14.6,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 34,
+              "text": "locally,",
+              "start": 14.489999999999998,
+              "end": 15.26,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 35,
+              "text": "create",
+              "start": 15.549999999999999,
+              "end": 16.11,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 36,
+              "text": "these",
+              "start": 15.959999999999999,
+              "end": 16.34,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 37,
+              "text": "files",
+              "start": 16.19,
+              "end": 16.759999999999998,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 38,
+              "text": "locally,",
+              "start": 16.610000000000003,
+              "end": 17.32,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 39,
+              "text": "[Pause 0.5s]",
+              "start": 17.32,
+              "end": 17.82,
+              "deleted": false,
+              "isPause": true
+            },
+            {
+              "id": 40,
+              "text": "and",
+              "start": 17.67,
+              "end": 18.13,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 41,
+              "text": "then",
+              "start": 17.98,
+              "end": 18.369999999999997,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 42,
+              "text": "I",
+              "start": 18.22,
+              "end": 18.5,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 43,
+              "text": "will",
+              "start": 18.35,
+              "end": 18.64,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 44,
+              "text": "have",
+              "start": 18.490000000000002,
+              "end": 18.810000000000002,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 45,
+              "text": "to",
+              "start": 18.660000000000004,
+              "end": 19.04,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 46,
+              "text": "follow",
+              "start": 18.950000000000003,
+              "end": 19.57,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 47,
+              "text": "all",
+              "start": 19.42,
+              "end": 19.83,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 48,
+              "text": "these",
+              "start": 19.68,
+              "end": 20.18,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 49,
+              "text": "[UH]",
+              "start": 20.250000000000004,
+              "end": 20.91,
+              "deleted": false,
+              "isFiller": true,
+              "_fixed": true
+            },
+            {
+              "id": 50,
+              "text": "instruction",
+              "start": 20.76,
+              "end": 21,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 51,
+              "text": "in",
+              "start": 21.050000000000004,
+              "end": 22.08,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 52,
+              "text": "order",
+              "start": 21.950000000000003,
+              "end": 22.490000000000002,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 53,
+              "text": "to",
+              "start": 22.340000000000003,
+              "end": 22.9,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 54,
+              "text": "[UH]",
+              "start": 23.230000000000004,
+              "end": 23.98,
+              "deleted": true,
+              "isFiller": true,
+              "_fixed": true
+            },
+            {
+              "id": 55,
+              "text": "[Pause 0.6s]",
+              "start": 23.98,
+              "end": 24.560000000000002,
+              "deleted": true,
+              "isPause": true
+            },
+            {
+              "id": 56,
+              "text": "create",
+              "start": 24.410000000000004,
+              "end": 24.950000000000003,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 57,
+              "text": "a",
+              "start": 24.800000000000004,
+              "end": 25.07,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 58,
+              "text": "right",
+              "start": 24.92,
+              "end": 25.599999999999998,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 59,
+              "text": "now.",
+              "start": 25.550000000000004,
+              "end": 27.54,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 60,
+              "text": "If",
+              "start": 27.390000000000004,
+              "end": 27.740000000000002,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 61,
+              "text": "I",
+              "start": 27.590000000000003,
+              "end": 27.919999999999998,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 62,
+              "text": "ask",
+              "start": 27.790000000000003,
+              "end": 28.26,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 63,
+              "text": "in",
+              "start": 21.85,
+              "end": 22.099999999999998,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 64,
+              "text": "order",
+              "start": 21.970000000000002,
+              "end": 22.490000000000002,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 65,
+              "text": "to",
+              "start": 22.340000000000003,
+              "end": 22.9,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 66,
+              "text": "[UH]",
+              "start": 23.230000000000004,
+              "end": 24.02,
+              "deleted": false,
+              "isFiller": true,
+              "_fixed": true
+            },
+            {
+              "id": 67,
+              "text": "[Pause 0.6s]",
+              "start": 24.02,
+              "end": 24.580000000000002,
+              "deleted": false,
+              "isPause": true
+            },
+            {
+              "id": 68,
+              "text": "create",
+              "start": 24.430000000000003,
+              "end": 24.96,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 69,
+              "text": "a",
+              "start": 24.810000000000002,
+              "end": 25.07,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 70,
+              "text": "doo",
+              "start": 24.92,
+              "end": 25.25,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 71,
+              "text": "doo",
+              "start": 25.1,
+              "end": 25.36,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 72,
+              "text": "web.",
+              "start": 25.270000000000003,
+              "end": 25.639999999999997,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 73,
+              "text": "Right",
+              "start": 25.490000000000002,
+              "end": 26.04,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 74,
+              "text": "[Pause 1.1s]",
+              "start": 26.04,
+              "end": 27.1,
+              "deleted": false,
+              "isPause": true
+            },
+            {
+              "id": 75,
+              "text": "now,",
+              "start": 26.950000000000003,
+              "end": 27.54,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 76,
+              "text": "if",
+              "start": 27.410000000000004,
+              "end": 27.759999999999998,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 77,
+              "text": "I",
+              "start": 27.61,
+              "end": 27.919999999999998,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 78,
+              "text": "ask",
+              "start": 27.790000000000003,
+              "end": 28.34,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 79,
+              "text": "same",
+              "start": 28.250000000000004,
+              "end": 28.82,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 80,
+              "text": "thing",
+              "start": 28.69,
+              "end": 29.279999999999998,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 81,
+              "text": "to",
+              "start": 29.53,
+              "end": 30.04,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 82,
+              "text": "A",
+              "start": 29.890000000000004,
+              "end": 30.22,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 83,
+              "text": ".I.",
+              "start": 30.07,
+              "end": 30.439999999999998,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 84,
+              "text": "agent",
+              "start": 30.35,
+              "end": 31.139999999999997,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 85,
+              "text": "[Pause 1.4s]",
+              "start": 31.139999999999997,
+              "end": 32.5,
+              "deleted": false,
+              "isPause": true
+            },
+            {
+              "id": 86,
+              "text": "[UH]",
+              "start": 32.35,
+              "end": 32.84,
+              "deleted": false,
+              "isFiller": true,
+              "_fixed": true
+            },
+            {
+              "id": 87,
+              "text": "let's",
+              "start": 32.690000000000005,
+              "end": 33.17,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 88,
+              "text": "open",
+              "start": 33.02,
+              "end": 33.54,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 89,
+              "text": "anti",
+              "start": 33.39,
+              "end": 33.78,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 90,
+              "text": "-gravity.",
+              "start": 33.63,
+              "end": 34.440000000000005,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 91,
+              "text": "[Pause 2.4s]",
+              "start": 34.440000000000005,
+              "end": 36.839999999999996,
+              "deleted": false,
+              "isPause": true
+            },
+            {
+              "id": 92,
+              "text": "It",
+              "start": 36.69,
+              "end": 37.14,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 93,
+              "text": "is",
+              "start": 36.99,
+              "end": 37.46,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 94,
+              "text": "a",
+              "start": 37.39,
+              "end": 37.7,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 95,
+              "text": "coding",
+              "start": 37.73,
+              "end": 38.36,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 96,
+              "text": "agent.",
+              "start": 38.25,
+              "end": 38.86,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 97,
+              "text": "[Pause 1.1s]",
+              "start": 38.86,
+              "end": 40,
+              "deleted": false,
+              "isPause": true
+            },
+            {
+              "id": 98,
+              "text": "I",
+              "start": 39.85,
+              "end": 40.32,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 99,
+              "text": "asked",
+              "start": 40.17,
+              "end": 40.67,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 100,
+              "text": "it",
+              "start": 40.52,
+              "end": 40.980000000000004,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 101,
+              "text": "[UH]",
+              "start": 40.93,
+              "end": 41.379999999999995,
+              "deleted": false,
+              "isFiller": true,
+              "_fixed": true
+            },
+            {
+              "id": 102,
+              "text": "same",
+              "start": 41.23,
+              "end": 41.760000000000005,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 103,
+              "text": "thing,",
+              "start": 41.61000000000001,
+              "end": 42.010000000000005,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 104,
+              "text": "create",
+              "start": 41.86000000000001,
+              "end": 42.36,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 105,
+              "text": "a",
+              "start": 42.21,
+              "end": 42.49,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 106,
+              "text": "full",
+              "start": 42.34,
+              "end": 42.760000000000005,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 107,
+              "text": "staked",
+              "start": 42.63,
+              "end": 43.07,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 108,
+              "text": "doo",
+              "start": 42.92,
+              "end": 43.28,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 109,
+              "text": "doo",
+              "start": 43.13,
+              "end": 43.39,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 110,
+              "text": "web.",
+              "start": 43.24,
+              "end": 43.72,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 111,
+              "text": "[Pause 1.1s]",
+              "start": 43.72,
+              "end": 44.839999999999996,
+              "deleted": false,
+              "isPause": true
+            },
+            {
+              "id": 112,
+              "text": "You",
+              "start": 44.69,
+              "end": 45.02,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 113,
+              "text": "see,",
+              "start": 42.83,
+              "end": 47.620000000000005,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 114,
+              "text": "it",
+              "start": 47.51,
+              "end": 48.52,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 115,
+              "text": "[Pause 0.6s]",
+              "start": 48.52,
+              "end": 49.12,
+              "deleted": false,
+              "isPause": true
+            },
+            {
+              "id": 116,
+              "text": "has",
+              "start": 48.97,
+              "end": 49.980000000000004,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 117,
+              "text": "[Pause 0.6s]",
+              "start": 49.980000000000004,
+              "end": 50.58,
+              "deleted": false,
+              "isPause": true
+            },
+            {
+              "id": 118,
+              "text": "[UH]",
+              "start": 50.43,
+              "end": 51.300000000000004,
+              "deleted": false,
+              "isFiller": true,
+              "_fixed": true
+            },
+            {
+              "id": 119,
+              "text": "[Pause 0.7s]",
+              "start": 51.300000000000004,
+              "end": 52.019999999999996,
+              "deleted": false,
+              "isPause": true
+            },
+            {
+              "id": 120,
+              "text": "come",
+              "start": 51.87,
+              "end": 52.78,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 121,
+              "text": "up",
+              "start": 53.03,
+              "end": 53.72,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 122,
+              "text": "with",
+              "start": 53.57,
+              "end": 53.86,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 123,
+              "text": "a",
+              "start": 53.73,
+              "end": 53.97,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 124,
+              "text": "plan.",
+              "start": 53.82,
+              "end": 54.14,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 125,
+              "text": "If",
+              "start": 54.11,
+              "end": 55.06,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 126,
+              "text": "I",
+              "start": 54.910000000000004,
+              "end": 55.11,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 127,
+              "text": "click",
+              "start": 54.96,
+              "end": 55.22,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 128,
+              "text": "proceed,",
+              "start": 55.07,
+              "end": 55.480000000000004,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 129,
+              "text": "it",
+              "start": 55.37,
+              "end": 55.660000000000004,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 130,
+              "text": "has",
+              "start": 55.63,
+              "end": 56.47,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 131,
+              "text": "[UH]",
+              "start": 56.32,
+              "end": 57.1,
+              "deleted": false,
+              "isFiller": true,
+              "_fixed": true
+            },
+            {
+              "id": 132,
+              "text": "started",
+              "start": 57.089999999999996,
+              "end": 57.400000000000006,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 133,
+              "text": "working",
+              "start": 57.589999999999996,
+              "end": 57.870000000000005,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 134,
+              "text": "and",
+              "start": 57.720000000000006,
+              "end": 57.95,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 135,
+              "text": "[UH]",
+              "start": 57.800000000000004,
+              "end": 58.080000000000005,
+              "deleted": false,
+              "isFiller": true,
+              "_fixed": true
+            },
+            {
+              "id": 136,
+              "text": "now",
+              "start": 58.07,
+              "end": 58.45,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 137,
+              "text": "it's",
+              "start": 58.300000000000004,
+              "end": 58.55,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 138,
+              "text": "creating",
+              "start": 58.4,
+              "end": 58.709999999999994,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 139,
+              "text": "all",
+              "start": 58.559999999999995,
+              "end": 58.91,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 140,
+              "text": "these",
+              "start": 58.76,
+              "end": 59.03,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 141,
+              "text": "files.",
+              "start": 58.88,
+              "end": 59.17,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 142,
+              "text": "If",
+              "start": 59.02,
+              "end": 59.26,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 143,
+              "text": "you",
+              "start": 59.11,
+              "end": 59.44,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 144,
+              "text": "open",
+              "start": 59.29,
+              "end": 59.65,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 145,
+              "text": "this,",
+              "start": 59.5,
+              "end": 59.72,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 146,
+              "text": "you",
+              "start": 59.57,
+              "end": 59.83,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 147,
+              "text": "see,",
+              "start": 59.68,
+              "end": 59.980000000000004,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 148,
+              "text": "it",
+              "start": 59.89,
+              "end": 60.24,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 149,
+              "text": "[UH]",
+              "start": 60.15,
+              "end": 60.400000000000006,
+              "deleted": false,
+              "isFiller": true,
+              "_fixed": true
+            },
+            {
+              "id": 150,
+              "text": "already",
+              "start": 60.25000000000001,
+              "end": 60.57,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 151,
+              "text": "started",
+              "start": 60.42,
+              "end": 60.74,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 152,
+              "text": "[Pause 0.6s]",
+              "start": 60.74,
+              "end": 61.3,
+              "deleted": false,
+              "isPause": true
+            },
+            {
+              "id": 153,
+              "text": "[UH]",
+              "start": 61.15,
+              "end": 61.51,
+              "deleted": false,
+              "isFiller": true,
+              "_fixed": true
+            },
+            {
+              "id": 154,
+              "text": "creating",
+              "start": 61.36,
+              "end": 61.65,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 155,
+              "text": "this",
+              "start": 61.5,
+              "end": 62.440000000000005,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 156,
+              "text": "[Pause 0.6s]",
+              "start": 62.440000000000005,
+              "end": 63.019999999999996,
+              "deleted": false,
+              "isPause": true
+            },
+            {
+              "id": 157,
+              "text": "file.",
+              "start": 62.87,
+              "end": 63.58,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 158,
+              "text": "Now",
+              "start": 63.43,
+              "end": 64.37,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 159,
+              "text": "it's",
+              "start": 64.22,
+              "end": 64.54,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 160,
+              "text": "creating",
+              "start": 64.64999999999999,
+              "end": 65.68,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 161,
+              "text": "front",
+              "start": 65.83,
+              "end": 66.32,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 162,
+              "text": "end.",
+              "start": 66.16999999999999,
+              "end": 64.48,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 163,
+              "text": "[Pause 1.2s]",
+              "start": 64.48,
+              "end": 65.67999999999999,
+              "deleted": false,
+              "isPause": true
+            },
+            {
+              "id": 164,
+              "text": "Let",
+              "start": 65.52999999999999,
+              "end": 65.99000000000001,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 165,
+              "text": "it",
+              "start": 65.84,
+              "end": 66.19,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 166,
+              "text": "finish.",
+              "start": 66.03999999999999,
+              "end": 66.78,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 167,
+              "text": "[Pause 1.0s]",
+              "start": 66.78,
+              "end": 67.78,
+              "deleted": false,
+              "isPause": true
+            },
+            {
+              "id": 168,
+              "text": "So",
+              "start": 67.63,
+              "end": 68.09,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 169,
+              "text": "it",
+              "start": 67.94,
+              "end": 68.28,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 170,
+              "text": "has",
+              "start": 68.13,
+              "end": 68.58000000000001,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 171,
+              "text": "created",
+              "start": 68.43,
+              "end": 69.2,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 172,
+              "text": "entire",
+              "start": 69.24999999999999,
+              "end": 70.05,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 173,
+              "text": "app",
+              "start": 69.89999999999999,
+              "end": 70.4,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 174,
+              "text": "here.",
+              "start": 70.27,
+              "end": 70.88,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 175,
+              "text": "[Pause 0.6s]",
+              "start": 70.88,
+              "end": 71.44,
+              "deleted": false,
+              "isPause": true
+            },
+            {
+              "id": 176,
+              "text": "Now",
+              "start": 71.28999999999999,
+              "end": 71.78,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 177,
+              "text": "let's",
+              "start": 71.63,
+              "end": 72.1,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 178,
+              "text": "ask",
+              "start": 71.94999999999999,
+              "end": 72.4,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 179,
+              "text": "it",
+              "start": 72.25,
+              "end": 72.6,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 180,
+              "text": "to",
+              "start": 72.44999999999999,
+              "end": 72.78,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 181,
+              "text": "run",
+              "start": 72.63,
+              "end": 73.22,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 182,
+              "text": "run",
+              "start": 73.24999999999999,
+              "end": 73.74000000000001,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 183,
+              "text": "it.",
+              "start": 73.59,
+              "end": 74.06,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 184,
+              "text": "[Pause 2.2s]",
+              "start": 74.06,
+              "end": 76.24,
+              "deleted": false,
+              "isPause": true
+            },
+            {
+              "id": 185,
+              "text": "I",
+              "start": 76.08999999999999,
+              "end": 76.56,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 186,
+              "text": "don't",
+              "start": 76.41,
+              "end": 76.82,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 187,
+              "text": "have",
+              "start": 76.66999999999999,
+              "end": 77,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 188,
+              "text": "to",
+              "start": 76.85,
+              "end": 77.14,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 189,
+              "text": "do",
+              "start": 76.99,
+              "end": 77.36,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 190,
+              "text": "anything.",
+              "start": 77.21,
+              "end": 77.80000000000001,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 191,
+              "text": "It",
+              "start": 77.65,
+              "end": 77.93,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 192,
+              "text": "will",
+              "start": 77.78,
+              "end": 78.12,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 193,
+              "text": "do",
+              "start": 77.97,
+              "end": 78.33,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 194,
+              "text": "everything",
+              "start": 78.17999999999999,
+              "end": 78.83,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 195,
+              "text": "for",
+              "start": 78.67999999999999,
+              "end": 79.03,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 196,
+              "text": "me.",
+              "start": 78.88,
+              "end": 79.3,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 197,
+              "text": "[Pause 1.5s]",
+              "start": 79.3,
+              "end": 80.75999999999999,
+              "deleted": false,
+              "isPause": true
+            },
+            {
+              "id": 198,
+              "text": "It's",
+              "start": 80.60999999999999,
+              "end": 81.22,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 199,
+              "text": "[UH]",
+              "start": 81.08999999999999,
+              "end": 81.62,
+              "deleted": false,
+              "isFiller": true,
+              "_fixed": true
+            },
+            {
+              "id": 200,
+              "text": "[Pause 0.8s]",
+              "start": 81.62,
+              "end": 82.42,
+              "deleted": false,
+              "isPause": true
+            },
+            {
+              "id": 201,
+              "text": "giving",
+              "start": 82.27,
+              "end": 82.80000000000001,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 202,
+              "text": "me",
+              "start": 82.65,
+              "end": 82.99,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 203,
+              "text": "an",
+              "start": 82.83999999999999,
+              "end": 83.19,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 204,
+              "text": "URL",
+              "start": 83.03999999999999,
+              "end": 83.84,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 205,
+              "text": "if",
+              "start": 83.71,
+              "end": 84.12,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 206,
+              "text": "I",
+              "start": 83.97,
+              "end": 84.3,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 207,
+              "text": "open",
+              "start": 84.14999999999999,
+              "end": 84.67,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 208,
+              "text": "it",
+              "start": 84.52,
+              "end": 84.9,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 209,
+              "text": "on",
+              "start": 84.75,
+              "end": 85.44,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 210,
+              "text": "[Pause 0.6s]",
+              "start": 85.44,
+              "end": 86,
+              "deleted": false,
+              "isPause": true
+            },
+            {
+              "id": 211,
+              "text": "my",
+              "start": 85.85,
+              "end": 86.28,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 212,
+              "text": "browser,",
+              "start": 86.13,
+              "end": 86.98,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 213,
+              "text": "[Pause 1.0s]",
+              "start": 86.98,
+              "end": 87.94,
+              "deleted": false,
+              "isPause": true
+            },
+            {
+              "id": 214,
+              "text": "so",
+              "start": 87.78999999999999,
+              "end": 88.4,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 215,
+              "text": "this",
+              "start": 88.27,
+              "end": 88.72,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 216,
+              "text": "is",
+              "start": 88.57,
+              "end": 88.88,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 217,
+              "text": "our",
+              "start": 88.72999999999999,
+              "end": 89.19,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 218,
+              "text": "to",
+              "start": 89.03999999999999,
+              "end": 89.38,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 219,
+              "text": "-do",
+              "start": 89.22999999999999,
+              "end": 89.57,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            },
+            {
+              "id": 220,
+              "text": "app.",
+              "start": 89.41999999999999,
+              "end": 90.5,
+              "deleted": false,
+              "isFiller": false,
+              "_fixed": true
+            }
+          ],
+          "cuts": [],
+          "deletedRegions": []
+        }
+      ],
+      "redoStack": [],
+      "transcriptionStatus": "done",
+      "transcriptionJobId": "e9e75ba1-116b-4616-9a51-a55e01010c75",
+      "transcriptionProvider": "crisperwhisper",
+      "gcsOperationName": null,
+      "projectId": "2e35dee3-bde1-4d4d-98eb-585d42c7e921",
+      "revision": 27,
+      "zoom": 1,
+      "cuts": [],
+      "deletedRegions": [],
+      "selectedSegmentIndex": 0
+    },
+    "createdAt": 1780197462622,
+    "lastModified": 1780199695421
+  },
+  {
+    "id": "4f1a01dd-1198-44cc-b114-c82d0edba219",
+    "name": "7ef2888d-31a2-4167-85a7-58ae82eadc0c.mp4",
+    "state": {
+      "fileId": "7ef2888d-31a2-4167-85a7-58ae82eadc0c.mp4",
+      "videoUrl": "/api/files/7ef2888d-31a2-4167-85a7-58ae82eadc0c.mp4",
+      "duration": 90.533333,
       "words": [],
       "segments": [
         {
           "start": 0,
-          "end": 1896.5
+          "end": 90.533333
         }
       ],
       "selection": {
@@ -19,18 +5964,18 @@
       },
       "undoStack": [],
       "redoStack": [],
-      "transcriptionStatus": "transcribing",
-      "transcriptionJobId": "ac6ea836-28f9-441f-8e76-2d04db4a77f5",
+      "transcriptionStatus": "error",
+      "transcriptionJobId": "4caef332-d9f7-4814-95bb-65fc70119306",
       "transcriptionProvider": "crisperwhisper",
       "gcsOperationName": null,
-      "projectId": "cdbe3e07-d6e7-4e20-8439-2c1c6cfbb689",
-      "revision": 15,
+      "projectId": "4f1a01dd-1198-44cc-b114-c82d0edba219",
+      "revision": 7,
       "zoom": 1,
       "cuts": [],
       "deletedRegions": [],
       "selectedSegmentIndex": null
     },
-    "createdAt": 1780185373744,
-    "lastModified": 1780187000229
+    "createdAt": 1780197571799,
+    "lastModified": 1780197571799
   }
 ]
