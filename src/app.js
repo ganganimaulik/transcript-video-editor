@@ -283,7 +283,7 @@ class App {
     const state = store.getState();
     if (!state.fileId || state.segments.length === 0) return;
 
-    $('#export-modal').classList.remove('hidden');
+    $('#export-toast').classList.remove('hidden');
     $('#export-progress').style.width = '0%';
     $('#export-status-text').textContent = 'Starting export...';
 
@@ -305,7 +305,7 @@ class App {
           $('#export-status-text').textContent = 'Export complete! Downloading...';
           
           setTimeout(() => {
-            $('#export-modal').classList.add('hidden');
+            $('#export-toast').classList.add('hidden');
             // Trigger download
             const a = document.createElement('a');
             a.href = data.url;
@@ -315,19 +315,19 @@ class App {
         } else if (data.status === 'error' || data.status === 'failed') {
           eventSource.close();
           $('#export-status-text').textContent = `Error: ${data.error}`;
-          setTimeout(() => $('#export-modal').classList.add('hidden'), 3000);
+          setTimeout(() => $('#export-toast').classList.add('hidden'), 3000);
         }
       };
       
       eventSource.onerror = () => {
         eventSource.close();
         $('#export-status-text').textContent = `Connection lost. Check server logs.`;
-        setTimeout(() => $('#export-modal').classList.add('hidden'), 3000);
+        setTimeout(() => $('#export-toast').classList.add('hidden'), 3000);
       };
       
     } catch (err) {
       $('#export-status-text').textContent = `Error: ${err.message}`;
-      setTimeout(() => $('#export-modal').classList.add('hidden'), 3000);
+      setTimeout(() => $('#export-toast').classList.add('hidden'), 3000);
     }
   }
 }

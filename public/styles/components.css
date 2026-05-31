@@ -735,3 +735,52 @@ canvas#waveform-canvas {
   padding: var(--space-2) var(--space-3);
 }
 
+/* Export Toast */
+.export-toast {
+  position: fixed;
+  bottom: var(--space-6);
+  right: var(--space-6);
+  z-index: 1000;
+  animation: slideInUp 0.3s ease-out;
+}
+
+.export-toast.hidden {
+  display: none;
+}
+
+.toast-content {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--bg-surface);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4) var(--space-6);
+  width: 320px;
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  flex-direction: column;
+}
+
+.toast-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.toast-icon {
+  color: var(--accent-blue);
+}
+
+.toast-icon.spin {
+  animation: spin 2s linear infinite;
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
