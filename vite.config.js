@@ -9,5 +9,8 @@ export default defineConfig({
         changeOrigin: true,
       }
     }
+  },
+  test: {
+    environment: 'jsdom'
   }
 });
